@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eAssist AI | WhatsApp AI Assistant for Healthcare & Doctors</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- AOS (Animate On Scroll) Library CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            navy: '#072b61',
+                            blue: '#0d5db8',
+                            green: '#20a738',
+                            teal: '#02a89e',
+                            darkNavy: '#041738',
+                            lightBg: '#f4f9ff',
+                            emeraldGlow: '#00e676'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    animation: {
+                        'float': 'float 4s ease-in-out infinite',
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-12px)' },
+                        },
+                        glow: {
+                            '0%': { boxShadow: '0 0 15px rgba(32, 167, 56, 0.3)' },
+                            '100%': { boxShadow: '0 0 30px rgba(2, 168, 158, 0.6)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .gradient-text {
+            background: linear-gradient(135deg, #072b61 0%, #0d5db8 40%, #20a738 80%, #02a89e 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #072b61 0%, #0d5db8 100%);
+        }
+        .gradient-btn {
+            background: linear-gradient(90deg, #20a738 0%, #02a89e 100%);
+        }
+        .gradient-btn:hover {
+            background: linear-gradient(90deg, #1b8f30 0%, #028e86 100%);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        .glass-dark {
+            background: rgba(7, 43, 97, 0.7);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .chat-bubble-received {
+            border-radius: 0px 18px 18px 18px;
+        }
+        .chat-bubble-sent {
+            border-radius: 18px 0px 18px 18px;
+        }
+        .hero-glow {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(2,168,158,0.15) 0%, rgba(32,167,56,0.05) 50%, rgba(255,255,255,0) 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="font-sans text-gray-800 bg-white antialiased selection:bg-brand-green selection:text-white overflow-x-hidden">
+
+ <!-- Navigation -->
+<nav class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-lg border-b border-gray-100/80 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+        
+        <!-- Image Logo (Increased scale for mobile and desktop clarity) -->
+        <a href="#" class="flex items-center group py-2">
+            <img src="/images/Assistlogo.png" alt="eAssist AI Logo" class="h-14 sm:h-16 lg:h-16 w-auto max-h-16 object-contain transform group-hover:scale-105 transition-transform duration-200">
+        </a>
+
+        <!-- Desktop Links (Optimized spacing, typography, and active alignment) -->
+        <div class="hidden lg:flex items-center space-x-6 xl:space-x-8 text-sm font-bold text-gray-700">
+            <a href="#doctors" class="hover:text-brand-blue transition-colors relative py-2 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-brand-blue hover:after:w-full after:transition-all">For Doctors</a>
+            <a href="#hospitals" class="hover:text-brand-blue transition-colors relative py-2 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-brand-blue hover:after:w-full after:transition-all">Hospitals</a>
+            <a href="#caretakers" class="hover:text-brand-blue transition-colors relative py-2 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-brand-blue hover:after:w-full after:transition-all">Care Takers</a>
+            <a href="#crm" class="hover:text-brand-blue transition-colors relative py-2 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-brand-blue hover:after:w-full after:transition-all">CRM Portal</a>
+            <a href="#msme" class="hover:text-brand-blue transition-colors relative py-2 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-brand-blue hover:after:w-full after:transition-all">MSME Solution</a>
+        </div>
+
+        <!-- Action CTA & Mobile Hamburger Button -->
+        <div class="flex items-center space-x-3 sm:space-x-4">
+            <a href="#demo" class="hidden sm:inline-flex items-center px-6 py-2.5 rounded-full text-sm font-bold text-white gradient-btn shadow-md hover:shadow-emerald-500/25 transition-all duration-300 transform hover:-translate-y-0.5">
+                <i class="fa-brands fa-whatsapp text-lg mr-2 animate-bounce"></i> Live Demo
+            </a>
+
+            <!-- Mobile Hamburger Button -->
+            <button id="mobile-menu-btn" class="lg:hidden p-2.5 rounded-xl text-gray-700 hover:text-brand-blue hover:bg-gray-100 focus:outline-none transition-colors" aria-label="Toggle Navigation Menu">
+                <i id="menu-icon" class="fa-solid fa-bars text-2xl"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Mobile Dropdown Menu -->
+    <div id="mobile-menu" class="hidden lg:hidden bg-white/95 backdrop-blur-xl border-b border-gray-200 px-4 pt-4 pb-6 space-y-3 shadow-xl transition-all duration-300">
+        <a href="#doctors" class="mobile-link block px-4 py-3 rounded-xl font-bold text-gray-800 hover:text-brand-blue hover:bg-blue-50 transition-all">For Doctors</a>
+        <a href="#hospitals" class="mobile-link block px-4 py-3 rounded-xl font-bold text-gray-800 hover:text-brand-blue hover:bg-blue-50 transition-all">Hospitals</a>
+        <a href="#caretakers" class="mobile-link block px-4 py-3 rounded-xl font-bold text-gray-800 hover:text-brand-blue hover:bg-blue-50 transition-all">Care Takers</a>
+        <a href="#crm" class="mobile-link block px-4 py-3 rounded-xl font-bold text-gray-800 hover:text-brand-blue hover:bg-blue-50 transition-all">CRM Portal</a>
+        <a href="#msme" class="mobile-link block px-4 py-3 rounded-xl font-bold text-gray-800 hover:text-brand-blue hover:bg-blue-50 transition-all">MSME Solution</a>
+        <div class="pt-2">
+            <a href="#demo" class="mobile-link w-full inline-flex items-center justify-center px-6 py-3.5 rounded-xl text-base font-bold text-white gradient-btn shadow-md">
+                <i class="fa-brands fa-whatsapp text-xl mr-2"></i> Live Demo
+            </a>
+        </div>
+    </div>
+</nav>
+
+<!-- JavaScript Script for Auto-Close functionality -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+        let lastScrollY = window.scrollY;
+
+        function toggleMenu() {
+            const isHidden = mobileMenu.classList.contains('hidden');
+            if (isHidden) {
+                mobileMenu.classList.remove('hidden');
+                menuIcon.classList.remove('fa-bars');
+                menuIcon.classList.add('fa-xmark');
+            } else {
+                closeMenu();
+            }
+        }
+
+        function closeMenu() {
+            if (!mobileMenu.classList.contains('hidden')) {
+                mobileMenu.classList.add('hidden');
+                menuIcon.classList.remove('fa-xmark');
+                menuIcon.classList.add('fa-bars');
+            }
+        }
+
+        menuBtn.addEventListener('click', toggleMenu);
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', closeMenu);
+        });
+
+        window.addEventListener('scroll', () => {
+            const currentScrollY = window.scrollY;
+            if (Math.abs(currentScrollY - lastScrollY) > 10) {
+                closeMenu();
+            }
+            lastScrollY = currentScrollY;
+        });
+    });
+</script>
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 md:pt-44 md:pb-32 bg-gradient-to-b from-brand-lightBg via-white to-white overflow-hidden relative">
+        <div class="hero-glow top-10 left-10"></div>
+        <div class="hero-glow bottom-0 right-10"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Left Text Column -->
+                <div class="lg:col-span-7 text-center lg:text-left" data-aos="fade-right" data-aos-duration="1000">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-50 border border-emerald-200/60 text-brand-green text-xs font-bold uppercase tracking-wider mb-6 shadow-sm">
+                        <span class="w-2.5 h-2.5 rounded-full bg-brand-green animate-ping"></span> 
+                        <span class="w-2.5 h-2.5 rounded-full bg-brand-green -ml-5"></span> Smart. Simple. AI-Powered.
+                    </div>
+                    
+                    <h1 class="text-4xl sm:text-6xl lg:text-6xl font-extrabold text-brand-darkNavy leading-[1.15] tracking-tight">
+                        Transform Medical Care with <span class="gradient-text">WhatsApp AI</span> Automation
+                    </h1>
+                    
+                    <p class="mt-6 text-lg sm:text-xl text-gray-600 font-normal leading-relaxed max-w-2xl mx-auto lg:mx-0">
+                        Empower your clinic, hospital, or caretaking agency with intelligent AI assistants on WhatsApp. Automate appointment bookings, patient tagging, continuous care plans, and CRM responses seamlessly.
+                    </p>
+                    
+                    <div class="mt-10 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                        <a href="#demo" class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 rounded-xl text-base font-bold text-white gradient-btn shadow-lg shadow-emerald-500/25 hover:shadow-xl hover:shadow-emerald-500/35 transition-all duration-300 transform hover:-translate-y-1">
+                            Start Free Trial <i class="fa-solid fa-arrow-right ml-2 text-sm"></i>
+                        </a>
+                        <a href="#crm" class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 rounded-xl text-base font-bold text-brand-navy bg-white border border-gray-200 hover:bg-gray-50 shadow-sm transition-all duration-200">
+                            <i class="fa-solid fa-play text-xs mr-2 text-brand-blue"></i> See Live CRM
+                        </a>
+                    </div>
+                    
+                    <!-- Trust Badges -->
+                    <div class="mt-12 pt-8 border-t border-gray-200/80 flex flex-wrap items-center justify-center lg:justify-start gap-8 text-xs text-gray-500 font-semibold">
+                        <div class="flex items-center gap-2 bg-white px-3 py-1.5 rounded-lg border border-gray-100 shadow-sm">
+                            <i class="fa-solid fa-shield-halved text-brand-blue text-base"></i> HIPAA Compliant
+                        </div>
+                        <div class="flex items-center gap-2 bg-white px-3 py-1.5 rounded-lg border border-gray-100 shadow-sm">
+                            <i class="fa-solid fa-bolt text-brand-green text-base"></i> 15-Min WhatsApp Setup
+                        </div>
+                        <div class="flex items-center gap-2 bg-white px-3 py-1.5 rounded-lg border border-gray-100 shadow-sm">
+                            <i class="fa-solid fa-building-ngo text-brand-teal text-base"></i> Official Meta API
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Phone Mockup Floating Column -->
+                <div class="lg:col-span-5 relative" data-aos="fade-left" data-aos-duration="1200" data-aos-delay="200">
+                    
+                    <!-- Floating Badge 1 -->
+                    <div class="absolute -top-6 -left-6 z-30 bg-white p-3.5 rounded-2xl shadow-xl border border-gray-100 flex items-center space-x-3 animate-float hidden sm:flex">
+                        <div class="w-10 h-10 rounded-xl bg-emerald-100 text-brand-green flex items-center justify-center font-bold">
+                            <i class="fa-solid fa-calendar-check"></i>
+                        </div>
+                        <div>
+                            <p class="text-[10px] text-gray-400 font-bold uppercase">Automated</p>
+                            <p class="text-xs font-bold text-brand-navy">Appointment Booked</p>
+                        </div>
+                    </div>
+
+                    <!-- Floating Badge 2 -->
+                    <div class="absolute -bottom-6 -right-6 z-30 bg-white p-3.5 rounded-2xl shadow-xl border border-gray-100 flex items-center space-x-3 animate-float hidden sm:flex" style="animation-delay: 2s;">
+                        <div class="w-10 h-10 rounded-xl bg-blue-100 text-brand-blue flex items-center justify-center font-bold">
+                            <i class="fa-solid fa-tags"></i>
+                        </div>
+                        <div>
+                            <p class="text-[10px] text-gray-400 font-bold uppercase">CRM Auto Tag</p>
+                            <p class="text-xs font-bold text-brand-navy">Cardiology VIP</p>
+                        </div>
+                    </div>
+
+                    <!-- Phone Frame -->
+                    <div class="relative mx-auto max-w-xs sm:max-w-sm rounded-[2.5rem] bg-gray-900 p-3.5 shadow-2xl border-4 border-gray-800 ring-1 ring-gray-900/10">
+                        <div class="absolute top-0 left-1/2 transform -translate-x-1/2 h-5 w-32 bg-gray-800 rounded-b-xl z-20"></div>
+                        
+                        <!-- Screen -->
+                        <div class="bg-slate-100 rounded-[2rem] overflow-hidden border border-gray-800 h-[560px] flex flex-col font-sans">
+                            <!-- WhatsApp Header -->
+                            <div class="bg-brand-navy p-3 text-white flex items-center justify-between pt-6">
+                                <div class="flex items-center space-x-2.5">
+                                    <div class="w-9 h-9 rounded-full bg-white flex items-center justify-center text-brand-blue font-bold shadow">
+                                        <i class="fa-solid fa-user-doctor"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-xs font-bold leading-tight">Dr. Sharma AI Assistant</h4>
+                                        <p class="text-[9px] text-emerald-400 flex items-center gap-1">
+                                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Online (eAssist)
+                                        </p>
+                                    </div>
+                                </div>
+                                <i class="fa-solid fa-ellipsis-vertical text-gray-300 text-xs"></i>
+                            </div>
+
+                            <!-- Chat Body -->
+                            <div class="flex-1 p-3 overflow-y-auto bg-[#e5ddd5]/30 space-y-3 text-[11px] leading-snug">
+                                <!-- Received -->
+                                <div class="flex flex-col items-start" data-aos="fade-up" data-aos-delay="400">
+                                    <div class="chat-bubble-received bg-white p-2.5 shadow-sm text-gray-800 max-w-[85%] border border-gray-100">
+                                        Hello! Welcome to Dr. Sharma's Clinic. How can eAssist AI help you today?
+                                        <span class="block text-[8px] text-gray-400 text-right mt-1">10:00 AM</span>
+                                    </div>
+                                </div>
+
+                                <!-- Sent -->
+                                <div class="flex flex-col items-end" data-aos="fade-up" data-aos-delay="600">
+                                    <div class="chat-bubble-sent bg-[#dcf8c6] p-2.5 shadow-sm text-gray-800 max-w-[85%]">
+                                        I need to book an appointment for tomorrow afternoon.
+                                        <span class="block text-[8px] text-gray-500 text-right mt-1">10:01 AM</span>
+                                    </div>
+                                </div>
+
+                                <!-- Received AI Automated Response -->
+                                <div class="flex flex-col items-start" data-aos="fade-up" data-aos-delay="800">
+                                    <div class="chat-bubble-received bg-white p-2.5 shadow-sm text-gray-800 max-w-[85%] border border-gray-100">
+                                        <span class="font-bold text-brand-blue flex items-center gap-1 mb-1">
+                                            <i class="fa-solid fa-robot text-brand-green"></i> eAssist Auto Booking
+                                        </span>
+                                        I have two slots available for Cardiology Consultation tomorrow:
+                                        <br><br>
+                                        1️⃣ 02:30 PM<br>
+                                        2️⃣ 04:15 PM
+                                        <br><br>
+                                        Reply with <b>1</b> or <b>2</b> to confirm.
+                                        <span class="block text-[8px] text-gray-400 text-right mt-1">10:01 AM</span>
+                                    </div>
+                                </div>
+
+                                <!-- Sent -->
+                                <div class="flex flex-col items-end" data-aos="fade-up" data-aos-delay="1000">
+                                    <div class="chat-bubble-sent bg-[#dcf8c6] p-2.5 shadow-sm text-gray-800 max-w-[85%] font-bold">
+                                        1
+                                        <span class="block text-[8px] text-gray-500 font-normal text-right mt-1">10:02 AM</span>
+                                    </div>
+                                </div>
+
+                                <!-- Received Confirmation -->
+                                <div class="flex flex-col items-start" data-aos="fade-up" data-aos-delay="1200">
+                                    <div class="chat-bubble-received bg-white p-2.5 shadow-sm text-gray-800 max-w-[85%] border border-gray-100">
+                                        ✅ <b>Appointment Confirmed!</b><br>
+                                        Time: Tomorrow at 02:30 PM.<br>
+                                        <span class="inline-block mt-1 px-1.5 py-0.5 bg-emerald-100 text-brand-green rounded text-[9px] font-bold">[Tagged: VIP Cardiology]</span>
+                                        <span class="block text-[8px] text-gray-400 text-right mt-1">10:02 AM</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Footer Input -->
+                            <div class="p-2 bg-gray-50 border-t border-gray-200 flex items-center space-x-2">
+                                <div class="flex-1 bg-white border border-gray-300 rounded-full px-3 py-1.5 text-[11px] text-gray-400 flex items-center justify-between">
+                                    <span>Type message...</span>
+                                    <i class="fa-regular fa-paperclip text-gray-400"></i>
+                                </div>
+                                <div class="w-7 h-7 bg-brand-green rounded-full flex items-center justify-center text-white text-xs shadow">
+                                    <i class="fa-solid fa-paper-plane"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 1: Personal Assistant for Doctors -->
+    <section id="doctors" class="py-24 bg-white relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                
+                <div data-aos="fade-right" data-aos-duration="1000">
+                    <span class="px-3 py-1 rounded-full bg-blue-50 text-brand-blue font-bold text-xs uppercase tracking-wider border border-blue-100">01. For Individual Doctors</span>
+                    <h2 class="text-3xl sm:text-5xl font-extrabold text-brand-darkNavy mt-4 mb-6 leading-tight">
+                        Your Personal 24/7 Digital Medical Assistant
+                    </h2>
+                    <p class="text-gray-600 leading-relaxed mb-8 text-base">
+                        Doctors can focus purely on patient care while eAssist AI handles pre-consultation questions, organizes clinical notes, and schedules routine follow-ups right through WhatsApp.
+                    </p>
+
+                    <div class="space-y-4">
+                        <div class="p-4 rounded-xl bg-gray-50 border border-gray-100 hover:border-brand-blue/30 hover:shadow-md transition-all flex items-start space-x-4">
+                            <div class="w-10 h-10 rounded-xl bg-brand-navy text-white flex items-center justify-center shrink-0 text-lg">
+                                <i class="fa-solid fa-clipboard-user"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-brand-darkNavy text-base">Automated Patient Triage</h4>
+                                <p class="text-xs text-gray-500 mt-1">Collects patient symptoms, medical history, and past prescriptions before the patient even walks into your clinic.</p>
+                            </div>
+                        </div>
+
+                        <div class="p-4 rounded-xl bg-gray-50 border border-gray-100 hover:border-brand-blue/30 hover:shadow-md transition-all flex items-start space-x-4">
+                            <div class="w-10 h-10 rounded-xl bg-brand-blue text-white flex items-center justify-center shrink-0 text-lg">
+                                <i class="fa-solid fa-calendar-minus"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-brand-darkNavy text-base">Schedule & Break Management</h4>
+                                <p class="text-xs text-gray-500 mt-1">Block emergency hours or delay schedules on the fly. The AI instantly updates queued WhatsApp patients.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div data-aos="fade-left" data-aos-duration="1000" data-aos-delay="200">
+                    <div class="relative p-8 rounded-3xl bg-gradient-to-br from-brand-navy via-brand-navy to-brand-darkNavy text-white shadow-2xl overflow-hidden border border-blue-900/40">
+                        <div class="absolute -right-10 -bottom-10 w-48 h-48 bg-brand-green/20 rounded-full blur-2xl"></div>
+                        <div class="flex items-center space-x-4 mb-8">
+                            <div class="w-14 h-14 rounded-2xl bg-white/10 border border-white/20 backdrop-blur-md flex items-center justify-center text-brand-green text-2xl font-bold">
+                                <i class="fa-solid fa-user-doctor"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold">Dr. Consultation Suite</h3>
+                                <p class="text-xs text-blue-200">Powered by eAssist Intelligence</p>
+                            </div>
+                        </div>
+
+                        <!-- Mini UI Box inside card -->
+                        <div class="bg-white/10 backdrop-blur-md p-5 rounded-2xl border border-white/10 space-y-3 text-xs mb-6">
+                            <div class="flex justify-between text-blue-200 border-b border-white/10 pb-2">
+                                <span>Patient: Sunita Rao</span>
+                                <span class="text-emerald-400 font-bold">Pre-Checked</span>
+                            </div>
+                            <p class="text-gray-200"><b>Symptoms Logged:</b> Mild Fever, Cough (3 Days)</p>
+                            <p class="text-gray-200"><b>Vitals:</b> Temp 100.2 F | BP 120/80</p>
+                        </div>
+
+                        <div class="flex items-center justify-between text-xs text-blue-200 pt-2">
+                            <span><i class="fa-solid fa-shield text-brand-green mr-1"></i> End-to-End Encrypted</span>
+                            <span class="font-bold text-white">Save 2.5 Hours Daily</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 2: Hospitals - Appointment Booking -->
+    <section id="hospitals" class="py-24 bg-brand-lightBg border-y border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
+                <span class="px-3 py-1 rounded-full bg-emerald-100 text-brand-green font-bold text-xs uppercase tracking-wider">02. Hospital Systems</span>
+                <h2 class="text-3xl sm:text-5xl font-extrabold text-brand-darkNavy mt-4">
+                    Automated OPD & Multi-Specialty Booking
+                </h2>
+                <p class="text-gray-600 mt-4 text-base">
+                    Eliminate front-desk queues and streamline hospital registrations through an automated WhatsApp chatbot engine.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300" data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-14 h-14 rounded-2xl bg-blue-50 text-brand-blue flex items-center justify-center text-2xl mb-6">
+                        <i class="fa-solid fa-calendar-days"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-brand-darkNavy mb-3">Multi-Department Slots</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        Patients can browse cardiology, orthopedics, or pediatrics, select preferred specialists, and reserve time slots effortlessly.
+                    </p>
+                </div>
+
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300" data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-14 h-14 rounded-2xl bg-emerald-50 text-brand-green flex items-center justify-center text-2xl mb-6">
+                        <i class="fa-solid fa-[#02a89e] fa-bell"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-brand-darkNavy mb-3">Automated Reminders</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        Reduce missed appointments by 40% with automated WhatsApp reminders, map direction links, and preparation instructions.
+                    </p>
+                </div>
+
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300" data-aos="fade-up" data-aos-delay="300">
+                    <div class="w-14 h-14 rounded-2xl bg-teal-50 text-brand-teal flex items-center justify-center text-2xl mb-6">
+                        <i class="fa-solid fa-[#02a89e] fa-receipt"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-brand-darkNavy mb-3">Token & Fee Collection</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        Generate OPD queue tokens and accept registration payments instantly via integrated WhatsApp pay links.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 3: Care Takers & Monitoring -->
+    <section id="caretakers" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                
+                <div class="order-2 lg:order-1" data-aos="fade-right" data-aos-duration="1000">
+                    <div class="relative bg-gradient-to-tr from-brand-navy to-brand-blue p-8 rounded-3xl text-white shadow-2xl">
+                        <div class="flex items-center justify-between pb-6 border-b border-blue-400/30">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-10 h-10 rounded-full bg-brand-green flex items-center justify-center text-white text-lg">
+                                    <i class="fa-solid fa-heart-pulse"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-base">Home Care Monitoring</h4>
+                                    <p class="text-xs text-blue-200">Patient: Robert V. (Post-Surgery)</p>
+                                </div>
+                            </div>
+                            <span class="px-3 py-1 bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 rounded-full text-xs font-semibold">Live Monitor</span>
+                        </div>
+
+                        <div class="py-6 space-y-3 text-xs">
+                            <div class="bg-white/10 p-3.5 rounded-xl backdrop-blur-sm border border-white/5">
+                                <p class="text-blue-300 font-bold">09:00 AM • Automated Vitals Bot</p>
+                                <p class="mt-1 text-gray-100">"Good morning Robert! Please reply with your BP reading today."</p>
+                            </div>
+                            <div class="bg-brand-green/20 p-3.5 rounded-xl backdrop-blur-sm border border-brand-green/30 ml-8 text-right">
+                                <p class="text-emerald-300 font-bold">09:02 AM • Patient Reply</p>
+                                <p class="mt-1 text-white">"120 / 80 - Feeling good today"</p>
+                            </div>
+                            <div class="bg-white/10 p-3.5 rounded-xl backdrop-blur-sm border border-white/5">
+                                <p class="text-blue-300 font-bold">09:02 AM • eAssist System</p>
+                                <p class="mt-1 text-gray-100">"Vitals logged normal! Caregiver Nurse Sarah notified for your 2 PM visit."</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="order-1 lg:order-2" data-aos="fade-left" data-aos-duration="1000">
+                    <span class="px-3 py-1 rounded-full bg-teal-50 text-brand-teal font-bold text-xs uppercase tracking-wider">03. Caregivers & Nursing Agencies</span>
+                    <h2 class="text-3xl sm:text-5xl font-extrabold text-brand-darkNavy mt-4 mb-6 leading-tight">
+                        Post-Op Monitoring & Caretaker Management
+                    </h2>
+                    <p class="text-gray-600 leading-relaxed mb-6 text-base">
+                        Keep home care continuous and reliable. eAssist AI collects routine patient vitals, coordinates shift assignments for caregivers, and alerts doctors if anomalies occur.
+                    </p>
+                    
+                    <div class="space-y-4">
+                        <div class="flex items-start space-x-3">
+                            <i class="fa-solid fa-circle-check text-brand-green text-xl mt-1"></i>
+                            <p class="text-sm text-gray-600"><b>Medication Alerts:</b> Timed WhatsApp prompts ensuring patients take prescriptions on schedule.</p>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <i class="fa-solid fa-circle-check text-brand-green text-xl mt-1"></i>
+                            <p class="text-sm text-gray-600"><b>Caregiver Dispatch:</b> Assign nursing staff to patients and track home visit status in real-time.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 4: Customer Tagging & CRM Portal Assignment -->
+    <section id="crm" class="py-24 bg-brand-darkNavy text-white relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-96 h-96 bg-brand-blue/10 rounded-full blur-3xl"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
+                <span class="px-3 py-1 rounded-full bg-blue-500/20 text-blue-300 font-bold text-xs uppercase tracking-wider border border-blue-400/20">04. Multi-Agent Healthcare CRM</span>
+                <h2 class="text-3xl sm:text-5xl font-extrabold mt-4">
+                    Filter, Tag & Respond Directly from CRM Portal
+                </h2>
+                <p class="text-blue-200 mt-4 text-base">
+                    Organize patient records dynamically with smart auto-tagging. Transition smoothly between AI automated replies and human desk agents.
+                </p>
+            </div>
+
+            <!-- CRM Dashboard UI Mockup -->
+            <div class="bg-slate-900 border border-slate-700/80 rounded-3xl shadow-2xl overflow-hidden" data-aos="zoom-in" data-aos-duration="1000">
+                
+                <!-- Toolbar Header -->
+                <div class="bg-slate-800/90 px-6 py-4 flex flex-wrap items-center justify-between gap-4 border-b border-slate-700">
+                    <div class="flex items-center space-x-3">
+                        <span class="w-3 h-3 rounded-full bg-red-500 inline-block"></span>
+                        <span class="w-3 h-3 rounded-full bg-yellow-500 inline-block"></span>
+                        <span class="w-3 h-3 rounded-full bg-green-500 inline-block"></span>
+                        <span class="text-xs font-mono text-gray-400 ml-4 hidden sm:inline">eAssist Smart Desktop Hub v2.4</span>
+                    </div>
+
+                    <!-- Filter & Tagging Section -->
+                    <div class="flex flex-wrap items-center gap-2">
+                        <span class="text-xs text-gray-400 font-medium">Filter Tags:</span>
+                        <span class="px-2.5 py-1 rounded-md bg-blue-500/20 text-blue-300 text-xs font-bold border border-blue-500/30">#Cardiology</span>
+                        <span class="px-2.5 py-1 rounded-md bg-emerald-500/20 text-emerald-300 text-xs font-bold border border-emerald-500/30">#VIP_Patient</span>
+                        <span class="px-2.5 py-1 rounded-md bg-purple-500/20 text-purple-300 text-xs font-bold border border-purple-500/30">#Pending_Report</span>
+                    </div>
+                </div>
+
+                <!-- Main CRM Grid -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 min-h-[420px]">
+                    
+                    <!-- Left Sidebar - Patient Inbox -->
+                    <div class="lg:col-span-4 border-r border-slate-800 p-4 space-y-3 bg-slate-900/80">
+                        <div class="text-[11px] font-bold uppercase tracking-wider text-gray-400 mb-2">Live WhatsApp Conversations</div>
+                        
+                        <!-- Patient Active -->
+                        <div class="p-3.5 rounded-2xl bg-slate-800 border border-brand-green/50 flex items-center justify-between cursor-pointer transition-all">
+                            <div>
+                                <div class="font-bold text-sm text-white">Anil Kumar</div>
+                                <div class="text-xs text-gray-400">Requesting Lab Reports...</div>
+                                <div class="mt-2 flex gap-1">
+                                    <span class="px-2 py-0.5 rounded text-[9px] bg-emerald-900/80 text-emerald-300 font-bold">OPD</span>
+                                    <span class="px-2 py-0.5 rounded text-[9px] bg-blue-900/80 text-blue-300 font-bold">Dr. Verma</span>
+                                </div>
+                            </div>
+                            <span class="w-2.5 h-2.5 rounded-full bg-brand-green animate-ping"></span>
+                        </div>
+
+                        <!-- Patient 2 -->
+                        <div class="p-3.5 rounded-2xl bg-slate-900 border border-slate-800 flex items-center justify-between opacity-60 hover:opacity-100 transition-opacity">
+                            <div>
+                                <div class="font-bold text-sm text-white">Priya Patel</div>
+                                <div class="text-xs text-gray-400">Consultation Fee Query</div>
+                                <div class="mt-2 flex gap-1">
+                                    <span class="px-2 py-0.5 rounded text-[9px] bg-purple-900/80 text-purple-300 font-bold">New Lead</span>
+                                </div>
+                            </div>
+                            <span class="text-[10px] text-gray-400">AI Handled</span>
+                        </div>
+                    </div>
+
+                    <!-- Right Chat Workspace -->
+                    <div class="lg:col-span-8 p-6 flex flex-col justify-between bg-slate-950/40">
+                        <div>
+                            <div class="flex flex-wrap items-center justify-between pb-4 border-b border-slate-800 gap-4">
+                                <div>
+                                    <h4 class="font-bold text-white text-base">Anil Kumar (+91 98765 *****)</h4>
+                                    <p class="text-xs text-gray-400">Assigned Agent: <span class="text-brand-green font-bold">FrontDesk Operator</span></p>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <button class="px-3.5 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-xs font-bold text-white transition-colors">
+                                        <i class="fa-solid fa-headset mr-1"></i> Takeover Chat
+                                    </button>
+                                    <button class="px-3.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-bold text-gray-300 transition-colors">
+                                        <i class="fa-solid fa-user-plus mr-1"></i> Assign Doctor
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Conversation Thread -->
+                            <div class="space-y-4 text-xs mt-4">
+                                <div class="bg-slate-800/80 p-3.5 rounded-2xl max-w-md text-gray-300 border border-slate-700/50">
+                                    <span class="text-brand-green font-bold block mb-1"><i class="fa-solid fa-robot mr-1"></i> eAssist AI Bot:</span>
+                                    I have forwarded your request for the Lipid Profile report to the lab department.
+                                </div>
+                                <div class="bg-brand-blue/30 border border-brand-blue/40 p-3.5 rounded-2xl max-w-md ml-auto text-blue-100">
+                                    <span class="text-blue-300 font-bold block mb-1"><i class="fa-solid fa-user mr-1"></i> Human Desk Agent (From CRM):</span>
+                                    Hello Anil, your lab reports are ready! I am sending the official PDF file right here.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Response Input Box -->
+                        <div class="mt-6 pt-4 border-t border-slate-800 flex gap-2">
+                            <input type="text" placeholder="Type direct WhatsApp response or select standard medical template..." class="flex-1 bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 text-xs text-white focus:outline-none focus:border-brand-green transition-colors">
+                            <button class="gradient-btn px-6 py-3 rounded-xl text-xs font-bold text-white shadow-lg">
+                                Send WhatsApp <i class="fa-solid fa-paper-plane ml-1"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 5: Healthcare MSME Solutions -->
+    <section id="msme" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-gradient-to-r from-brand-lightBg via-emerald-50/50 to-blue-50/50 rounded-3xl p-8 sm:p-14 border border-blue-100/80 shadow-lg relative overflow-hidden" data-aos="fade-up">
+                
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+                    <div class="lg:col-span-8">
+                        <span class="px-3 py-1 bg-brand-green text-white font-bold text-xs uppercase tracking-wider rounded-md">Tailored For MSMEs</span>
+                        <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-darkNavy mt-4 mb-4">
+                            Affordable AI Automation Built for Growing Healthcare MSMEs
+                        </h2>
+                        <p class="text-gray-600 leading-relaxed text-base mb-6">
+                            Small clinics and regional diagnostic labs don't need complex IT teams. eAssist AI connects with your official WhatsApp Business API effortlessly in under 15 minutes.
+                        </p>
+                        
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm font-semibold text-gray-700">
+                            <div class="flex items-center space-x-2">
+                                <i class="fa-solid fa-circle-check text-brand-green text-base"></i>
+                                <span>No technical coding required</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <i class="fa-solid fa-circle-check text-brand-green text-base"></i>
+                                <span>Multi-lingual WhatsApp AI</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <i class="fa-solid fa-circle-check text-brand-green text-base"></i>
+                                <span>Government MSME Compliant</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <i class="fa-solid fa-circle-check text-brand-green text-base"></i>
+                                <span>Unlimited automated chat handling</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-4 text-center">
+                        <div class="bg-white p-6 rounded-2xl shadow-xl border border-gray-100">
+                            <span class="text-gray-400 text-xs font-bold uppercase">MSME Growth Special</span>
+                            <div class="text-3xl font-extrabold text-brand-navy mt-2">Special Plan</div>
+                            <p class="text-xs text-gray-500 mt-2 mb-6">Get custom onboarding support & setup discount today.</p>
+                            <a href="#demo" class="block w-full py-3.5 px-4 rounded-xl text-xs font-bold text-white gradient-btn text-center shadow-md hover:shadow-lg transition-all">
+                                Claim MSME Offer <i class="fa-solid fa-arrow-right ml-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 6: CTA Section -->
+    <section id="demo" class="py-24 gradient-bg text-white relative overflow-hidden">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10" data-aos="zoom-in">
+            <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight">
+                Ready to Upgrade Your Clinic with WhatsApp AI?
+            </h2>
+            <p class="mt-4 text-lg text-blue-100 max-w-2xl mx-auto">
+                Join forward-thinking doctors, caretaker agencies, and hospitals using eAssist AI.
+            </p>
+            <div class="mt-10 flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#" class="px-8 py-4 rounded-xl font-bold bg-white text-brand-navy hover:bg-gray-100 shadow-2xl transition-all transform hover:-translate-y-1">
+                    <i class="fa-brands fa-whatsapp text-brand-green text-xl mr-2"></i> Book Live Demo Now
+                </a>
+                <a href="#" class="px-8 py-4 rounded-xl font-bold border border-white/30 text-white hover:bg-white/10 transition-all">
+                    Contact Sales Team
+                </a>
+            </div>
+        </div>
+    </section>
+
+    
+   <!-- Footer -->
+   <!-- Footer -->
+<!-- Footer -->
+<footer class="bg-brand-darkNavy text-gray-300 pt-16 pb-12 border-t border-slate-800 relative overflow-hidden font-sans">
+    <!-- Background Glow FX -->
+    <div class="absolute bottom-0 left-1/4 w-96 h-96 bg-brand-blue/10 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute top-0 right-1/4 w-96 h-96 bg-brand-green/10 rounded-full blur-3xl pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <!-- Top Footer Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-slate-800" data-aos="fade-up">
+            
+            <!-- Brand Info (Spans 2 columns on desktop) -->
+            <div class="lg:col-span-2 space-y-4">
+                
+                <!-- Solid White Background Container for Logo -->
+                <a href="#" class="inline-flex items-center p-3 rounded-xl bg-white shadow-md group transition-all duration-300 hover:shadow-lg">
+                    <img src="/images/Assistlogo.png" alt="eAssist AI Logo" class="h-10 sm:h-12 w-auto max-h-12 object-contain transform group-hover:scale-105 transition-transform duration-200">
+                </a>
+                
+                <p class="text-xs text-slate-400 leading-relaxed max-w-sm">
+                    Smart. Simple. AI-Powered. Empowering doctors, hospitals, MSMEs, and caregivers with official WhatsApp API automation, smart tagging, and unified CRM controls.
+                </p>
+
+                <!-- Contact Details -->
+                <div class="pt-2 space-y-2 text-xs">
+                    <div class="flex items-center space-x-3 text-slate-300">
+                        <i class="fa-solid fa-envelope text-brand-teal w-4"></i>
+                        <span>support@eassist.ai</span>
+                    </div>
+                    <div class="flex items-center space-x-3 text-slate-300">
+                        <i class="fa-brands fa-whatsapp text-brand-green w-4 text-sm"></i>
+                        <span>+91 (800) 555-eAI (3247)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Column 1: Healthcare Solutions -->
+            <div>
+                <h4 class="text-sm font-bold text-white tracking-wider uppercase mb-4 border-l-2 border-brand-green pl-2.5">Solutions</h4>
+                <ul class="space-y-2.5 text-xs text-slate-400">
+                    <li><a href="#doctors" class="hover:text-white hover:translate-x-1 transition-all inline-block">For Individual Doctors</a></li>
+                    <li><a href="#hospitals" class="hover:text-white hover:translate-x-1 transition-all inline-block">Hospitals & OPD Booking</a></li>
+                    <li><a href="#caretakers" class="hover:text-white hover:translate-x-1 transition-all inline-block">Care Takers & Home Health</a></li>
+                    <li><a href="#crm" class="hover:text-white hover:translate-x-1 transition-all inline-block">Multi-Agent CRM Portal</a></li>
+                    <li><a href="#msme" class="hover:text-white hover:translate-x-1 transition-all inline-block">Healthcare MSME Plan</a></li>
+                </ul>
+            </div>
+
+            <!-- Column 2: Platform Features -->
+            <div>
+                <h4 class="text-sm font-bold text-white tracking-wider uppercase mb-4 border-l-2 border-brand-blue pl-2.5">Features</h4>
+                <ul class="space-y-2.5 text-xs text-slate-400">
+                    <li><a href="#" class="hover:text-white hover:translate-x-1 transition-all inline-block">WhatsApp Bot Engine</a></li>
+                    <li><a href="#" class="hover:text-white hover:translate-x-1 transition-all inline-block">Patient Auto-Tagging</a></li>
+                    <li><a href="#" class="hover:text-white hover:translate-x-1 transition-all inline-block">Live Chat Takeover</a></li>
+                    <li><a href="#" class="hover:text-white hover:translate-x-1 transition-all inline-block">Prescription Sharing</a></li>
+                    <li><a href="#" class="hover:text-white hover:translate-x-1 transition-all inline-block">WhatsApp Payment Links</a></li>
+                </ul>
+            </div>
+
+            <!-- Column 3: Trust & Compliance -->
+            <div>
+                <h4 class="text-sm font-bold text-white tracking-wider uppercase mb-4 border-l-2 border-brand-teal pl-2.5">Compliance</h4>
+                <div class="space-y-3 text-xs text-slate-400">
+                    <div class="flex items-center space-x-2 bg-slate-900/80 p-2 rounded-lg border border-slate-800">
+                        <i class="fa-solid fa-shield-halved text-brand-green text-sm"></i>
+                        <span class="text-slate-300 font-medium">HIPAA Compliant</span>
+                    </div>
+                    <div class="flex items-center space-x-2 bg-slate-900/80 p-2 rounded-lg border border-slate-800">
+                        <i class="fa-solid fa-lock text-brand-blue text-sm"></i>
+                        <span class="text-slate-300 font-medium">Meta Verified Partner</span>
+                    </div>
+                    <div class="flex items-center space-x-2 bg-slate-900/80 p-2 rounded-lg border border-slate-800">
+                        <i class="fa-solid fa-building-flag text-brand-teal text-sm"></i>
+                        <span class="text-slate-300 font-medium">MSME Registered</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Bottom Bar -->
+        <div class="pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-400">
+            <p>&copy; 2026 eAssist AI. Smart. Simple. AI-Powered. All rights reserved.</p>
+            
+            <div class="flex items-center space-x-6">
+                <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
+                <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
+                <a href="#" class="hover:text-white transition-colors">Security</a>
+            </div>
+
+            <!-- Social Links -->
+            <div class="flex space-x-3">
+                <a href="#" class="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center text-slate-300 hover:bg-brand-blue hover:text-white transition-all">
+                    <i class="fa-brands fa-linkedin-in text-xs"></i>
+                </a>
+                <a href="#" class="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center text-slate-300 hover:bg-brand-green hover:text-white transition-all">
+                    <i class="fa-brands fa-whatsapp text-xs"></i>
+                </a>
+                <a href="#" class="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center text-slate-300 hover:bg-brand-teal hover:text-white transition-all">
+                    <i class="fa-brands fa-twitter text-xs"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <!-- AOS (Animate On Scroll) JS Library -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS library
+        AOS.init({
+            once: true, // Animation occurs only once while scrolling down
+            duration: 800, // Duration of animations in ms
+            easing: 'ease-out-cubic',
+        });
+    </script>
+</body>
+</html>
