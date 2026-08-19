@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automated OPD & Multi-Specialty Booking - eAssist AI</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            green: '#05a550',
+                            navy: '#0b192c',
+                            darkNavy: '#070f1e',
+                            blue: '#1d4ed8',
+                            teal: '#02a89e',
+                            lightBg: '#f8fafc'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <style>
+        .gradient-text {
+            background: linear-gradient(135deg, #05a550 0%, #02a89e 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gradient-btn {
+            background: linear-gradient(135deg, #05a550 0%, #02a89e 100%);
+        }
+        .gradient-btn:hover {
+            background: linear-gradient(135deg, #038a42 0%, #018a82 100%);
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-800 font-sans antialiased">
+
+    <!-- Navigation Header -->
+    <header class="fixed top-0 left-0 right-0 bg-white/90 backdrop-blur-md z-50 border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <a href="#" class="flex items-center space-x-2">
+                <span class="text-2xl font-extrabold text-brand-darkNavy tracking-tight">eAssist<span class="text-brand-green">AI</span></span>
+            </a>
+            <div class="flex items-center space-x-4">
+                <a href="https://wa.me/919702053758?text=Hi%2C%20I%20want%20to%20know%20more%20about%20Hospital%20OPD%20Automation." target="_blank" rel="noopener noreferrer" class="hidden sm:inline-flex items-center justify-center px-5 py-2.5 rounded-xl text-xs font-bold text-brand-navy bg-gray-100 hover:bg-gray-200 transition-all">
+                    Contact Sales
+                </a>
+                <a href="https://wa.me/919702053758?text=Hi%2C%20I%20am%20interested%20in%20a%20live%20demo%20of%20the%20Hospital%20OPD%20Booking%20System." target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center px-5 py-2.5 rounded-xl text-xs font-bold text-white gradient-btn shadow-md hover:shadow-lg transition-all">
+                    <i class="fa-brands fa-whatsapp text-sm mr-2"></i> Book Hospital Demo
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 md:pt-40 md:pb-28 bg-gradient-to-b from-brand-lightBg via-white to-white relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Hero Left Text -->
+                <div class="lg:col-span-7 text-center lg:text-left" data-aos="fade-right">
+                    <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-100 text-brand-green text-xs font-bold uppercase tracking-wider mb-6">
+                        <i class="fa-solid fa-hospital text-sm"></i> Hospital Enterprise Solution
+                    </span>
+                    <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-brand-darkNavy leading-tight">
+                        Automated OPD & Multi-Specialty <span class="gradient-text">WhatsApp Booking</span>
+                    </h1>
+                    <p class="mt-6 text-base sm:text-lg text-gray-600 leading-relaxed max-w-2xl mx-auto lg:mx-0">
+                        Eliminate manual registration queues, streamline specialist scheduling, collect consultation fees, and deliver instant digital tokens—all natively inside WhatsApp.
+                    </p>
+
+                    <!-- CTA Buttons -->
+                    <div class="mt-8 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                        <a href="https://wa.me/919702053758?text=Hi%2C%20I%20want%20to%20test%20the%20Automated%20OPD%20Booking%20System%20on%20WhatsApp." target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 rounded-xl text-sm font-bold text-white gradient-btn shadow-lg hover:shadow-xl transition-all duration-300">
+                            <i class="fa-brands fa-whatsapp text-lg mr-2"></i> Try Live WhatsApp Demo
+                        </a>
+                        <a href="https://wa.me/919702053758?text=Hi%2C%20I%20want%20to%20integrate%20eAssist%20OPD%20booking%20with%20our%20Hospital%20HIS%2FEHR." target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 rounded-xl text-sm font-bold text-brand-navy bg-white border border-gray-200 hover:bg-gray-50 shadow-sm transition-all">
+                            Integrate with HIS / EHR
+                        </a>
+                    </div>
+
+                    <!-- Key Badges -->
+                    <div class="mt-10 flex flex-wrap items-center justify-center lg:justify-start gap-6 text-xs text-gray-500 font-semibold border-t border-gray-200/80 pt-6">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-circle-check text-brand-green text-sm"></i> HIS & EHR API Ready
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-circle-check text-brand-green text-sm"></i> Zero App Downloads
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-circle-check text-brand-green text-sm"></i> Multi-Location Support
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hero Right Phone Mockup -->
+                <div class="lg:col-span-5 relative" data-aos="fade-left">
+                    <div class="mx-auto max-w-xs sm:max-w-sm rounded-[2.5rem] bg-gray-900 p-3.5 shadow-2xl border-4 border-gray-800">
+                        <div class="bg-slate-100 rounded-[2rem] overflow-hidden h-[540px] flex flex-col font-sans text-xs">
+                            <!-- WhatsApp Top Header -->
+                            <div class="bg-brand-navy p-3 text-white flex items-center justify-between pt-5">
+                                <div class="flex items-center space-x-2">
+                                    <div class="w-8 h-8 rounded-full bg-white text-brand-green flex items-center justify-center font-bold">
+                                        <i class="fa-solid fa-hospital"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold leading-tight text-xs">Apollo Care OPD Hub</h4>
+                                        <p class="text-[9px] text-emerald-400">Verified Hospital Assistant</p>
+                                    </div>
+                                </div>
+                                <i class="fa-solid fa-ellipsis-vertical text-gray-300"></i>
+                            </div>
+
+                            <!-- Chat Area -->
+                            <div class="flex-1 p-3 overflow-y-auto bg-[#e5ddd5]/30 space-y-2.5 text-[11px]">
+                                <div class="bg-white p-2.5 rounded-lg shadow-sm max-w-[85%] border border-gray-100">
+                                    Welcome to Apollo Hospitals OPD! Select a specialty to book your appointment:
+                                    <div class="mt-2 space-y-1">
+                                        <div class="p-1.5 bg-blue-50 text-brand-blue rounded font-bold text-center">1️⃣ Cardiology</div>
+                                        <div class="p-1.5 bg-emerald-50 text-brand-green rounded font-bold text-center">2️⃣ Orthopedics</div>
+                                        <div class="p-1.5 bg-teal-50 text-brand-teal rounded font-bold text-center">3️⃣ Neurology</div>
+                                    </div>
+                                </div>
+                                <div class="bg-[#dcf8c6] p-2.5 rounded-lg shadow-sm max-w-[85%] ml-auto font-bold text-gray-800">
+                                    1 (Cardiology)
+                                </div>
+                                <div class="bg-white p-2.5 rounded-lg shadow-sm max-w-[85%] border border-gray-100">
+                                    Available Specialists for Tomorrow:
+                                    <br><br>
+                                    👨‍⚕️ <b>Dr. V. K. Sharma</b> (10:30 AM)<br>
+                                    👩‍⚕️ <b>Dr. Ananya Roy</b> (03:15 PM)
+                                </div>
+                                <div class="bg-[#dcf8c6] p-2.5 rounded-lg shadow-sm max-w-[85%] ml-auto font-bold text-gray-800">
+                                    Book Dr. Sharma at 10:30 AM
+                                </div>
+                                <div class="bg-white p-2.5 rounded-lg shadow-sm max-w-[85%] border border-gray-100">
+                                    🎟️ <b>OPD Token #C-14 Issued</b><br>
+                                    Hospital: Main Block, Gate 2<br>
+                                    <span class="text-[9px] text-emerald-600 font-bold">[Payment Received: ₹800]</span>
+                                </div>
+                            </div>
+
+                            <!-- Footer Input -->
+                            <div class="p-2 bg-gray-50 border-t border-gray-200 flex items-center space-x-2">
+                                <div class="flex-1 bg-white border border-gray-300 rounded-full px-3 py-1 text-gray-400">Type a reply...</div>
+                                <div class="w-7 h-7 bg-brand-green rounded-full flex items-center justify-center text-white"><i class="fa-solid fa-paper-plane text-xs"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Capabilities Section -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
+                <span class="px-3 py-1 rounded-full bg-emerald-100 text-brand-green font-bold text-xs uppercase tracking-wider">Enterprise Capabilities</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-darkNavy mt-4">
+                    Designed for High-Volume Hospital OPD Operations
+                </h2>
+                <p class="text-gray-600 mt-4 text-sm sm:text-base">
+                    Transform manual phone inquiries and long front-desk queues into an automated, self-serve WhatsApp experience.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Feature 1 -->
+                <div class="bg-brand-lightBg p-8 rounded-2xl border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300" data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-14 h-14 rounded-2xl bg-blue-100 text-brand-blue flex items-center justify-center text-2xl mb-6">
+                        <i class="fa-solid fa-sitemap"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-brand-darkNavy mb-3">Multi-Specialty Routing</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        Categorize doctors across departments like OPD, IPD, Diagnostics, and Emergency. Direct patients seamlessly to the right specialist.
+                    </p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="bg-brand-lightBg p-8 rounded-2xl border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300" data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-14 h-14 rounded-2xl bg-emerald-100 text-brand-green flex items-center justify-center text-2xl mb-6">
+                        <i class="fa-solid fa-ticket-simple"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-brand-darkNavy mb-3">Digital Token Generation</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        Issue instant digital OPD queue passes complete with registration numbers, estimated wait times, and gate location instructions.
+                    </p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="bg-brand-lightBg p-8 rounded-2xl border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300" data-aos="fade-up" data-aos-delay="300">
+                    <div class="w-14 h-14 rounded-2xl bg-teal-100 text-brand-teal flex items-center justify-center text-2xl mb-6">
+                        <i class="fa-solid fa-credit-card"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-brand-darkNavy mb-3">Instant Consultation Payments</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        Collect OPD registration fees online via integrated UPI, cards, or digital wallets before generating doctor appointment slots.
+                    </p>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="bg-brand-lightBg p-8 rounded-2xl border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300" data-aos="fade-up" data-aos-delay="400">
+                    <div class="w-14 h-14 rounded-2xl bg-purple-100 text-purple-600 flex items-center justify-center text-2xl mb-6">
+                        <i class="fa-solid fa-bell font-bold"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-brand-darkNavy mb-3">No-Show Reduction Engine</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        Send automated 24-hour and 2-hour WhatsApp appointment reminders with single-click options to confirm, reschedule, or cancel.
+                    </p>
+                </div>
+
+                <!-- Feature 5 -->
+                <div class="bg-brand-lightBg p-8 rounded-2xl border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300" data-aos="fade-up" data-aos-delay="500">
+                    <div class="w-14 h-14 rounded-2xl bg-amber-100 text-amber-600 flex items-center justify-center text-2xl mb-6">
+                        <i class="fa-solid fa-file-medical"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-brand-darkNavy mb-3">Lab Report & Prescription Delivery</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        Automatically deliver PDF diagnostic reports and digital prescriptions to patients as soon as doctors update records in your HIS.
+                    </p>
+                </div>
+
+                <!-- Feature 6 -->
+                <div class="bg-brand-lightBg p-8 rounded-2xl border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300" data-aos="fade-up" data-aos-delay="600">
+                    <div class="w-14 h-14 rounded-2xl bg-red-100 text-red-600 flex items-center justify-center text-2xl mb-6">
+                        <i class="fa-solid fa-plug"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-brand-darkNavy mb-3">2-Way HIS/EHR Integration</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        Sync seamlessly with existing hospital management software like Meditech, Epic, Cerner, or custom database APIs.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Step-by-Step -->
+    <section class="py-20 bg-brand-lightBg border-y border-gray-200/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
+                <span class="px-3 py-1 rounded-full bg-blue-100 text-brand-blue font-bold text-xs uppercase tracking-wider">Patient Experience</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-darkNavy mt-4">
+                    How OPD Booking Works in 4 Simple Steps
+                </h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                <!-- Step 1 -->
+                <div class="bg-white p-6 rounded-2xl border border-gray-200/80 shadow-sm relative">
+                    <div class="w-10 h-10 rounded-xl bg-brand-navy text-white flex items-center justify-center font-bold text-sm mb-4">01</div>
+                    <h4 class="font-bold text-base text-brand-darkNavy mb-2">Scan or Message</h4>
+                    <p class="text-xs text-gray-600 leading-relaxed">Patient scans a QR code at the hospital entrance or sends "Hi" to the official WhatsApp number.</p>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="bg-white p-6 rounded-2xl border border-gray-200/80 shadow-sm relative">
+                    <div class="w-10 h-10 rounded-xl bg-brand-green text-white flex items-center justify-center font-bold text-sm mb-4">02</div>
+                    <h4 class="font-bold text-base text-brand-darkNavy mb-2">Select Department</h4>
+                    <p class="text-xs text-gray-600 leading-relaxed">Selects preferred specialty, chooses doctor profile, and picks available time slot from live schedule.</p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="bg-white p-6 rounded-2xl border border-gray-200/80 shadow-sm relative">
+                    <div class="w-10 h-10 rounded-xl bg-brand-teal text-white flex items-center justify-center font-bold text-sm mb-4">03</div>
+                    <h4 class="font-bold text-base text-brand-darkNavy mb-2">Pay & Confirm</h4>
+                    <p class="text-xs text-gray-600 leading-relaxed">Completes instant payment on WhatsApp. Booking syncs directly with the hospital HIS database.</p>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="bg-white p-6 rounded-2xl border border-gray-200/80 shadow-sm relative">
+                    <div class="w-10 h-10 rounded-xl bg-brand-blue text-white flex items-center justify-center font-bold text-sm mb-4">04</div>
+                    <h4 class="font-bold text-base text-brand-darkNavy mb-2">Get Digital Pass</h4>
+                    <p class="text-xs text-gray-600 leading-relaxed">Receives token number, room location, and live queue updates directly on WhatsApp.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Operational Metrics / Impact -->
+    <section class="py-20 bg-brand-darkNavy text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
+                <div class="p-6 bg-slate-900/60 rounded-2xl border border-slate-800">
+                    <div class="text-4xl font-extrabold text-brand-green mb-2">65%</div>
+                    <div class="text-xs text-gray-400 font-semibold uppercase tracking-wider">Queue Time Reduced</div>
+                </div>
+                <div class="p-6 bg-slate-900/60 rounded-2xl border border-slate-800">
+                    <div class="text-4xl font-extrabold text-brand-teal mb-2">40%</div>
+                    <div class="text-xs text-gray-400 font-semibold uppercase tracking-wider">Fewer Patient No-Shows</div>
+                </div>
+                <div class="p-6 bg-slate-900/60 rounded-2xl border border-slate-800">
+                    <div class="text-4xl font-extrabold text-brand-blue mb-2">10x</div>
+                    <div class="text-xs text-gray-400 font-semibold uppercase tracking-wider">Faster OPD Registration</div>
+                </div>
+                <div class="p-6 bg-slate-900/60 rounded-2xl border border-slate-800">
+                    <div class="text-4xl font-extrabold text-purple-400 mb-2">100%</div>
+                    <div class="text-xs text-gray-400 font-semibold uppercase tracking-wider">HIPAA / Data Compliant</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-20 bg-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-extrabold text-brand-darkNavy">Frequently Asked Questions</h2>
+                <p class="text-gray-600 text-sm mt-2">Everything you need to know about integrating WhatsApp OPD automation.</p>
+            </div>
+
+            <div class="space-y-4">
+                <div class="border border-gray-200 rounded-xl p-5">
+                    <h3 class="font-bold text-brand-darkNavy text-base">Can this integrate with our existing Hospital Information System (HIS)?</h3>
+                    <p class="text-xs sm:text-sm text-gray-600 mt-2 leading-relaxed">Yes. eAssist AI offers REST APIs and custom webhooks to integrate directly with any custom or commercial HIS/EHR database for real-time doctor availability and token generation.</p>
+                </div>
+                <div class="border border-gray-200 rounded-xl p-5">
+                    <h3 class="font-bold text-brand-darkNavy text-base">How do patients pay consultation fees?</h3>
+                    <p class="text-xs sm:text-sm text-gray-600 mt-2 leading-relaxed">We support native WhatsApp Pay alongside integrated payment gateways (Razorpay, Paytm, Stripe) so patients can pay securely via UPI, cards, or net banking before receiving their booking token.</p>
+                </div>
+                <div class="border border-gray-200 rounded-xl p-5">
+                    <h3 class="font-bold text-brand-darkNavy text-base">What happens if a doctor is unexpectedly unavailable?</h3>
+                    <p class="text-xs sm:text-sm text-gray-600 mt-2 leading-relaxed">The front-desk team can trigger automated broadcast alerts from the CRM. Affected patients will instantly receive a WhatsApp message with single-tap options to reschedule or request a refund.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 gradient-bg text-white relative overflow-hidden">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight">
+                Ready to Automate Your Hospital OPD Operations?
+            </h2>
+            <p class="mt-4 text-base sm:text-lg text-blue-100 max-w-2xl mx-auto">
+                Schedule a consultation with our hospital automation team today to see a live demonstration tailored to your facility.
+            </p>
+            <div class="mt-10 flex flex-col sm:flex-row justify-center gap-4">
+                <a href="https://wa.me/919702053758?text=Hi%2C%20I%20want%20to%20schedule%20a%20hospital%20OPD%20automation%20consultation." target="_blank" rel="noopener noreferrer" class="px-8 py-4 rounded-xl font-bold bg-white text-brand-navy hover:bg-gray-100 shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
+                    <i class="fa-brands fa-whatsapp text-brand-green text-xl mr-2"></i> Schedule Demo on WhatsApp
+                </a>
+                <a href="https://wa.me/919702053758?text=Hi%2C%20I%20need%20custom%20pricing%20for%20our%20hospital%20chain." target="_blank" rel="noopener noreferrer" class="px-8 py-4 rounded-xl font-bold border border-white/30 text-white hover:bg-white/10 transition-all">
+                    Request Custom Enterprise Quote
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Simple Footer -->
+    <footer class="bg-brand-darkNavy py-8 text-center text-xs text-gray-400 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4">
+            <p>© 2026 eAssist AI. All rights reserved. Hospital Automation Suite.</p>
+        </div>
+    </footer>
+
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true
+        });
+    </script>
+</body>
+</html>
