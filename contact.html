@@ -15,6 +15,13 @@
 .form-label{font-size:.8125rem;font-weight:700;color:#1e293b;margin-bottom:.375rem;display:block}
 .stat-card{background:#fff;border-radius:1.25rem;padding:1.75rem;text-align:center;border:1px solid #e2e8f0;transition:all .3s}
 .stat-card:hover{box-shadow:0 12px 40px rgba(109,40,217,0.1);transform:translateY(-3px)}
+@media(max-width:767px){
+  #contact-grid > div:first-child > div:first-child{padding:1.5rem}
+  .form-name-row{grid-template-columns:1fr !important}
+}
+@media(max-width:380px){
+  #contact-grid > div:first-child > div:first-child{padding:1.25rem}
+}
 </style>
 </head>
 <body>
@@ -78,7 +85,7 @@
           <p style="font-size:.875rem;color:#64748b;margin-bottom:2rem">Fill in your details and our team will reach out within 2 hours on WhatsApp.</p>
 
           <form id="demo-form" onsubmit="submitForm(event)">
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem">
+            <div class="form-name-row" style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem">
               <div>
                 <label class="form-label" for="name">Full Name *</label>
                 <input id="name" class="form-field" type="text" placeholder="Your full name" required>
