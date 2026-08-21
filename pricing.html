@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pricing — eAssist AI | WhatsApp AI Automation Plans</title>
+<meta name="description" content="Simple, transparent pricing for WhatsApp AI automation. Starter, Growth, and Enterprise plans for every business size.">
+<link rel="stylesheet" href="shared.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<style>
+/* Base Reset & Preserved Original Styles */
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  color: #1e293b;
+  background-color: #ffffff;
+}
+
+.pricing-hero{background:linear-gradient(-45deg,#041738,#072b61,#6d28d9,#0d9488);background-size:400% 400%;animation:meshShift 14s ease infinite;padding:8rem 1.5rem 5rem;position:relative;overflow:hidden;text-align:center}
+@keyframes meshShift { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
+
+.toggle-wrap{display:inline-flex;align-items:center;background:#f1f5f9;border-radius:99px;padding:.25rem;border:1px solid #e2e8f0;margin:2.5rem auto;position:relative}
+.toggle-opt{padding:.5rem 1.5rem;border-radius:99px;font-size:.875rem;font-weight:700;cursor:pointer;transition:all .3s;border:none;background:none;color:#64748b}
+.toggle-opt.active{background:#6d28d9;color:#fff;box-shadow:0 4px 12px rgba(109,40,217,0.3)}
+
+.badge-popular{position:absolute;top:-1rem;left:50%;transform:translateX(-50%);background:linear-gradient(90deg,#6d28d9,#0d9488);color:#fff;font-size:.6875rem;font-weight:800;padding:.3rem 1rem;border-radius:99px;white-space:nowrap;letter-spacing:.06em;text-transform:uppercase}
+.price-amount{font-size:3rem;font-weight:900;line-height:1;letter-spacing:-.03em}
+
+/* Updated Layout Grid & Cards for Full Vertical Content Visibility */
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  align-items: stretch; /* Ensures all cards match full height */
+  max-width: 68rem;
+  margin: 0 auto;
+}
+
+.price-card {
+  background: #ffffff;
+  border-radius: 1.25rem;
+  border: 1px solid #e2e8f0;
+  padding: 2.25rem 1.75rem 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%; /* Guarantees full vertical growth */
+  position: relative;
+  overflow: visible;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
+}
+
+.price-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 35px -10px rgba(0,0,0,0.1);
+}
+
+.price-card.featured {
+  background: linear-gradient(180deg, #072b61 0%, #041738 100%);
+  border: 2px solid #6d28d9;
+  box-shadow: 0 20px 40px -10px rgba(109, 40, 217, 0.35);
+}
+
+.feature-row {
+  display: flex;
+  align-items: center;
+  gap: .625rem;
+  font-size: .875rem;
+  padding: .625rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.feature-row.light-row {
+  border-bottom: 1px solid #f1f5f9;
+  color: #475569;
+}
+
+.check-icon { color: #16a34a; font-size: .9375rem; flex-shrink: 0; }
+.cross-icon { color: #cbd5e1; font-size: .9375rem; flex-shrink: 0; }
+
+/* Premium Comparison Table Styling */
+.table-wrapper {
+  background: #ffffff;
+  border-radius: 1.25rem;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+  overflow-x: auto;
+  margin-top: 1.5rem;
+}
+
+.compare-table {
+  width: 100%;
+  min-width: 650px;
+  border-collapse: separate;
+  border-spacing: 0;
+  text-align: left;
+}
+
+.compare-table th {
+  padding: 1.25rem 1.5rem;
+  font-size: .9375rem;
+  font-weight: 800;
+  border-bottom: 2px solid #e2e8f0;
+  background: #f8fafc;
+}
+
+.compare-table td {
+  padding: 1.125rem 1.5rem;
+  font-size: .875rem;
+  color: #334155;
+  border-bottom: 1px solid #f1f5f9;
+  vertical-align: middle;
+}
+
+.compare-table tr:last-child td {
+  border-bottom: none;
+}
+
+.compare-table th:nth-child(3),
+.compare-table td:nth-child(3) {
+  background: rgba(109, 40, 217, 0.03);
+}
+
+.compare-table td .check { color: #16a34a; font-size: 1.125rem; }
+.compare-table td .cross { color: #cbd5e1; font-size: 1.125rem; }
+
+/* FAQ Styles */
+.faq-item {
+  border-bottom: 1px solid #e2e8f0;
+  padding: 1.25rem 0;
+}
+
+.faq-btn {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: none;
+  border: none;
+  font-size: 1.0625rem;
+  font-weight: 700;
+  color: #041738;
+  cursor: pointer;
+  text-align: left;
+  padding: 0;
+}
+
+.faq-body {
+  display: none;
+  padding-top: .75rem;
+  color: #64748b;
+  font-size: .9375rem;
+  line-height: 1.6;
+}
+
+.faq-body.open { display: block; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav-bar" id="navbar">
+  <div style="height:3px;background:linear-gradient(90deg,#072b61,#16a34a,#0d9488,#6d28d9);position:absolute;top:0;left:0;right:0"></div>
+  <div style="max-width:80rem;margin:0 auto;padding:0 1.5rem;height:4.5rem;display:flex;align-items:center;justify-content:space-between">
+    <a href="index.html" style="display:flex;align-items:center;padding:.25rem .5rem;border-radius:.625rem;transition:all .2s" onmouseover="this.style.background='rgba(22,163,74,0.06)'" onmouseout="this.style.background='transparent'">
+      <img src="images/Assistlogo.png" alt="eAssist AI" style="height:3rem;width:auto;object-fit:contain;filter:drop-shadow(0 1px 4px rgba(7,43,97,0.12))">
+    </a>
+    <div class="desktop-nav" style="display:flex;align-items:center;gap:2rem">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="#solutions" class="nav-link">Solutions</a>
+      <a href="#industries" class="nav-link">Industries</a>
+      <a href="#features" class="nav-link">Features</a>
+      <a href="pricing.html" class="nav-link">Pricing</a>
+      <a href="contact.html" class="nav-link">Demo</a>
+      <a href="https://wa.me/919702053758?text=Hi%2C+I+want+a+free+demo" target="_blank" class="btn-primary" style="padding:.625rem 1.25rem;font-size:.8125rem">
+        <i class="fab fa-whatsapp"></i> Live Demo
+      </a>
+    </div>
+    <button id="mob-btn" style="display:none;background:none;border:none;color:#072b61;font-size:1.5rem;cursor:pointer;padding:.5rem" aria-label="Menu">
+      <i class="fas fa-bars" id="mob-icon"></i>
+    </button>
+  </div>
+  <div id="mob-menu" style="display:none;padding:1rem 1.5rem 1.5rem">
+    <div style="display:flex;flex-direction:column;gap:.5rem">
+      <a href="index.html" class="mob-link" style="color:#334155;text-decoration:none;font-weight:600;padding:.75rem 1rem;border-radius:.625rem;display:block;transition:background .2s">Home</a>
+      <a href="#solutions" class="mob-link" style="color:#334155;text-decoration:none;font-weight:600;padding:.75rem 1rem;border-radius:.625rem;display:block;transition:background .2s">Solutions</a>
+      <a href="#industries" class="mob-link" style="color:#334155;text-decoration:none;font-weight:600;padding:.75rem 1rem;border-radius:.625rem;display:block">Industries</a>
+      <a href="#features" class="mob-link" style="color:#334155;text-decoration:none;font-weight:600;padding:.75rem 1rem;border-radius:.625rem;display:block">Features</a>
+      <a href="pricing.html" class="mob-link" style="color:#334155;text-decoration:none;font-weight:600;padding:.75rem 1rem;border-radius:.625rem;display:block">Pricing</a>
+      <a href="contact.html" class="mob-link" style="color:#334155;text-decoration:none;font-weight:600;padding:.75rem 1rem;border-radius:.625rem;display:block">Demo</a>
+      <a href="https://wa.me/919702053758?text=Hi%2C+I+want+a+free+demo" target="_blank" class="btn-primary" style="margin-top:.5rem;justify-content:center">
+        <i class="fab fa-whatsapp"></i> Get Free Demo
+      </a>
+    </div>
+  </div>
+</nav>
+
+<!-- PRICING HERO -->
+<div class="pricing-hero">
+  <div class="grid-overlay"></div>
+  <div style="position:relative;z-index:1" data-aos="fade-up">
+    <span class="section-label" style="background:rgba(255,255,255,0.1);color:#fff;border:1px solid rgba(255,255,255,0.2)"><i class="fas fa-tag"></i> Pricing Plans</span>
+    <h1 style="font-size:clamp(2rem,5vw,3.5rem);font-weight:900;color:#fff;margin-top:1rem;line-height:1.15">Simple, Transparent <span class="gradient-text">Pricing</span></h1>
+    <p style="color:rgba(255,255,255,0.75);font-size:1.0625rem;margin-top:1rem;max-width:36rem;margin-left:auto;margin-right:auto">No hidden fees. No long contracts. Start free, scale as you grow.</p>
+  </div>
+</div>
+
+<!-- TOGGLE -->
+<div style="text-align:center;padding:0 1.5rem">
+  <div class="toggle-wrap">
+    <button class="toggle-opt active" id="monthly-btn" onclick="setFreq('monthly')">Monthly</button>
+    <button class="toggle-opt" id="annual-btn" onclick="setFreq('annual')">Annual <span style="color:#16a34a;font-size:.75rem;font-weight:800">Save 15%</span></button>
+  </div>
+</div>
+
+<!-- PRICING CARDS -->
+<section style="padding:1.5rem 1.5rem 4rem">
+  <div class="pricing-grid">
+
+    <!-- STARTER -->
+    <div class="price-card" data-aos="fade-up" data-aos-delay="50">
+      <div>
+        <div style="font-size:.75rem;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:#6d28d9;margin-bottom:.75rem">Starter</div>
+        <div style="display:flex;align-items:baseline;gap:.25rem;margin-bottom:.375rem">
+          <span style="font-size:1.125rem;font-weight:700;color:#475569">₹</span>
+          <span class="price-amount" style="color:#041738" id="starter-price">2,499</span>
+          <span style="color:#94a3b8;font-size:.875rem">/mo</span>
+        </div>
+        <p style="font-size:.8125rem;color:#64748b;margin-bottom:1.5rem">Perfect for solo entrepreneurs &amp; small shops getting started.</p>
+        <a href="contact.html" class="btn-violet" style="width:100%;margin-bottom:1.5rem;justify-content:center">Get Started</a>
+        <div style="display:flex;flex-direction:column;gap:0">
+          <div class="feature-row light-row"><i class="fas fa-check check-icon"></i> 1 WhatsApp Number</div>
+          <div class="feature-row light-row"><i class="fas fa-check check-icon"></i> 500 Conversations/mo</div>
+          <div class="feature-row light-row"><i class="fas fa-check check-icon"></i> Basic AI Bot Builder</div>
+          <div class="feature-row light-row"><i class="fas fa-check check-icon"></i> Booking Automation</div>
+          <div class="feature-row light-row"><i class="fas fa-check check-icon"></i> CRM Inbox (1 Agent)</div>
+          <div class="feature-row light-row"><i class="fas fa-times cross-icon"></i> <span style="color:#cbd5e1">Broadcast Campaigns</span></div>
+          <div class="feature-row light-row"><i class="fas fa-times cross-icon"></i> <span style="color:#cbd5e1">Multi-Agent Inbox</span></div>
+          <div class="feature-row light-row" style="border:none"><i class="fas fa-times cross-icon"></i> <span style="color:#cbd5e1">Dedicated Onboarding</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GROWTH (featured) -->
+    <div class="price-card featured" data-aos="fade-up" data-aos-delay="150">
+      <div class="badge-popular">⚡ Most Popular</div>
+      <div>
+        <div style="font-size:.75rem;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,0.7);margin-bottom:.75rem">Growth</div>
+        <div style="display:flex;align-items:baseline;gap:.25rem;margin-bottom:.375rem">
+          <span style="font-size:1.125rem;font-weight:700;color:rgba(255,255,255,0.7)">₹</span>
+          <span class="price-amount" style="color:#fff" id="growth-price">5,999</span>
+          <span style="color:rgba(255,255,255,0.6);font-size:.875rem">/mo</span>
+        </div>
+        <p style="font-size:.8125rem;color:rgba(255,255,255,0.65);margin-bottom:1.5rem">For growing businesses that need power, speed, and automation.</p>
+        <a href="contact.html" class="btn-primary" style="width:100%;margin-bottom:1.5rem;justify-content:center;background:rgba(255,255,255,0.15);border:1.5px solid rgba(255,255,255,0.3)">Start Free Trial</a>
+        <div style="display:flex;flex-direction:column;gap:0">
+          <div class="feature-row"><i class="fas fa-check" style="color:#6ee7b7;font-size:.9375rem;flex-shrink:0"></i> <span style="color:rgba(255,255,255,0.85)">3 WhatsApp Numbers</span></div>
+          <div class="feature-row"><i class="fas fa-check" style="color:#6ee7b7;font-size:.9375rem;flex-shrink:0"></i> <span style="color:rgba(255,255,255,0.85)">5,000 Conversations/mo</span></div>
+          <div class="feature-row"><i class="fas fa-check" style="color:#6ee7b7;font-size:.9375rem;flex-shrink:0"></i> <span style="color:rgba(255,255,255,0.85)">Advanced AI Bot Builder</span></div>
+          <div class="feature-row"><i class="fas fa-check" style="color:#6ee7b7;font-size:.9375rem;flex-shrink:0"></i> <span style="color:rgba(255,255,255,0.85)">Booking + Order Automation</span></div>
+          <div class="feature-row"><i class="fas fa-check" style="color:#6ee7b7;font-size:.9375rem;flex-shrink:0"></i> <span style="color:rgba(255,255,255,0.85)">CRM + Tagging + Broadcast</span></div>
+          <div class="feature-row"><i class="fas fa-check" style="color:#6ee7b7;font-size:.9375rem;flex-shrink:0"></i> <span style="color:rgba(255,255,255,0.85)">Multi-Agent Inbox (5 Agents)</span></div>
+          <div class="feature-row"><i class="fas fa-check" style="color:#6ee7b7;font-size:.9375rem;flex-shrink:0"></i> <span style="color:rgba(255,255,255,0.85)">Analytics Dashboard</span></div>
+          <div class="feature-row" style="border:none"><i class="fas fa-times" style="color:rgba(255,255,255,0.3);font-size:.9375rem;flex-shrink:0"></i> <span style="color:rgba(255,255,255,0.35)">Dedicated Onboarding</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ENTERPRISE -->
+    <div class="price-card" data-aos="fade-up" data-aos-delay="250">
+      <div>
+        <div style="font-size:.75rem;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:#6d28d9;margin-bottom:.75rem">Enterprise</div>
+        <div style="display:flex;align-items:baseline;gap:.25rem;margin-bottom:.375rem">
+          <span class="price-amount" style="color:#041738;font-size:2rem">Custom</span>
+        </div>
+        <p style="font-size:.8125rem;color:#64748b;margin-bottom:1.5rem">For large businesses, agencies, and multi-location brands at scale.</p>
+        <a href="contact.html" class="btn-primary" style="width:100%;margin-bottom:1.5rem;justify-content:center">Contact Sales</a>
+        <div style="display:flex;flex-direction:column;gap:0">
+          <div class="feature-row light-row"><i class="fas fa-check check-icon"></i> Unlimited Numbers</div>
+          <div class="feature-row light-row"><i class="fas fa-check check-icon"></i> Unlimited Conversations</div>
+          <div class="feature-row light-row"><i class="fas fa-check check-icon"></i> Custom AI Flows + GPT-4</div>
+          <div class="feature-row light-row"><i class="fas fa-check check-icon"></i> Full Automation Suite</div>
+          <div class="feature-row light-row"><i class="fas fa-check check-icon"></i> Unlimited Agents</div>
+          <div class="feature-row light-row"><i class="fas fa-check check-icon"></i> Broadcast + Retargeting</div>
+          <div class="feature-row light-row"><i class="fas fa-check check-icon"></i> Advanced Analytics + API</div>
+          <div class="feature-row light-row" style="border:none"><i class="fas fa-check check-icon"></i> Dedicated Onboarding + SLA</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- COMPARISON TABLE -->
+<section style="padding:4rem 1.5rem;background:#f8fafc">
+  <div style="max-width:76rem;margin:0 auto">
+    <div style="text-align:center;max-width:38rem;margin:0 auto 2.5rem" data-aos="fade-up">
+      <span class="section-label label-violet">Compare Plans</span>
+      <h2 style="font-size:clamp(1.5rem,3vw,2.25rem);font-weight:900;color:#041738;margin-top:1rem">Feature Comparison</h2>
+    </div>
+    
+    <div class="table-wrapper" data-aos="fade-up" data-aos-delay="100">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th style="width:40%;color:#64748b">Feature</th>
+            <th style="width:20%;color:#6d28d9;text-align:center">Starter</th>
+            <th style="width:20%;color:#6d28d9;text-align:center">Growth</th>
+            <th style="width:20%;color:#6d28d9;text-align:center">Enterprise</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="font-weight:600">WhatsApp Numbers</td>
+            <td style="text-align:center">1</td>
+            <td style="text-align:center;font-weight:700;color:#6d28d9">3</td>
+            <td style="text-align:center">Unlimited</td>
+          </tr>
+          <tr>
+            <td style="font-weight:600">Monthly Conversations</td>
+            <td style="text-align:center">500</td>
+            <td style="text-align:center;font-weight:700;color:#6d28d9">5,000</td>
+            <td style="text-align:center">Unlimited</td>
+          </tr>
+          <tr>
+            <td style="font-weight:600">AI Bot Builder</td>
+            <td style="text-align:center"><i class="fas fa-check check"></i></td>
+            <td style="text-align:center"><i class="fas fa-check check"></i></td>
+            <td style="text-align:center"><i class="fas fa-check check"></i></td>
+          </tr>
+          <tr>
+            <td style="font-weight:600">Booking Automation</td>
+            <td style="text-align:center"><i class="fas fa-check check"></i></td>
+            <td style="text-align:center"><i class="fas fa-check check"></i></td>
+            <td style="text-align:center"><i class="fas fa-check check"></i></td>
+          </tr>
+          <tr>
+            <td style="font-weight:600">CRM &amp; Auto-Tagging</td>
+            <td style="text-align:center"><i class="fas fa-check check"></i></td>
+            <td style="text-align:center"><i class="fas fa-check check"></i></td>
+            <td style="text-align:center"><i class="fas fa-check check"></i></td>
+          </tr>
+          <tr>
+            <td style="font-weight:600">Broadcast Campaigns</td>
+            <td style="text-align:center"><i class="fas fa-times cross"></i></td>
+            <td style="text-align:center"><i class="fas fa-check check"></i></td>
+            <td style="text-align:center"><i class="fas fa-check check"></i></td>
+          </tr>
+          <tr>
+            <td style="font-weight:600">Multi-Agent Inbox</td>
+            <td style="text-align:center"><i class="fas fa-times cross"></i></td>
+            <td style="text-align:center;font-weight:700;color:#6d28d9">Up to 5</td>
+            <td style="text-align:center">Unlimited</td>
+          </tr>
+          <tr>
+            <td style="font-weight:600">Payment Links</td>
+            <td style="text-align:center"><i class="fas fa-times cross"></i></td>
+            <td style="text-align:center"><i class="fas fa-check check"></i></td>
+            <td style="text-align:center"><i class="fas fa-check check"></i></td>
+          </tr>
+          <tr>
+            <td style="font-weight:600">Analytics Dashboard</td>
+            <td style="text-align:center">Basic</td>
+            <td style="text-align:center;font-weight:700;color:#6d28d9">Advanced</td>
+            <td style="text-align:center">Custom</td>
+          </tr>
+          <tr>
+            <td style="font-weight:600">API Access</td>
+            <td style="text-align:center"><i class="fas fa-times cross"></i></td>
+            <td style="text-align:center"><i class="fas fa-times cross"></i></td>
+            <td style="text-align:center"><i class="fas fa-check check"></i></td>
+          </tr>
+          <tr>
+            <td style="font-weight:600">Dedicated Onboarding</td>
+            <td style="text-align:center"><i class="fas fa-times cross"></i></td>
+            <td style="text-align:center"><i class="fas fa-times cross"></i></td>
+            <td style="text-align:center"><i class="fas fa-check check"></i></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section style="padding:5rem 1.5rem;background:#fff">
+  <div style="max-width:48rem;margin:0 auto">
+    <div style="text-align:center;margin-bottom:3rem" data-aos="fade-up">
+      <span class="section-label label-teal">FAQ</span>
+      <h2 style="font-size:clamp(1.5rem,3vw,2.25rem);font-weight:900;color:#041738;margin-top:1rem">Frequently Asked Questions</h2>
+    </div>
+    <div data-aos="fade-up" data-aos-delay="100">
+      <div class="faq-item">
+        <button class="faq-btn" onclick="toggleFaq(this)">Is there a free trial? <i class="fas fa-plus faq-icon"></i></button>
+        <div class="faq-body">Yes! Every plan comes with a 14-day free trial — no credit card required. You get full access to all features of your chosen plan during the trial period.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-btn" onclick="toggleFaq(this)">Can I change my plan later? <i class="fas fa-plus faq-icon"></i></button>
+        <div class="faq-body">Absolutely. You can upgrade or downgrade your plan at any time from your dashboard. Upgrades take effect immediately, and downgrades apply at the next billing cycle.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-btn" onclick="toggleFaq(this)">What counts as a "conversation"? <i class="fas fa-plus faq-icon"></i></button>
+        <div class="faq-body">A conversation is a 24-hour window of messaging between your WhatsApp number and a single customer. All messages in that 24-hour window count as one conversation, regardless of volume.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-btn" onclick="toggleFaq(this)">Do I need a technical team to set up? <i class="fas fa-plus faq-icon"></i></button>
+        <div class="faq-body">No. eAssist AI is designed for non-technical business owners. Our no-code bot builder and guided onboarding get you live in under 15 minutes. Enterprise customers get a dedicated success manager.</div>
+      </div>
+      <div class="faq-item" style="border:none">
+        <button class="faq-btn" onclick="toggleFaq(this)">Is my customer data secure? <i class="fas fa-plus faq-icon"></i></button>
+        <div class="faq-body">Yes. All data is end-to-end encrypted, stored in ISO 27001-certified infrastructure. We are a Meta Verified Business Partner and fully comply with WhatsApp Business Policy and GDPR regulations.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="hero-mesh" style="position:relative;overflow:hidden;text-align:center;padding:5rem 1.5rem">
+  <div class="grid-overlay"></div>
+  <div style="max-width:40rem;margin:0 auto;position:relative;z-index:1" data-aos="zoom-in">
+    <h2 style="font-size:clamp(1.75rem,3.5vw,2.75rem);font-weight:900;color:#fff;line-height:1.2;margin-bottom:1rem">Start Your Free 14-Day Trial</h2>
+    <p style="color:rgba(255,255,255,0.75);margin-bottom:2rem;font-size:1.0625rem">No credit card needed. Cancel anytime. Full access from day one.</p>
+    <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:1rem">
+      <a href="contact.html" class="btn-primary"><i class="fas fa-rocket"></i> Start Free Trial</a>
+      <a href="https://wa.me/919702053758?text=Hi%2C+I+want+to+know+more+about+pricing" target="_blank" class="btn-ghost"><i class="fab fa-whatsapp"></i> Talk to Sales</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="background:#020d1f;color:#94a3b8;padding:4rem 0 2rem;border-top:1px solid rgba(255,255,255,0.06)">
+  <div style="max-width:76rem;margin:0 auto;padding:0 1.5rem">
+    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:1rem;padding-bottom:2rem;border-bottom:1px solid rgba(255,255,255,0.06)">
+      <a href="index.html" style="display:inline-block;padding:.5rem .75rem;background:#fff;border-radius:.5rem"><img src="images/Assistlogo.png" alt="eAssist AI" style="height:2rem;width:auto;object-fit:contain"></a>
+      <div style="display:flex;gap:1.5rem;font-size:.8125rem">
+        <a href="index.html" style="color:#64748b;text-decoration:none">Home</a>
+        <a href="pricing.html" style="color:#fff;text-decoration:none;font-weight:700">Pricing</a>
+        <a href="contact.html" style="color:#64748b;text-decoration:none">Contact</a>
+        <a href="#" style="color:#64748b;text-decoration:none">Privacy</a>
+      </div>
+    </div>
+    <div style="padding-top:2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;font-size:.8125rem">
+      <p>© 2026 eAssist AI. All rights reserved.</p>
+      <a href="https://wa.me/919702053758" target="_blank" style="color:#64748b;text-decoration:none;display:flex;align-items:center;gap:.375rem"><i class="fab fa-whatsapp" style="color:#25d366"></i> +91 9702053758</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Floating WhatsApp Button -->
+<a href="https://wa.me/919702053758?text=Hi%2C%20I%20have%20a%20query."
+   target="_blank"
+   rel="noopener noreferrer"
+   aria-label="Chat with us on WhatsApp"
+   style="
+     position:fixed;
+     bottom:20px;
+     right:20px;
+     width:58px;
+     height:58px;
+     background:#25D366;
+     color:#fff;
+     border-radius:50%;
+     display:flex;
+     align-items:center;
+     justify-content:center;
+     font-size:30px;
+     text-decoration:none;
+     box-shadow:0 6px 18px rgba(0,0,0,0.25);
+     z-index:9999;
+     transition:all 0.3s ease;
+   "
+   onmouseover="this.style.transform='scale(1.1)'"
+   onmouseout="this.style.transform='scale(1)'">
+   <i class="fab fa-whatsapp"></i>
+</a>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+AOS.init({ once: true, duration: 800, easing: 'ease-out-cubic' });
+
+const mobBtn=document.getElementById('mob-btn'),mobMenu=document.getElementById('mob-menu'),mobIcon=document.getElementById('mob-icon');
+mobBtn.addEventListener('click',()=>{const o=mobMenu.style.display==='block';mobMenu.style.display=o?'none':'block';mobIcon.className=o?'fas fa-bars':'fas fa-xmark';});
+document.querySelectorAll('.mob-link').forEach(l=>l.addEventListener('click',()=>{mobMenu.style.display='none';mobIcon.className='fas fa-bars';}));
+
+function applyR(){const w=window.innerWidth;document.querySelector('.desktop-nav').style.display=w>=1024?'flex':'none';mobBtn.style.display=w>=1024?'none':'block';}
+applyR();window.addEventListener('resize',applyR);
+
+const prices={starter:{monthly:'2,499',annual:'2,124'},growth:{monthly:'5,999',annual:'5,099'}};
+function setFreq(f){
+  document.getElementById('monthly-btn').classList.toggle('active',f==='monthly');
+  document.getElementById('annual-btn').classList.toggle('active',f==='annual');
+  document.getElementById('starter-price').textContent=prices.starter[f];
+  document.getElementById('growth-price').textContent=prices.growth[f];
+}
+
+function toggleFaq(btn){
+  const body=btn.nextElementSibling,open=body.classList.contains('open');
+  document.querySelectorAll('.faq-body').forEach(b=>b.classList.remove('open'));
+  document.querySelectorAll('.faq-btn').forEach(b=>b.classList.remove('open'));
+  if(!open){body.classList.add('open');btn.classList.add('open');}
+}
+</script>
+</body>
+</html>

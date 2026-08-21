@@ -1,1056 +1,1129 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>eAssist AI | WhatsApp AI Assistant for Healthcare & Doctors</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- AOS (Animate On Scroll) Library CSS -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        brand: {
-                            navy: '#072b61',
-                            blue: '#0d5db8',
-                            green: '#20a738',
-                            teal: '#02a89e',
-                            darkNavy: '#041738',
-                            lightBg: '#f4f9ff',
-                            emeraldGlow: '#00e676'
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['Plus Jakarta Sans', 'sans-serif'],
-                    },
-                    animation: {
-                        'float': 'float 4s ease-in-out infinite',
-                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                        'glow': 'glow 2s ease-in-out infinite alternate',
-                    },
-                    keyframes: {
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0px)' },
-                            '50%': { transform: 'translateY(-12px)' },
-                        },
-                        glow: {
-                            '0%': { boxShadow: '0 0 15px rgba(32, 167, 56, 0.3)' },
-                            '100%': { boxShadow: '0 0 30px rgba(2, 168, 158, 0.6)' }
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        .gradient-text {
-            background: linear-gradient(135deg, #072b61 0%, #0d5db8 40%, #20a738 80%, #02a89e 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .gradient-bg {
-            background: linear-gradient(135deg, #072b61 0%, #0d5db8 100%);
-        }
-        .gradient-btn {
-            background: linear-gradient(90deg, #20a738 0%, #02a89e 100%);
-        }
-        .gradient-btn:hover {
-            background: linear-gradient(90deg, #1b8f30 0%, #028e86 100%);
-        }
-        .glass-card {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-        }
-        .glass-dark {
-            background: rgba(7, 43, 97, 0.7);
-            backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        .chat-bubble-received {
-            border-radius: 0px 18px 18px 18px;
-        }
-        .chat-bubble-sent {
-            border-radius: 18px 0px 18px 18px;
-        }
-        .hero-glow {
-            position: absolute;
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(2,168,158,0.15) 0%, rgba(32,167,56,0.05) 50%, rgba(255,255,255,0) 70%);
-            border-radius: 50%;
-            pointer-events: none;
-        }
-
-        html, body{
-            overflow-x: hidden;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>eAssist AI | Automate Any Business with WhatsApp AI</title>
+<meta name="description" content="WhatsApp AI automation for retail, clinics, restaurants, real estate, logistics & more. Start free trial today.">
+<link rel="stylesheet" href="shared.css">
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+      <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+   
+<style>
+.hero-section{position:relative;min-height:100vh;display:flex;align-items:center;padding-top:5rem;overflow:hidden}
+.hero-content{position:relative;z-index:10;max-width:80rem;margin:0 auto;width:100%;padding:3rem 1.5rem}
+.trust-badge{display:inline-flex;align-items:center;gap:.5rem;padding:.35rem 1rem;border-radius:99px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:#fff;font-size:.75rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:1.5rem}
+.trust-badge span.dot{width:.5rem;height:.5rem;border-radius:50%;background:#00e676;animation:ping 1.5s cubic-bezier(0,0,.2,1) infinite}
+.hero-h1{font-size:clamp(2.4rem,5.5vw,4rem);font-weight:900;line-height:1.1;color:#fff;letter-spacing:-.02em;margin-bottom:1.25rem}
+.hero-sub{font-size:clamp(1rem,2vw,1.2rem);color:rgba(255,255,255,0.75);max-width:36rem;line-height:1.7;margin-bottom:2rem}
+.hero-ctas{display:flex;flex-wrap:wrap;gap:1rem;margin-bottom:2.5rem}
+.floating-badge{position:absolute;background:#fff;border-radius:1rem;padding:.75rem 1rem;box-shadow:0 12px 40px rgba(0,0,0,0.2);display:flex;align-items:center;gap:.625rem;z-index:20}
+.floating-badge .fb-icon{width:2.25rem;height:2.25rem;border-radius:.625rem;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
+.floating-badge .fb-label{font-size:.625rem;font-weight:700;text-transform:uppercase;color:#94a3b8;letter-spacing:.06em}
+.floating-badge .fb-val{font-size:.8125rem;font-weight:800;color:#0f172a}
+@keyframes ping{75%,100%{transform:scale(1.8);opacity:0}}
+.phone-frame{background:#111827;border-radius:2.5rem;padding:.875rem;border:3px solid #1f2937;box-shadow:0 40px 80px rgba(0,0,0,0.5),0 0 0 1px rgba(255,255,255,0.05);position:relative;max-width:17rem;margin:0 auto}
+.phone-notch{position:absolute;top:0;left:50%;transform:translateX(-50%);width:7rem;height:1.25rem;background:#111827;border-radius:0 0 1rem 1rem;z-index:30}
+.phone-screen{border-radius:2rem;overflow:hidden;height:34rem;display:flex;flex-direction:column;background:#e5ddd5}
+.wa-header{background:#072b61;padding:.875rem .75rem .75rem;color:#fff;display:flex;align-items:center;gap:.625rem}
+.wa-avatar{width:2.25rem;height:2.25rem;border-radius:50%;background:rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;font-size:.9rem;flex-shrink:0}
+.wa-body{flex:1;padding:.75rem;overflow:hidden;display:flex;flex-direction:column;gap:.625rem;background:#e5ddd5 url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c8b9a8' fill-opacity='0.25'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")}
+.bubble-in{background:#fff;border-radius:0 .875rem .875rem .875rem;padding:.5rem .75rem;font-size:.6875rem;color:#1e293b;box-shadow:0 1px 2px rgba(0,0,0,0.1);max-width:88%;align-self:flex-start}
+.bubble-out{background:#dcf8c6;border-radius:.875rem 0 .875rem .875rem;padding:.5rem .75rem;font-size:.6875rem;color:#1e293b;box-shadow:0 1px 2px rgba(0,0,0,0.1);max-width:88%;align-self:flex-end}
+.bubble-time{font-size:.5rem;color:#94a3b8;text-align:right;margin-top:.25rem}
+.wa-footer{padding:.5rem;background:#f0f0f0;border-top:1px solid #ddd;display:flex;gap:.5rem;align-items:center}
+.wa-input{flex:1;background:#fff;border-radius:99px;padding:.375rem .875rem;font-size:.625rem;color:#94a3b8;border:none}
+.wa-send{width:1.75rem;height:1.75rem;background:#16a34a;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:.625rem;flex-shrink:0}
+.industry-strip{overflow:hidden;padding:1.5rem 0;background:#fff;border-top:1px solid #f1f5f9;border-bottom:1px solid #f1f5f9}
+.ind-chip{display:inline-flex;align-items:center;gap:.5rem;padding:.5rem 1.25rem;border-radius:99px;background:#fff;border:1px solid #e2e8f0;font-size:.8125rem;font-weight:700;color:#334155;white-space:nowrap;box-shadow:0 1px 4px rgba(7,43,97,0.06);transition:all .2s}.ind-chip:hover{border-color:#16a34a;color:#16a34a;box-shadow:0 2px 12px rgba(22,163,74,0.15)}
+.step-line{position:absolute;top:2rem;left:calc(50% + 2rem);right:calc(-50% + 2rem);height:2px;background:linear-gradient(90deg,#6d28d9,#0d9488);display:none}
+@media(min-width:768px){.step-line{display:block}}
+.stat-num{font-size:2.5rem;font-weight:900;background:linear-gradient(135deg,#6d28d9,#0d9488);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1}
+.compare-table{width:100%;border-collapse:collapse}
+.compare-table th,.compare-table td{padding:1rem 1.25rem;text-align:center;border-bottom:1px solid #f1f5f9;font-size:.875rem}
+.compare-table th{font-weight:700;font-size:.8125rem;text-transform:uppercase;letter-spacing:.06em}
+.compare-table td:first-child{text-align:left;font-weight:600;color:#475569}
+.compare-table tr:hover td{background:#fafafa}
+.check{color:#16a34a;font-size:1.1rem}
+.cross{color:#cbd5e1;font-size:1.1rem}
+</style>
 </head>
-<body class="font-sans text-gray-800 bg-white antialiased selection:bg-brand-green selection:text-white overflow-x-hidden">
+<body>
 
-<!-- Navigation -->
-<nav class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-lg border-b border-gray-100/80 transition-all duration-300">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-        
-        <!-- Image Logo -->
-        <a href="#" class="flex items-center group py-2">
-            <img src="/images/Assistlogo.png" alt="eAssist AI Logo" class="h-14 sm:h-16 lg:h-16 w-auto max-h-16 object-contain transform group-hover:scale-105 transition-transform duration-200">
-        </a>
-
-        <!-- Desktop Links -->
-        <div class="hidden lg:flex items-center space-x-6 xl:space-x-8 text-sm font-bold text-gray-700">
-            <a href="#doctors" class="hover:text-brand-blue transition-colors relative py-2 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-brand-blue hover:after:w-full after:transition-all">For Doctors</a>
-            <a href="#hospitals" class="hover:text-brand-blue transition-colors relative py-2 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-brand-blue hover:after:w-full after:transition-all">Hospitals</a>
-            <a href="#caretakers" class="hover:text-brand-blue transition-colors relative py-2 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-brand-blue hover:after:w-full after:transition-all">Care Takers</a>
-            <a href="#crm" class="hover:text-brand-blue transition-colors relative py-2 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-brand-blue hover:after:w-full after:transition-all">CRM Portal</a>
-            <a href="#msme" class="hover:text-brand-blue transition-colors relative py-2 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-brand-blue hover:after:w-full after:transition-all">MSME Solution</a>
-        </div>
-
-        <!-- Action CTA & Mobile Hamburger Button -->
-        <div class="flex items-center space-x-3 sm:space-x-4">
-            <!-- Book Live Demo Button -->
-            <a href="https://wa.me/919702053758?text=Hi%2C%20I%20want%20a%20free%20demo%20of%20eAssistAI%20for%20my%20business." target="_blank" rel="noopener noreferrer" class="hidden sm:inline-flex items-center px-6 py-2.5 rounded-full text-sm font-bold text-white gradient-btn shadow-md hover:shadow-emerald-500/25 transition-all duration-300 transform hover:-translate-y-0.5">
-                <i class="fa-brands fa-whatsapp text-lg mr-2 animate-bounce"></i> Live Demo
-            </a>
-
-            <!-- Mobile Hamburger Button -->
-            <button id="mobile-menu-btn" class="lg:hidden p-2.5 rounded-xl text-gray-700 hover:text-brand-blue hover:bg-gray-100 focus:outline-none transition-colors" aria-label="Toggle Navigation Menu">
-                <i id="menu-icon" class="fa-solid fa-bars text-2xl"></i>
-            </button>
-        </div>
+<!-- NAV -->
+<nav class="nav-bar" id="navbar">
+  <div style="height:3px;background:linear-gradient(90deg,#072b61,#16a34a,#0d9488,#6d28d9);position:absolute;top:0;left:0;right:0"></div>
+  <div style="max-width:80rem;margin:0 auto;padding:0 1.5rem;height:4.5rem;display:flex;align-items:center;justify-content:space-between">
+    <a href="index.html" style="display:flex;align-items:center;padding:.25rem .5rem;border-radius:.625rem;transition:all .2s" onmouseover="this.style.background='rgba(22,163,74,0.06)'" onmouseout="this.style.background='transparent'">
+      <img src="images/Assistlogo.png" alt="eAssist AI" style="height:3rem;width:auto;object-fit:contain;filter:drop-shadow(0 1px 4px rgba(7,43,97,0.12))">
+    </a>
+    <div class="desktop-nav" style="display:flex;align-items:center;gap:2rem">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="#solutions" class="nav-link">Solutions</a>
+      <a href="#industries" class="nav-link">Industries</a>
+      <a href="#features" class="nav-link">Features</a>
+      <a href="pricing.html" class="nav-link">Pricing</a>
+      <a href="contact.html" class="nav-link">Demo</a>
+      <a href="https://wa.me/919702053758?text=Hi%2C+I+want+a+free+demo" target="_blank" class="btn-primary" style="padding:.625rem 1.25rem;font-size:.8125rem">
+        <i class="fab fa-whatsapp"></i> Live Demo
+      </a>
     </div>
-
-    <!-- Mobile Dropdown Menu -->
-    <div id="mobile-menu" class="hidden lg:hidden bg-white/95 backdrop-blur-xl border-b border-gray-200 px-4 pt-4 pb-6 space-y-3 shadow-xl transition-all duration-300">
-        <a href="#doctors" class="mobile-link block px-4 py-3 rounded-xl font-bold text-gray-800 hover:text-brand-blue hover:bg-blue-50 transition-all">For Doctors</a>
-        <a href="#hospitals" class="mobile-link block px-4 py-3 rounded-xl font-bold text-gray-800 hover:text-brand-blue hover:bg-blue-50 transition-all">Hospitals</a>
-        <a href="#caretakers" class="mobile-link block px-4 py-3 rounded-xl font-bold text-gray-800 hover:text-brand-blue hover:bg-blue-50 transition-all">Care Takers</a>
-        <a href="#crm" class="mobile-link block px-4 py-3 rounded-xl font-bold text-gray-800 hover:text-brand-blue hover:bg-blue-50 transition-all">CRM Portal</a>
-        <a href="#msme" class="mobile-link block px-4 py-3 rounded-xl font-bold text-gray-800 hover:text-brand-blue hover:bg-blue-50 transition-all">MSME Solution</a>
-        
-        <div class="pt-2">
-            <a href="https://wa.me/919702053758?text=Hi%2C%20I%20want%20a%20free%20demo%20of%20eAssistAI%20for%20my%20business." target="_blank" rel="noopener noreferrer" class="mobile-link w-full inline-flex items-center justify-center px-6 py-3.5 rounded-xl text-base font-bold text-white gradient-btn shadow-md">
-                <i class="fa-brands fa-whatsapp text-xl mr-2"></i> Live Demo
-            </a>
-        </div>
+    <button id="mob-btn" style="display:none;background:none;border:none;color:#072b61;font-size:1.5rem;cursor:pointer;padding:.5rem" aria-label="Menu">
+      <i class="fas fa-bars" id="mob-icon"></i>
+    </button>
+  </div>
+  <div id="mob-menu" style="display:none;padding:1rem 1.5rem 1.5rem">
+    <div style="display:flex;flex-direction:column;gap:.5rem">
+      <a href="index.html" class="mob-link" style="color:#334155;text-decoration:none;font-weight:600;padding:.75rem 1rem;border-radius:.625rem;display:block;transition:background .2s">Home</a>
+      <a href="#solutions" class="mob-link" style="color:#334155;text-decoration:none;font-weight:600;padding:.75rem 1rem;border-radius:.625rem;display:block;transition:background .2s">Solutions</a>
+      <a href="#industries" class="mob-link" style="color:#334155;text-decoration:none;font-weight:600;padding:.75rem 1rem;border-radius:.625rem;display:block">Industries</a>
+      <a href="#features" class="mob-link" style="color:#334155;text-decoration:none;font-weight:600;padding:.75rem 1rem;border-radius:.625rem;display:block">Features</a>
+      <a href="pricing.html" class="mob-link" style="color:#334155;text-decoration:none;font-weight:600;padding:.75rem 1rem;border-radius:.625rem;display:block">Pricing</a>
+      <a href="contact.html" class="mob-link" style="color:#334155;text-decoration:none;font-weight:600;padding:.75rem 1rem;border-radius:.625rem;display:block">Demo</a>
+      <a href="https://wa.me/919702053758?text=Hi%2C+I+want+a+free+demo" target="_blank" class="btn-primary" style="margin-top:.5rem;justify-content:center">
+        <i class="fab fa-whatsapp"></i> Get Free Demo
+      </a>
     </div>
+  </div>
 </nav>
 
-<!-- JavaScript Script for Auto-Close functionality -->
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const menuBtn = document.getElementById('mobile-menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const menuIcon = document.getElementById('menu-icon');
-        const mobileLinks = document.querySelectorAll('.mobile-link');
-        let lastScrollY = window.scrollY;
+<!-- HERO -->
+<section class="hero-section hero-mesh">
+  <div class="grid-overlay"></div>
 
-        function toggleMenu() {
-            const isHidden = mobileMenu.classList.contains('hidden');
-            if (isHidden) {
-                mobileMenu.classList.remove('hidden');
-                menuIcon.classList.remove('fa-bars');
-                menuIcon.classList.add('fa-xmark');
-            } else {
-                closeMenu();
-            }
-        }
+  
 
-        function closeMenu() {
-            if (!mobileMenu.classList.contains('hidden')) {
-                mobileMenu.classList.add('hidden');
-                menuIcon.classList.remove('fa-xmark');
-                menuIcon.classList.add('fa-bars');
-            }
-        }
+  <div class="hero-content">
+    <div style="display:grid;grid-template-columns:1fr;gap:3rem;align-items:center" id="hero-grid">
 
-        menuBtn.addEventListener('click', toggleMenu);
-
-        mobileLinks.forEach(link => {
-            link.addEventListener('click', closeMenu);
-        });
-
-        window.addEventListener('scroll', () => {
-            const currentScrollY = window.scrollY;
-            if (Math.abs(currentScrollY - lastScrollY) > 10) {
-                closeMenu();
-            }
-            lastScrollY = currentScrollY;
-        });
-    });
-</script>
-
- <!-- Hero Section -->
-<section class="pt-32 pb-20 md:pt-44 md:pb-32 bg-gradient-to-b from-brand-lightBg via-white to-white overflow-hidden relative">
-    <div class="hero-glow top-10 left-10"></div>
-    <div class="hero-glow bottom-0 right-10"></div>
-
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            
-            <!-- Left Text Column -->
-            <div class="lg:col-span-7 text-center lg:text-left" data-aos="fade-right" data-aos-duration="1000">
-                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-50 border border-emerald-200/60 text-brand-green text-xs font-bold uppercase tracking-wider mb-6 shadow-sm">
-                    <span class="w-2.5 h-2.5 rounded-full bg-brand-green animate-ping"></span> 
-                    <span class="w-2.5 h-2.5 rounded-full bg-brand-green -ml-5"></span> Smart. Simple. AI-Powered.
-                </div>
-                
-                <h1 class="text-4xl sm:text-6xl lg:text-6xl font-extrabold text-brand-darkNavy leading-[1.15] tracking-tight">
-                    Transform Medical Care with <span class="gradient-text">WhatsApp AI</span> Automation
-                </h1>
-                
-                <p class="mt-6 text-lg sm:text-xl text-gray-600 font-normal leading-relaxed max-w-2xl mx-auto lg:mx-0">
-                    Empower your clinic, hospital, or caretaking agency with intelligent AI assistants on WhatsApp. Automate appointment bookings, patient tagging, continuous care plans, and CRM responses seamlessly.
-                </p>
-                
-                <div class="mt-10 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
-                    <!-- Start Free Trial CTA -->
-                    <a href="https://wa.me/919702053758?text=Hi%2C%20I%20am%20interested%20in%20eAssistAI%20for%20my%20business%20and%20want%20a%20free%20demo." target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 rounded-xl text-base font-bold text-white gradient-btn shadow-lg shadow-emerald-500/25 hover:shadow-xl hover:shadow-emerald-500/35 transition-all duration-300 transform hover:-translate-y-1">
-                        Start Free Trial <i class="fa-solid fa-arrow-right ml-2 text-sm"></i>
-                    </a>
-                    <!-- See Live CRM / Book Demo CTA -->
-                    <a href="https://wa.me/919702053758?text=Hi%2C%20I%20want%20a%20free%20demo%20and%20looking%20for%20support%20with%20eAssistAI." target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 rounded-xl text-base font-bold text-brand-navy bg-white border border-gray-200 hover:bg-gray-50 shadow-sm transition-all duration-200">
-                        <i class="fa-brands fa-whatsapp text-sm mr-2 text-brand-green"></i> See Live Demo
-                    </a>
-                </div>
-                
-                <!-- Trust Badges -->
-                <div class="mt-12 pt-8 border-t border-gray-200/80 flex flex-wrap items-center justify-center lg:justify-start gap-8 text-xs text-gray-500 font-semibold">
-                    <div class="flex items-center gap-2 bg-white px-3 py-1.5 rounded-lg border border-gray-100 shadow-sm">
-                        <i class="fa-solid fa-shield-halved text-brand-blue text-base"></i> HIPAA Compliant
-                    </div>
-                    <div class="flex items-center gap-2 bg-white px-3 py-1.5 rounded-lg border border-gray-100 shadow-sm">
-                        <i class="fa-solid fa-bolt text-brand-green text-base"></i> 15-Min WhatsApp Setup
-                    </div>
-                    <div class="flex items-center gap-2 bg-white px-3 py-1.5 rounded-lg border border-gray-100 shadow-sm">
-                        <i class="fa-solid fa-building-ngo text-brand-teal text-base"></i> Official Meta API
-                    </div>
-                </div>
-            </div>
-
-            <!-- Right Phone Mockup Floating Column -->
-            <div class="lg:col-span-5 relative" data-aos="fade-left" data-aos-duration="1200" data-aos-delay="200">
-                
-                <!-- Floating Badge 1 -->
-                <div class="absolute -top-6 -left-6 z-30 bg-white p-3.5 rounded-2xl shadow-xl border border-gray-100 flex items-center space-x-3 animate-float hidden sm:flex">
-                    <div class="w-10 h-10 rounded-xl bg-emerald-100 text-brand-green flex items-center justify-center font-bold">
-                        <i class="fa-solid fa-calendar-check"></i>
-                    </div>
-                    <div>
-                        <p class="text-[10px] text-gray-400 font-bold uppercase">Automated</p>
-                        <p class="text-xs font-bold text-brand-navy">Appointment Booked</p>
-                    </div>
-                </div>
-
-                <!-- Floating Badge 2 -->
-                <div class="absolute -bottom-6 -right-6 z-30 bg-white p-3.5 rounded-2xl shadow-xl border border-gray-100 flex items-center space-x-3 animate-float hidden sm:flex" style="animation-delay: 2s;">
-                    <div class="w-10 h-10 rounded-xl bg-blue-100 text-brand-blue flex items-center justify-center font-bold">
-                        <i class="fa-solid fa-tags"></i>
-                    </div>
-                    <div>
-                        <p class="text-[10px] text-gray-400 font-bold uppercase">CRM Auto Tag</p>
-                        <p class="text-xs font-bold text-brand-navy">Cardiology VIP</p>
-                    </div>
-                </div>
-
-                <!-- Phone Frame -->
-                <div class="relative mx-auto max-w-xs sm:max-w-sm rounded-[2.5rem] bg-gray-900 p-3.5 shadow-2xl border-4 border-gray-800 ring-1 ring-gray-900/10">
-                    <div class="absolute top-0 left-1/2 transform -translate-x-1/2 h-5 w-32 bg-gray-800 rounded-b-xl z-20"></div>
-                    
-                    <!-- Screen -->
-                    <div class="bg-slate-100 rounded-[2rem] overflow-hidden border border-gray-800 h-[560px] flex flex-col font-sans">
-                        <!-- WhatsApp Header -->
-                        <div class="bg-brand-navy p-3 text-white flex items-center justify-between pt-6">
-                            <div class="flex items-center space-x-2.5">
-                                <div class="w-9 h-9 rounded-full bg-white flex items-center justify-center text-brand-blue font-bold shadow">
-                                    <i class="fa-solid fa-user-doctor"></i>
-                                </div>
-                                <div>
-                                    <h4 class="text-xs font-bold leading-tight">Dr. Sharma AI Assistant</h4>
-                                    <p class="text-[9px] text-emerald-400 flex items-center gap-1">
-                                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Online (eAssist)
-                                    </p>
-                                </div>
-                            </div>
-                            <i class="fa-solid fa-ellipsis-vertical text-gray-300 text-xs"></i>
-                        </div>
-
-                        <!-- Chat Body -->
-                        <div class="flex-1 p-3 overflow-y-auto bg-[#e5ddd5]/30 space-y-3 text-[11px] leading-snug">
-                            <!-- Received -->
-                            <div class="flex flex-col items-start" data-aos="fade-up" data-aos-delay="400">
-                                <div class="chat-bubble-received bg-white p-2.5 shadow-sm text-gray-800 max-w-[85%] border border-gray-100">
-                                    Hello! Welcome to Dr. Sharma's Clinic. How can eAssist AI help you today?
-                                    <span class="block text-[8px] text-gray-400 text-right mt-1">10:00 AM</span>
-                                </div>
-                            </div>
-
-                            <!-- Sent -->
-                            <div class="flex flex-col items-end" data-aos="fade-up" data-aos-delay="600">
-                                <div class="chat-bubble-sent bg-[#dcf8c6] p-2.5 shadow-sm text-gray-800 max-w-[85%]">
-                                    I need to book an appointment for tomorrow afternoon.
-                                    <span class="block text-[8px] text-gray-500 text-right mt-1">10:01 AM</span>
-                                </div>
-                            </div>
-
-                            <!-- Received AI Automated Response -->
-                            <div class="flex flex-col items-start" data-aos="fade-up" data-aos-delay="800">
-                                <div class="chat-bubble-received bg-white p-2.5 shadow-sm text-gray-800 max-w-[85%] border border-gray-100">
-                                    <span class="font-bold text-brand-blue flex items-center gap-1 mb-1">
-                                        <i class="fa-solid fa-robot text-brand-green"></i> eAssist Auto Booking
-                                    </span>
-                                    I have two slots available for Cardiology Consultation tomorrow:
-                                    <br><br>
-                                    1️⃣ 02:30 PM<br>
-                                    2️⃣ 04:15 PM
-                                    <br><br>
-                                    Reply with <b>1</b> or <b>2</b> to confirm.
-                                    <span class="block text-[8px] text-gray-400 text-right mt-1">10:01 AM</span>
-                                </div>
-                            </div>
-
-                            <!-- Sent -->
-                            <div class="flex flex-col items-end" data-aos="fade-up" data-aos-delay="1000">
-                                <div class="chat-bubble-sent bg-[#dcf8c6] p-2.5 shadow-sm text-gray-800 max-w-[85%] font-bold">
-                                    1
-                                    <span class="block text-[8px] text-gray-500 font-normal text-right mt-1">10:02 AM</span>
-                                </div>
-                            </div>
-
-                            <!-- Received Confirmation -->
-                            <div class="flex flex-col items-start" data-aos="fade-up" data-aos-delay="1200">
-                                <div class="chat-bubble-received bg-white p-2.5 shadow-sm text-gray-800 max-w-[85%] border border-gray-100">
-                                    ✅ <b>Appointment Confirmed!</b><br>
-                                    Time: Tomorrow at 02:30 PM.<br>
-                                    <span class="inline-block mt-1 px-1.5 py-0.5 bg-emerald-100 text-brand-green rounded text-[9px] font-bold">[Tagged: VIP Cardiology]</span>
-                                    <span class="block text-[8px] text-gray-400 text-right mt-1">10:02 AM</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Footer Input -->
-                        <div class="p-2 bg-gray-50 border-t border-gray-200 flex items-center space-x-2">
-                            <div class="flex-1 bg-white border border-gray-300 rounded-full px-3 py-1.5 text-[11px] text-gray-400 flex items-center justify-between">
-                                <span>Type message...</span>
-                                <i class="fa-regular fa-paperclip text-gray-400"></i>
-                            </div>
-                            <div class="w-7 h-7 bg-brand-green rounded-full flex items-center justify-center text-white text-xs shadow">
-                                <i class="fa-solid fa-paper-plane"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+      <!-- Left -->
+      <div data-aos="fade-right" data-aos-duration="1000" style="max-width:38rem">
+        <div class="trust-badge">
+          <span class="dot"></span>
+          Smart · Simple · AI-Powered
         </div>
+        <h1 class="hero-h1">Automate Any Business with <span class="gradient-text">WhatsApp AI</span></h1>
+        <p class="hero-sub">Works for retail, clinics, restaurants, real estate, logistics &amp; more. Set up in 15 minutes. No code needed.</p>
+        <div class="hero-ctas">
+          <a href="contact.html" class="btn-primary"><i class="fas fa-rocket"></i> Start Free Trial</a>
+          <a href="https://wa.me/919702053758?text=Hi%2C+I+want+to+see+a+demo" target="_blank" class="btn-ghost"><i class="fab fa-whatsapp"></i> See Demo</a>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:.75rem;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,0.12)">
+          <span style="display:flex;align-items:center;gap:.375rem;font-size:.75rem;font-weight:600;color:rgba(255,255,255,0.7)"><i class="fas fa-shield-halved" style="color:#0d9488"></i> ISO 27001</span>
+          <span style="display:flex;align-items:center;gap:.375rem;font-size:.75rem;font-weight:600;color:rgba(255,255,255,0.7)"><i class="fas fa-bolt" style="color:#16a34a"></i> 15-Min Setup</span>
+          <span style="display:flex;align-items:center;gap:.375rem;font-size:.75rem;font-weight:600;color:rgba(255,255,255,0.7)"><i class="fab fa-whatsapp" style="color:#25d366"></i> Official Meta API</span>
+          <span style="display:flex;align-items:center;gap:.375rem;font-size:.75rem;font-weight:600;color:rgba(255,255,255,0.7)"><i class="fas fa-star" style="color:#f59e0b"></i> 4.9★ Rated</span>
+        </div>
+      </div>
+
+      <!-- Right – Phone Mockup -->
+      <div data-aos="fade-left" data-aos-duration="1200" data-aos-delay="200" style="display:flex;justify-content:center;position:relative">
+        <div class="phone-frame">
+          <div class="phone-notch"></div>
+          <div class="phone-screen">
+            <div class="wa-header">
+              <div class="wa-avatar"><i class="fas fa-store" style="color:#0d9488"></i></div>
+              <div>
+                <div style="font-size:.75rem;font-weight:700">eAssist Business Bot</div>
+                <div style="font-size:.5625rem;color:#6ee7b7;display:flex;align-items:center;gap:.25rem"><span style="width:.4rem;height:.4rem;border-radius:50%;background:#6ee7b7;display:inline-block"></span>Online</div>
+              </div>
+            </div>
+            <div class="wa-body">
+              <div class="bubble-in">👋 Hi! Welcome to FreshMart. How can I help you today?<div class="bubble-time">10:00 AM ✓✓</div></div>
+              <div class="bubble-out">I want to place an order for 2kg apples &amp; milk<div class="bubble-time">10:01 AM ✓✓</div></div>
+              <div class="bubble-in"><b style="color:#6d28d9;font-size:.625rem"><i class="fas fa-robot"></i> AI Auto-Reply</b><br>Got it! Here's your cart:<br>🍎 Apples 2kg — ₹120<br>🥛 Milk 1L — ₹65<br><b>Total: ₹185</b><br><br>Reply <b>PAY</b> to confirm &amp; pay<div class="bubble-time">10:01 AM ✓✓</div></div>
+              <div class="bubble-out">PAY<div class="bubble-time">10:02 AM ✓✓</div></div>
+              <div class="bubble-in">✅ <b>Order Confirmed!</b><br>📦 Delivery by 12:00 PM<br><span style="background:#dcfce7;padding:.15rem .5rem;border-radius:4px;font-size:.5625rem;font-weight:700;color:#16a34a">#ORD-7821 Tracked</span><div class="bubble-time">10:02 AM ✓✓</div></div>
+            </div>
+            <div class="wa-footer">
+              <div class="wa-input">Type message...</div>
+              <div class="wa-send"><i class="fas fa-paper-plane"></i></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
+  </div>
 </section>
 
-    <!-- SECTION 1: Personal Assistant for Doctors -->
-    <section id="doctors" class="py-24 bg-white relative">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                
-                <div data-aos="fade-right" data-aos-duration="1000">
-                    <span class="px-3 py-1 rounded-full bg-blue-50 text-brand-blue font-bold text-xs uppercase tracking-wider border border-blue-100">01. For Individual Doctors</span>
-                    <h2 class="text-3xl sm:text-5xl font-extrabold text-brand-darkNavy mt-4 mb-6 leading-tight">
-                        Your Personal 24/7 Digital Medical Assistant
-                    </h2>
-                    <p class="text-gray-600 leading-relaxed mb-8 text-base">
-                        Doctors can focus purely on patient care while eAssist AI handles pre-consultation questions, organizes clinical notes, and schedules routine follow-ups right through WhatsApp.
-                    </p>
-
-                    <div class="space-y-4">
-                        <div class="p-4 rounded-xl bg-gray-50 border border-gray-100 hover:border-brand-blue/30 hover:shadow-md transition-all flex items-start space-x-4">
-                            <div class="w-10 h-10 rounded-xl bg-brand-navy text-white flex items-center justify-center shrink-0 text-lg">
-                                <i class="fa-solid fa-clipboard-user"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-brand-darkNavy text-base">Automated Patient Triage</h4>
-                                <p class="text-xs text-gray-500 mt-1">Collects patient symptoms, medical history, and past prescriptions before the patient even walks into your clinic.</p>
-                            </div>
-                        </div>
-
-                        <div class="p-4 rounded-xl bg-gray-50 border border-gray-100 hover:border-brand-blue/30 hover:shadow-md transition-all flex items-start space-x-4">
-                            <div class="w-10 h-10 rounded-xl bg-brand-blue text-white flex items-center justify-center shrink-0 text-lg">
-                                <i class="fa-solid fa-calendar-minus"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-brand-darkNavy text-base">Schedule & Break Management</h4>
-                                <p class="text-xs text-gray-500 mt-1">Block emergency hours or delay schedules on the fly. The AI instantly updates queued WhatsApp patients.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div data-aos="fade-left" data-aos-duration="1000" data-aos-delay="200">
-                    <div class="relative p-8 rounded-3xl bg-gradient-to-br from-brand-navy via-brand-navy to-brand-darkNavy text-white shadow-2xl overflow-hidden border border-blue-900/40">
-                        <div class="absolute -right-10 -bottom-10 w-48 h-48 bg-brand-green/20 rounded-full blur-2xl"></div>
-                        <div class="flex items-center space-x-4 mb-8">
-                            <div class="w-14 h-14 rounded-2xl bg-white/10 border border-white/20 backdrop-blur-md flex items-center justify-center text-brand-green text-2xl font-bold">
-                                <i class="fa-solid fa-user-doctor"></i>
-                            </div>
-                            <div>
-                                <h3 class="text-xl font-bold">Dr. Consultation Suite</h3>
-                                <p class="text-xs text-blue-200">Powered by eAssist Intelligence</p>
-                            </div>
-                        </div>
-
-                        <!-- Mini UI Box inside card -->
-                        <div class="bg-white/10 backdrop-blur-md p-5 rounded-2xl border border-white/10 space-y-3 text-xs mb-6">
-                            <div class="flex justify-between text-blue-200 border-b border-white/10 pb-2">
-                                <span>Patient: Sunita Rao</span>
-                                <span class="text-emerald-400 font-bold">Pre-Checked</span>
-                            </div>
-                            <p class="text-gray-200"><b>Symptoms Logged:</b> Mild Fever, Cough (3 Days)</p>
-                            <p class="text-gray-200"><b>Vitals:</b> Temp 100.2 F | BP 120/80</p>
-                        </div>
-
-                        <div class="flex items-center justify-between text-xs text-blue-200 pt-2">
-                            <span><i class="fa-solid fa-shield text-brand-green mr-1"></i> End-to-End Encrypted</span>
-                            <span class="font-bold text-white">Save 2.5 Hours Daily</span>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- SECTION 2: Hospitals - Appointment Booking -->
-    <section id="hospitals" class="py-24 bg-brand-lightBg border-y border-gray-100">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
-                <span class="px-3 py-1 rounded-full bg-emerald-100 text-brand-green font-bold text-xs uppercase tracking-wider">02. Hospital Systems</span>
-                <h2 class="text-3xl sm:text-5xl font-extrabold text-brand-darkNavy mt-4">
-                    Automated OPD & Multi-Specialty Booking
-                </h2>
-                <p class="text-gray-600 mt-4 text-base">
-                    Eliminate front-desk queues and streamline hospital registrations through an automated WhatsApp chatbot engine.
-                </p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                
-                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300" data-aos="fade-up" data-aos-delay="100">
-                    <div class="w-14 h-14 rounded-2xl bg-blue-50 text-brand-blue flex items-center justify-center text-2xl mb-6">
-                        <i class="fa-solid fa-calendar-days"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-brand-darkNavy mb-3">Multi-Department Slots</h3>
-                    <p class="text-gray-600 text-sm leading-relaxed">
-                        Patients can browse cardiology, orthopedics, or pediatrics, select preferred specialists, and reserve time slots effortlessly.
-                    </p>
-                </div>
-
-                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300" data-aos="fade-up" data-aos-delay="200">
-                    <div class="w-14 h-14 rounded-2xl bg-emerald-50 text-brand-green flex items-center justify-center text-2xl mb-6">
-                        <i class="fa-solid fa-[#02a89e] fa-bell"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-brand-darkNavy mb-3">Automated Reminders</h3>
-                    <p class="text-gray-600 text-sm leading-relaxed">
-                        Reduce missed appointments by 40% with automated WhatsApp reminders, map direction links, and preparation instructions.
-                    </p>
-                </div>
-
-                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300" data-aos="fade-up" data-aos-delay="300">
-                    <div class="w-14 h-14 rounded-2xl bg-teal-50 text-brand-teal flex items-center justify-center text-2xl mb-6">
-                        <i class="fa-solid fa-[#02a89e] fa-receipt"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-brand-darkNavy mb-3">Token & Fee Collection</h3>
-                    <p class="text-gray-600 text-sm leading-relaxed">
-                        Generate OPD queue tokens and accept registration payments instantly via integrated WhatsApp pay links.
-                    </p>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- SECTION 3: Care Takers & Monitoring -->
-    <section id="caretakers" class="py-24 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                
-                <div class="order-2 lg:order-1" data-aos="fade-right" data-aos-duration="1000">
-                    <div class="relative bg-gradient-to-tr from-brand-navy to-brand-blue p-8 rounded-3xl text-white shadow-2xl">
-                        <div class="flex items-center justify-between pb-6 border-b border-blue-400/30">
-                            <div class="flex items-center space-x-3">
-                                <div class="w-10 h-10 rounded-full bg-brand-green flex items-center justify-center text-white text-lg">
-                                    <i class="fa-solid fa-heart-pulse"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-bold text-base">Home Care Monitoring</h4>
-                                    <p class="text-xs text-blue-200">Patient: Robert V. (Post-Surgery)</p>
-                                </div>
-                            </div>
-                            <span class="px-3 py-1 bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 rounded-full text-xs font-semibold">Live Monitor</span>
-                        </div>
-
-                        <div class="py-6 space-y-3 text-xs">
-                            <div class="bg-white/10 p-3.5 rounded-xl backdrop-blur-sm border border-white/5">
-                                <p class="text-blue-300 font-bold">09:00 AM • Automated Vitals Bot</p>
-                                <p class="mt-1 text-gray-100">"Good morning Robert! Please reply with your BP reading today."</p>
-                            </div>
-                            <div class="bg-brand-green/20 p-3.5 rounded-xl backdrop-blur-sm border border-brand-green/30 ml-8 text-right">
-                                <p class="text-emerald-300 font-bold">09:02 AM • Patient Reply</p>
-                                <p class="mt-1 text-white">"120 / 80 - Feeling good today"</p>
-                            </div>
-                            <div class="bg-white/10 p-3.5 rounded-xl backdrop-blur-sm border border-white/5">
-                                <p class="text-blue-300 font-bold">09:02 AM • eAssist System</p>
-                                <p class="mt-1 text-gray-100">"Vitals logged normal! Caregiver Nurse Sarah notified for your 2 PM visit."</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="order-1 lg:order-2" data-aos="fade-left" data-aos-duration="1000">
-                    <span class="px-3 py-1 rounded-full bg-teal-50 text-brand-teal font-bold text-xs uppercase tracking-wider">03. Caregivers & Nursing Agencies</span>
-                    <h2 class="text-3xl sm:text-5xl font-extrabold text-brand-darkNavy mt-4 mb-6 leading-tight">
-                        Post-Op Monitoring & Caretaker Management
-                    </h2>
-                    <p class="text-gray-600 leading-relaxed mb-6 text-base">
-                        Keep home care continuous and reliable. eAssist AI collects routine patient vitals, coordinates shift assignments for caregivers, and alerts doctors if anomalies occur.
-                    </p>
-                    
-                    <div class="space-y-4">
-                        <div class="flex items-start space-x-3">
-                            <i class="fa-solid fa-circle-check text-brand-green text-xl mt-1"></i>
-                            <p class="text-sm text-gray-600"><b>Medication Alerts:</b> Timed WhatsApp prompts ensuring patients take prescriptions on schedule.</p>
-                        </div>
-                        <div class="flex items-start space-x-3">
-                            <i class="fa-solid fa-circle-check text-brand-green text-xl mt-1"></i>
-                            <p class="text-sm text-gray-600"><b>Caregiver Dispatch:</b> Assign nursing staff to patients and track home visit status in real-time.</p>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- SECTION: Staff Attendance & Payroll (LIGHT BG) -->
-<section class="py-20 bg-[#f8fafc] border-b border-gray-200/60">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            
-            <!-- Left Content -->
-            <div class="lg:col-span-6" data-aos="fade-right">
-                <span class="px-3.5 py-1.5 rounded-full bg-emerald-100 text-[#05a550] font-bold text-xs uppercase tracking-wider">Workforce & HR Management</span>
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-[#070f1e] mt-4 mb-4 leading-tight">
-                    WhatsApp Attendance & Automated Payroll
-                </h2>
-                <p class="text-gray-600 text-sm sm:text-base mb-6">
-                    Eliminate manual muster rolls, buddy punching, and payroll delays. Track 24x7 doctor, nurse, and staff shifts effortlessly directly over WhatsApp or biometric terminals.
-                </p>
-
-                <div class="space-y-4">
-                    <div class="flex items-start gap-3.5 p-3.5 rounded-xl bg-white border border-gray-200/80 shadow-sm">
-                        <div class="w-9 h-9 rounded-lg bg-emerald-100 text-[#05a550] flex items-center justify-center shrink-0 text-lg">
-                            <i class="fa-solid fa-location-dot"></i>
-                        </div>
-                        <div>
-                            <h4 class="text-sm font-bold text-[#070f1e]">WhatsApp & GPS Geofenced Punch</h4>
-                            <p class="text-xs text-gray-500">Staff check-in directly via WhatsApp message with live GPS location or touchless face recognition.</p>
-                        </div>
-                    </div>
-
-                    <div class="flex items-start gap-3.5 p-3.5 rounded-xl bg-white border border-gray-200/80 shadow-sm">
-                        <div class="w-9 h-9 rounded-lg bg-blue-100 text-[#1d4ed8] flex items-center justify-center shrink-0 text-lg">
-                            <i class="fa-solid fa-calendar-check"></i>
-                        </div>
-                        <div>
-                            <h4 class="text-sm font-bold text-[#070f1e]">24/7 Shift & Roster Automation</h4>
-                            <p class="text-xs text-gray-500">Auto-calculate night duty allowances, rotating nurse rosters, overtime, and weekly offs across OPD, IPD & ICU.</p>
-                        </div>
-                    </div>
-
-                    <div class="flex items-start gap-3.5 p-3.5 rounded-xl bg-white border border-gray-200/80 shadow-sm">
-                        <div class="w-9 h-9 rounded-lg bg-purple-100 text-purple-600 flex items-center justify-center shrink-0 text-lg">
-                            <i class="fa-solid fa-calculator"></i>
-                        </div>
-                        <div>
-                            <h4 class="text-sm font-bold text-[#070f1e]">Automated Healthcare Payroll & Compliance</h4>
-                            <p class="text-xs text-gray-500">1-click salary slip generation on WhatsApp with auto-calculated PF, ESI, TDS, PT, and locum staff pay.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Right Feature Card -->
-            <div class="lg:col-span-6" data-aos="fade-left">
-                <div class="bg-white p-6 sm:p-8 rounded-3xl border border-gray-200/80 shadow-xl space-y-6">
-                    <div class="flex items-center justify-between border-b border-gray-100 pb-4">
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-full bg-emerald-50 text-[#05a550] flex items-center justify-center font-bold">
-                                <i class="fa-solid fa-clock"></i>
-                            </div>
-                            <div>
-                                <h4 class="text-sm font-bold text-[#070f1e]">Shift Roster & Payroll Console</h4>
-                                <p class="text-xs text-gray-400">Shift Status: Morning Nursing Batch</p>
-                            </div>
-                        </div>
-                        <span class="px-2.5 py-1 rounded-full bg-emerald-100 text-[#05a550] text-[10px] font-bold">100% Compliant</span>
-                    </div>
-
-                    <!-- Mini Shift Punch Feed -->
-                    <div class="space-y-3">
-                        <div class="p-3 bg-[#f8fafc] rounded-xl border border-gray-200/60 flex items-center justify-between text-xs">
-                            <div class="flex items-center gap-3">
-                                <div class="w-8 h-8 rounded-full bg-slate-800 text-white flex items-center justify-center font-bold text-xs">Dr</div>
-                                <div>
-                                    <p class="font-bold text-[#070f1e]">Dr. Aris Khan</p>
-                                    <p class="text-[10px] text-gray-500">On-Call OPD Duty • Geofenced</p>
-                                </div>
-                            </div>
-                            <span class="px-2 py-0.5 rounded bg-emerald-50 text-emerald-600 font-bold text-[10px]"><i class="fa-solid fa-circle-check mr-1"></i> Checked In</span>
-                        </div>
-
-                        <div class="p-3 bg-[#f8fafc] rounded-xl border border-gray-200/60 flex items-center justify-between text-xs">
-                            <div class="flex items-center gap-3">
-                                <div class="w-8 h-8 rounded-full bg-slate-800 text-white flex items-center justify-center font-bold text-xs">Ns</div>
-                                <div>
-                                    <p class="font-bold text-[#070f1e]">Nurse Sunita M.</p>
-                                    <p class="text-[10px] text-gray-500">ICU Night Shift + Overtime</p>
-                                </div>
-                            </div>
-                            <span class="px-2 py-0.5 rounded bg-blue-50 text-blue-600 font-bold text-[10px]">Overtime Active</span>
-                        </div>
-                    </div>
-
-                    <!-- Salary Summary Banner -->
-                    <div class="p-4 rounded-2xl bg-slate-900 text-white flex items-center justify-between">
-                        <div>
-                            <p class="text-[10px] text-gray-400 uppercase font-mono">Monthly Payroll Run</p>
-                            <p class="text-sm font-bold mt-0.5">Automated PF/ESI Calculated</p>
-                        </div>
-                        <a href="https://wa.me/919702053758?text=Hi%2C%20I%20want%20a%20demo%20of%20Staff%20Attendance%20and%20Payroll%20software." target="_blank" class="px-3.5 py-1.5 rounded-lg bg-[#05a550] text-xs font-bold text-white hover:bg-emerald-600 transition-colors">
-                            Send Payslips
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-        </div>
+<!-- INDUSTRY LOGOS STRIP -->
+<div class="industry-strip">
+  <div style="max-width:80rem;margin:0 auto;padding:0 1.5rem">
+    <p style="text-align:center;font-size:.75rem;font-weight:700;color:#94a3b8;letter-spacing:.08em;text-transform:uppercase;margin-bottom:1rem">Trusted across industries</p>
+    <div style="overflow:hidden">
+      <div class="logo-strip-inner">
+        <span class="ind-chip">🛍️ Retail &amp; E-Commerce</span>
+        <span class="ind-chip">🏥 Healthcare &amp; Clinics</span>
+        <span class="ind-chip">🍽️ Restaurants &amp; F&amp;B</span>
+        <span class="ind-chip">🏡 Real Estate</span>
+        <span class="ind-chip">🚚 Logistics &amp; Delivery</span>
+        <span class="ind-chip">🏨 Hotels &amp; Hospitality</span>
+        <span class="ind-chip">🎓 Education</span>
+        <span class="ind-chip">💰 Finance &amp; Insurance</span>
+        <span class="ind-chip">🛍️ Retail &amp; E-Commerce</span>
+        <span class="ind-chip">🏥 Healthcare &amp; Clinics</span>
+        <span class="ind-chip">🍽️ Restaurants &amp; F&amp;B</span>
+        <span class="ind-chip">🏡 Real Estate</span>
+        <span class="ind-chip">🚚 Logistics &amp; Delivery</span>
+        <span class="ind-chip">🏨 Hotels &amp; Hospitality</span>
+        <span class="ind-chip">🎓 Education</span>
+        <span class="ind-chip">💰 Finance &amp; Insurance</span>
+      </div>
     </div>
+  </div>
+</div>
+
+<!-- INDUSTRIES SECTION -->
+<section id="industries" class="section-pad" style="background: linear-gradient(180deg, #f8fafc 0%, #edf2f7 100%); position: relative; overflow: hidden;">
+  
+  <!-- Subtle Ambient Background Accents -->
+  <div style="position: absolute; top: -5rem; left: -5rem; width: 25rem; height: 25rem; border-radius: 50%; background: radial-gradient(circle, rgba(109,40,217,0.05), transparent 70%); pointer-events: none;"></div>
+  <div style="position: absolute; bottom: -5rem; right: -5rem; width: 25rem; height: 25rem; border-radius: 50%; background: radial-gradient(circle, rgba(13,148,136,0.05), transparent 70%); pointer-events: none;"></div>
+
+  <div class="max-w-7xl" style="padding:0 1.5rem; position: relative; z-index: 1;">
+    
+    <!-- Section Header -->
+    <div style="text-align:center; max-width:40rem; margin:0 auto 4rem" data-aos="fade-up" data-aos-duration="800">
+      <span class="section-label label-violet" style="box-shadow: 0 4px 12px rgba(109,40,217,0.08);">
+        <i class="fas fa-industry"></i> Industry Solutions
+      </span>
+      <h2 style="font-size:clamp(1.75rem,3.5vw,2.75rem); font-weight:900; color:#041738; margin-top:1rem; line-height:1.2; letter-spacing:-0.02em;">
+        One Platform, Every <span class="gradient-text-blue">Business Type</span>
+      </h2>
+      <p style="color:#64748b; margin-top:.875rem; line-height:1.7; font-size:1rem;">
+        From a corner shop to a hospital chain — eAssist AI adapts instantly to your industry's unique workflow.
+      </p>
+    </div>
+
+    <!-- Cards Grid -->
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(15rem, 1fr)); gap:1.75rem">
+      
+      <!-- Retail & E-Commerce -->
+      <div class="feat-card industry-card-premium" data-aos="fade-up" data-aos-duration="800" data-aos-delay="50">
+        <div class="icon-wrapper" style="background:linear-gradient(135deg,#dcfce7,#bbf7d0); color:#15803d">🛍️</div>
+        <h3 class="card-title">Retail &amp; E-Commerce</h3>
+        <p class="card-desc">Order automation, abandoned cart recovery, product catalogues, and instant payment links on WhatsApp.</p>
+      </div>
+
+      <!-- Healthcare & Clinics -->
+      <div class="feat-card industry-card-premium" data-aos="fade-up" data-aos-duration="800" data-aos-delay="100">
+        <div class="icon-wrapper" style="background:linear-gradient(135deg,#ede9fe,#ddd6fe); color:#6d28d9">🏥</div>
+        <h3 class="card-title">Healthcare &amp; Clinics</h3>
+        <p class="card-desc">Appointment booking, patient triage, medication reminders, and lab report delivery over WhatsApp.</p>
+      </div>
+
+      <!-- Restaurants & F&B -->
+      <div class="feat-card industry-card-premium" data-aos="fade-up" data-aos-duration="800" data-aos-delay="150">
+        <div class="icon-wrapper" style="background:linear-gradient(135deg,#fef9c3,#fde68a); color:#b45309">🍽️</div>
+        <h3 class="card-title">Restaurants &amp; F&amp;B</h3>
+        <p class="card-desc">Digital menus, table reservations, takeaway orders, loyalty programs, and feedback collection automated.</p>
+      </div>
+
+      <!-- Real Estate -->
+      <div class="feat-card industry-card-premium" data-aos="fade-up" data-aos-duration="800" data-aos-delay="200">
+        <div class="icon-wrapper" style="background:linear-gradient(135deg,#dbeafe,#bfdbfe); color:#1d4ed8">🏡</div>
+        <h3 class="card-title">Real Estate</h3>
+        <p class="card-desc">Lead qualification, property brochures, site visit scheduling, and EMI calculator bots that convert faster.</p>
+      </div>
+
+      <!-- Logistics & Delivery -->
+      <div class="feat-card industry-card-premium" data-aos="fade-up" data-aos-duration="800" data-aos-delay="250">
+        <div class="icon-wrapper" style="background:linear-gradient(135deg,#fce7f3,#fbcfe8); color:#be185d">🚚</div>
+        <h3 class="card-title">Logistics &amp; Delivery</h3>
+        <p class="card-desc">Shipment tracking, live delivery updates, driver dispatch, and customer COD confirmation all automated.</p>
+      </div>
+
+      <!-- Hotels & Hospitality -->
+      <div class="feat-card industry-card-premium" data-aos="fade-up" data-aos-duration="800" data-aos-delay="300">
+        <div class="icon-wrapper" style="background:linear-gradient(135deg,#ccfbf1,#99f6e4); color:#0f766e">🏨</div>
+        <h3 class="card-title">Hotels &amp; Hospitality</h3>
+        <p class="card-desc">Room bookings, check-in links, concierge requests, and upsell campaigns straight to guest WhatsApp.</p>
+      </div>
+
+      <!-- Education -->
+      <div class="feat-card industry-card-premium" data-aos="fade-up" data-aos-duration="800" data-aos-delay="350">
+        <div class="icon-wrapper" style="background:linear-gradient(135deg,#e0e7ff,#c7d2fe); color:#4338ca">🎓</div>
+        <h3 class="card-title">Education</h3>
+        <p class="card-desc">Admissions funnel automation, fee reminders, class schedules, and parent communication streamlined.</p>
+      </div>
+
+      <!-- Finance & Insurance -->
+      <div class="feat-card industry-card-premium" data-aos="fade-up" data-aos-duration="800" data-aos-delay="400">
+        <div class="icon-wrapper" style="background:linear-gradient(135deg,#fef3c7,#fde68a); color:#a16207">💰</div>
+        <h3 class="card-title">Finance &amp; Insurance</h3>
+        <p class="card-desc">Policy renewals, EMI alerts, document collection, and claim status updates without any manual follow-up.</p>
+      </div>
+
+    </div>
+  </div>
 </section>
 
-<!-- SECTION: Healthcare Billing & Invoicing (WHITE BG) -->
-<section class="py-20 bg-white border-b border-gray-100">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            
-            <!-- Left Visual Invoice Card -->
-            <div class="lg:col-span-6 order-2 lg:order-1" data-aos="fade-right">
-                <div class="bg-slate-900 p-6 sm:p-8 rounded-3xl border border-slate-800 shadow-2xl text-white space-y-5">
-                    <div class="flex items-center justify-between border-b border-slate-800 pb-4">
-                        <div>
-                            <span class="text-[10px] text-emerald-400 font-mono font-bold uppercase">Tax Invoice #INV-2026-889</span>
-                            <h4 class="text-base font-bold mt-0.5">Apollo Diagnostics & Clinic</h4>
-                        </div>
-                        <span class="px-2.5 py-1 rounded-md bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-xs font-bold">GST Compliant</span>
-                    </div>
+<!-- PREMIUM CUSTOM STYLES (Add to your main CSS file or inside a <style> block) -->
+<style>
+  .industry-card-premium {
+    background: #ffffff;
+    border: 1px solid rgba(226, 232, 240, 0.8);
+    border-radius: 1.25rem;
+    padding: 2rem 1.5rem;
+    box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.03);
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+  }
 
-                    <!-- Itemized Breakdown -->
-                    <div class="space-y-2 text-xs">
-                        <div class="flex justify-between py-1.5 border-b border-slate-800/80 text-gray-300">
-                            <span>OPD Specialist Consultation Fee</span>
-                            <span class="font-bold text-white">₹800.00</span>
-                        </div>
-                        <div class="flex justify-between py-1.5 border-b border-slate-800/80 text-gray-300">
-                            <span>Comprehensive Lipid Profile Test</span>
-                            <span class="font-bold text-white">₹1,200.00</span>
-                        </div>
-                        <div class="flex justify-between py-1.5 border-b border-slate-800/80 text-gray-300">
-                            <span>CGST + SGST (18%)</span>
-                            <span class="font-bold text-white">₹360.00</span>
-                        </div>
-                        <div class="flex justify-between py-2 text-sm font-extrabold text-emerald-400">
-                            <span>Total Amount Payable</span>
-                            <span>₹2,360.00</span>
-                        </div>
-                    </div>
+  .industry-card-premium::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, #0d9488, #6d28d9);
+    opacity: 0;
+    transition: opacity 0.35s ease;
+  }
 
-                    <!-- Direct WhatsApp Payment Trigger -->
-                    <div class="p-3.5 bg-slate-800 rounded-xl border border-slate-700 flex items-center justify-between">
-                        <div class="flex items-center gap-2">
-                            <i class="fa-solid fa-qrcode text-[#02a89e] text-xl"></i>
-                            <span class="text-xs text-gray-300">Instant UPI & QR Code Link</span>
-                        </div>
-                        <a href="https://wa.me/919702053758?text=Hi%2C%20I%20want%20to%20see%20a%20demo%20of%20WhatsApp%20Billing%20and%20Invoice%20delivery." target="_blank" class="px-3 py-1.5 rounded-lg bg-emerald-600 text-xs font-bold text-white hover:bg-emerald-500">
-                            Dispatch PDF
-                        </a>
-                    </div>
-                </div>
-            </div>
+  .industry-card-premium:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 30px -10px rgba(4, 23, 56, 0.08);
+    border-color: rgba(203, 213, 225, 0.8);
+  }
 
-            <!-- Right Content -->
-            <div class="lg:col-span-6 order-1 lg:order-2" data-aos="fade-left">
-                <span class="px-3.5 py-1.5 rounded-full bg-blue-100 text-[#1d4ed8] font-bold text-xs uppercase tracking-wider">Smart Invoicing & Billing</span>
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-[#070f1e] mt-4 mb-4 leading-tight">
-                    Healthcare Billing & WhatsApp Invoice Software
-                </h2>
-                <p class="text-gray-600 text-sm sm:text-base mb-6">
-                    Speed up checkout lines, go 100% paperless, and automatically share GST-compliant medical invoices, receipt vouchers, and payment links directly to patient mobile phones.
-                </p>
+  .industry-card-premium:hover::before {
+    opacity: 1;
+  }
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div class="p-4 rounded-2xl bg-[#f8fafc] border border-gray-200/80">
-                        <div class="text-[#05a550] text-xl mb-2"><i class="fa-solid fa-file-invoice-dollar"></i></div>
-                        <h4 class="font-bold text-[#070f1e] text-sm mb-1">Instant GST Billing</h4>
-                        <p class="text-xs text-gray-500 leading-relaxed">Generate itemized bills for OPD, pharmacy, diagnostics, and IPD admissions in seconds.</p>
-                    </div>
+  .industry-card-premium .icon-wrapper {
+    width: 3.25rem;
+    height: 3.25rem;
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin-bottom: 1.25rem;
+    box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.6);
+    transition: transform 0.35s ease;
+  }
 
-                    <div class="p-4 rounded-2xl bg-[#f8fafc] border border-gray-200/80">
-                        <div class="text-[#1d4ed8] text-xl mb-2"><i class="fa-brands fa-whatsapp"></i></div>
-                        <h4 class="font-bold text-[#070f1e] text-sm mb-1">Auto WhatsApp PDF Delivery</h4>
-                        <p class="text-xs text-gray-500 leading-relaxed">Send branded PDF receipts and digital prescriptions straight to patient chats with 98% open rates.</p>
-                    </div>
+  .industry-card-premium:hover .icon-wrapper {
+    transform: scale(1.1) rotate(-3deg);
+  }
 
-                    <div class="p-4 rounded-2xl bg-[#f8fafc] border border-gray-200/80">
-                        <div class="text-amber-500 text-xl mb-2"><i class="fa-solid fa-credit-card"></i></div>
-                        <h4 class="font-bold text-[#070f1e] text-sm mb-1">UPI & Gateway Links</h4>
-                        <p class="text-xs text-gray-500 leading-relaxed">Embed Razorpay, Paytm, and UPI QR codes into invoices for instant pre-consultation payments.</p>
-                    </div>
+  .industry-card-premium .card-title {
+    font-size: 1.0625rem;
+    font-weight: 800;
+    color: #041738;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.01em;
+  }
 
-                    <div class="p-4 rounded-2xl bg-[#f8fafc] border border-gray-200/80">
-                        <div class="text-[#02a89e] text-xl mb-2"><i class="fa-solid fa-shield-halved"></i></div>
-                        <h4 class="font-bold text-[#070f1e] text-sm mb-1">Insurance & TPA Claims</h4>
-                        <p class="text-xs text-gray-500 leading-relaxed">Track claim statuses, co-pay balances, and cashless approval updates without phone calls.</p>
-                    </div>
-                </div>
-            </div>
+  .industry-card-premium .card-desc {
+    font-size: 0.8125rem;
+    color: #64748b;
+    line-height: 1.65;
+  }
+</style>
 
-        </div>
+<!-- FEATURES SECTION -->
+<section id="features" class="section-pad" style="background:#041738;position:relative;overflow:hidden">
+  <div style="position:absolute;top:-5rem;right:-8rem;width:30rem;height:30rem;border-radius:50%;background:radial-gradient(circle,rgba(109,40,217,0.25),transparent 70%);pointer-events:none"></div>
+  <div style="position:absolute;bottom:-5rem;left:-5rem;width:25rem;height:25rem;border-radius:50%;background:radial-gradient(circle,rgba(13,148,136,0.2),transparent 70%);pointer-events:none"></div>
+  <div class="max-w-7xl" style="padding:0 1.5rem;position:relative;z-index:1">
+    <div style="text-align:center;max-width:40rem;margin:0 auto 3.5rem" data-aos="fade-up">
+      <span class="section-label" style="background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.85);border:1px solid rgba(255,255,255,0.12)"><i class="fas fa-sparkles"></i> Platform Features</span>
+      <h2 style="font-size:clamp(1.75rem,3.5vw,2.75rem);font-weight:900;color:#fff;margin-top:1rem;line-height:1.2">Everything Your Business <span class="gradient-text">Needs to Automate</span></h2>
     </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(17rem,1fr));gap:1.5rem">
+      <div class="glass-dark" style="border-radius:1.25rem;padding:2rem" data-aos="fade-up" data-aos-delay="50">
+        <div style="width:3rem;height:3rem;border-radius:.875rem;background:linear-gradient(135deg,#6d28d9,#7c3aed);display:flex;align-items:center;justify-content:center;margin-bottom:1.25rem;font-size:1.25rem;color:#fff"><i class="fas fa-calendar-check"></i></div>
+        <h3 style="font-size:1.0625rem;font-weight:800;color:#fff;margin-bottom:.625rem">Instant Booking Automation</h3>
+        <p style="font-size:.8125rem;color:rgba(255,255,255,0.6);line-height:1.7">Let customers book appointments, tables, or services 24/7 through WhatsApp without human intervention.</p>
+      </div>
+      <div class="glass-dark" style="border-radius:1.25rem;padding:2rem" data-aos="fade-up" data-aos-delay="100">
+        <div style="width:3rem;height:3rem;border-radius:.875rem;background:linear-gradient(135deg,#0d9488,#14b8a6);display:flex;align-items:center;justify-content:center;margin-bottom:1.25rem;font-size:1.25rem;color:#fff"><i class="fas fa-user-tag"></i></div>
+        <h3 style="font-size:1.0625rem;font-weight:800;color:#fff;margin-bottom:.625rem">Smart Lead Capture &amp; CRM</h3>
+        <p style="font-size:.8125rem;color:rgba(255,255,255,0.6);line-height:1.7">Auto-tag and segment leads by product interest, location, or intent. Every lead lands in your CRM instantly.</p>
+      </div>
+      <div class="glass-dark" style="border-radius:1.25rem;padding:2rem" data-aos="fade-up" data-aos-delay="150">
+        <div style="width:3rem;height:3rem;border-radius:.875rem;background:linear-gradient(135deg,#16a34a,#22c55e);display:flex;align-items:center;justify-content:center;margin-bottom:1.25rem;font-size:1.25rem;color:#fff"><i class="fab fa-whatsapp"></i></div>
+        <h3 style="font-size:1.0625rem;font-weight:800;color:#fff;margin-bottom:.625rem">Broadcast Campaigns</h3>
+        <p style="font-size:.8125rem;color:rgba(255,255,255,0.6);line-height:1.7">Send promotional offers, restock alerts, or festival greetings to thousands of customers with 95%+ open rates.</p>
+      </div>
+      <div class="glass-dark" style="border-radius:1.25rem;padding:2rem" data-aos="fade-up" data-aos-delay="200">
+        <div style="width:3rem;height:3rem;border-radius:.875rem;background:linear-gradient(135deg,#d97706,#f59e0b);display:flex;align-items:center;justify-content:center;margin-bottom:1.25rem;font-size:1.25rem;color:#fff"><i class="fas fa-credit-card"></i></div>
+        <h3 style="font-size:1.0625rem;font-weight:800;color:#fff;margin-bottom:.625rem">Payments on WhatsApp</h3>
+        <p style="font-size:.8125rem;color:rgba(255,255,255,0.6);line-height:1.7">Share UPI links, Razorpay payment pages, or COD confirmation requests right inside the chat conversation.</p>
+      </div>
+      <div class="glass-dark" style="border-radius:1.25rem;padding:2rem" data-aos="fade-up" data-aos-delay="250">
+        <div style="width:3rem;height:3rem;border-radius:.875rem;background:linear-gradient(135deg,#0284c7,#0ea5e9);display:flex;align-items:center;justify-content:center;margin-bottom:1.25rem;font-size:1.25rem;color:#fff"><i class="fas fa-headset"></i></div>
+        <h3 style="font-size:1.0625rem;font-weight:800;color:#fff;margin-bottom:.625rem">Multi-Agent Inbox</h3>
+        <p style="font-size:.8125rem;color:rgba(255,255,255,0.6);line-height:1.7">Multiple team members handle WhatsApp from one shared inbox. Switch between AI bot and human agent seamlessly.</p>
+      </div>
+      <div class="glass-dark" style="border-radius:1.25rem;padding:2rem" data-aos="fade-up" data-aos-delay="300">
+        <div style="width:3rem;height:3rem;border-radius:.875rem;background:linear-gradient(135deg,#db2777,#ec4899);display:flex;align-items:center;justify-content:center;margin-bottom:1.25rem;font-size:1.25rem;color:#fff"><i class="fas fa-chart-line"></i></div>
+        <h3 style="font-size:1.0625rem;font-weight:800;color:#fff;margin-bottom:.625rem">Analytics &amp; Reports</h3>
+        <p style="font-size:.8125rem;color:rgba(255,255,255,0.6);line-height:1.7">Track conversation volumes, conversion rates, agent performance, and campaign ROI from one clean dashboard.</p>
+      </div>
+    </div>
+  </div>
 </section>
 
-<!-- SECTION 4: Customer Tagging & CRM Portal Assignment -->
-<section id="crm" class="py-16 sm:py-24 bg-brand-darkNavy text-white relative overflow-hidden">
-    <div class="absolute top-0 right-0 w-72 h-72 sm:w-96 sm:h-96 bg-brand-blue/10 rounded-full blur-3xl"></div>
+<!-- ========================================================= -->
+<!-- MSME WHATSAPP AI ENGINE SECTION -->
+<!-- ========================================================= -->
+<section id="msme-growth" class="section-pad"
+  style="background:linear-gradient(180deg,#f8fafc 0%,#eef2ff 100%);position:relative;overflow:hidden;">
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div class="text-center max-w-3xl mx-auto mb-12 sm:mb-16" data-aos="fade-up">
-            <span class="px-3 py-1 rounded-full bg-blue-500/20 text-blue-300 font-bold text-xs uppercase tracking-wider border border-blue-400/20">04. Multi-Agent Healthcare CRM</span>
-            <h2 class="text-2xl sm:text-4xl lg:text-5xl font-extrabold mt-4 leading-tight">
-                Filter, Tag & Respond Directly from CRM Portal
-            </h2>
-            <p class="text-blue-200 mt-4 text-sm sm:text-base leading-relaxed">
-                Organize patient records dynamically with smart auto-tagging. Transition smoothly between AI automated replies and human desk agents.
-            </p>
-        </div>
+  <!-- Background Glow & Accents -->
+  <div style="
+    position:absolute;
+    top:-10rem;
+    right:-10rem;
+    width:35rem;
+    height:35rem;
+    border-radius:50%;
+    background:radial-gradient(circle,rgba(109,40,217,0.08),transparent 70%);
+    pointer-events:none;">
+  </div>
 
-        <!-- CRM Dashboard UI Mockup -->
-        <div class="bg-slate-900 border border-slate-700/80 rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden" data-aos="zoom-in" data-aos-duration="1000">
-            
-            <!-- Toolbar Header -->
-            <div class="bg-slate-800/90 px-4 sm:px-6 py-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-slate-700">
-                <div class="flex items-center space-x-2 sm:space-x-3">
-                    <span class="w-3 h-3 rounded-full bg-red-500 inline-block"></span>
-                    <span class="w-3 h-3 rounded-full bg-yellow-500 inline-block"></span>
-                    <span class="w-3 h-3 rounded-full bg-green-500 inline-block"></span>
-                    <span class="text-xs font-mono text-gray-400 ml-2 sm:ml-4">eAssist Smart Desktop Hub v2.4</span>
-                </div>
+  <div style="
+    position:absolute;
+    bottom:-10rem;
+    left:-10rem;
+    width:35rem;
+    height:35rem;
+    border-radius:50%;
+    background:radial-gradient(circle,rgba(13,148,136,0.08),transparent 70%);
+    pointer-events:none;">
+  </div>
 
-                <!-- Filter & Tagging Section -->
-                <div class="flex flex-wrap items-center gap-1.5 sm:gap-2">
-                    <span class="text-xs text-gray-400 font-medium mr-1">Filter Tags:</span>
-                    <span class="px-2 sm:px-2.5 py-1 rounded-md bg-blue-500/20 text-blue-300 text-[10px] sm:text-xs font-bold border border-blue-500/30">#Cardiology</span>
-                    <span class="px-2 sm:px-2.5 py-1 rounded-md bg-emerald-500/20 text-emerald-300 text-[10px] sm:text-xs font-bold border border-emerald-500/30">#VIP_Patient</span>
-                    <span class="px-2 sm:px-2.5 py-1 rounded-md bg-purple-500/20 text-purple-300 text-[10px] sm:text-xs font-bold border border-purple-500/30">#Pending_Report</span>
-                </div>
-            </div>
+  <div class="max-w-7xl"
+    style="padding:0 1.5rem;position:relative;z-index:1;margin:0 auto;">
 
-            <!-- Main CRM Grid -->
-            <div class="grid grid-cols-1 lg:grid-cols-12 min-h-0 lg:min-h-[420px]">
-                
-                <!-- Left Sidebar - Patient Inbox -->
-                <div class="lg:col-span-4 border-b lg:border-b-0 lg:border-r border-slate-800 p-4 space-y-3 bg-slate-900/80">
-                    <div class="text-[11px] font-bold uppercase tracking-wider text-gray-400 mb-2">Live WhatsApp Conversations</div>
-                    
-                    <!-- Patient Active -->
-                    <a href="https://wa.me/919702053758?text=Hi%20eAssist%20Team%2C%20I%20want%20to%20test%20the%20CRM%20Chat%20Takeover%20for%20Anil%20Kumar." target="_blank" rel="noopener noreferrer" class="p-3.5 rounded-2xl bg-slate-800 border border-brand-green/50 flex items-center justify-between cursor-pointer transition-all hover:bg-slate-700/80 block">
-                        <div>
-                            <div class="font-bold text-sm text-white">Anil Kumar</div>
-                            <div class="text-xs text-gray-400 truncate max-w-[180px] sm:max-w-xs">Requesting Lab Reports...</div>
-                            <div class="mt-2 flex gap-1">
-                                <span class="px-2 py-0.5 rounded text-[9px] bg-emerald-900/80 text-emerald-300 font-bold">OPD</span>
-                                <span class="px-2 py-0.5 rounded text-[9px] bg-blue-900/80 text-blue-300 font-bold">Dr. Verma</span>
-                            </div>
-                        </div>
-                        <span class="w-2.5 h-2.5 rounded-full bg-brand-green animate-ping shrink-0"></span>
-                    </a>
+    <!-- ===================================================== -->
+    <!-- SECTION HEADER -->
+    <!-- ===================================================== -->
+    <div
+      style="text-align:center;max-width:46rem;margin:0 auto 3.5rem;"
+      data-aos="fade-up">
 
-                    <!-- Patient 2 -->
-                    <a href="https://wa.me/919702053758?text=Hi%20eAssist%20Team%2C%20I%20want%20to%20test%20the%20CRM%20Chat%20Takeover%20for%20Priya%20Patel." target="_blank" rel="noopener noreferrer" class="p-3.5 rounded-2xl bg-slate-900 border border-slate-800 flex items-center justify-between opacity-70 hover:opacity-100 transition-opacity block">
-                        <div>
-                            <div class="font-bold text-sm text-white">Priya Patel</div>
-                            <div class="text-xs text-gray-400 truncate max-w-[180px] sm:max-w-xs">Consultation Fee Query</div>
-                            <div class="mt-2 flex gap-1">
-                                <span class="px-2 py-0.5 rounded text-[9px] bg-purple-900/80 text-purple-300 font-bold">New Lead</span>
-                            </div>
-                        </div>
-                        <span class="text-[10px] text-gray-400 shrink-0">AI Handled</span>
-                    </a>
-                </div>
+      <span
+        class="section-label"
+        style="
+          background:#e0e7ff;
+          color:#4338ca;
+          border:1px solid #c7d2fe;
+          display:inline-flex;
+          align-items:center;
+          gap:.5rem;">
+        <i class="fab fa-whatsapp"></i>
+        WhatsApp AI for MSMEs
+      </span>
 
-                <!-- Right Chat Workspace -->
-                <div class="lg:col-span-8 p-4 sm:p-6 flex flex-col justify-between bg-slate-950/40">
-                    <div>
-                        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between pb-4 border-b border-slate-800 gap-4">
-                            <div>
-                                <h4 class="font-bold text-white text-sm sm:text-base">Anil Kumar (+91 98765 *****)</h4>
-                                <p class="text-xs text-gray-400 mt-0.5">Assigned Agent: <span class="text-brand-green font-bold">FrontDesk Operator</span></p>
-                            </div>
-                            <div class="flex items-center gap-2 w-full sm:w-auto">
-                                <a href="https://wa.me/919702053758?text=Hi%2C%20I%20want%20to%20Takeover%20Chat%20for%20patient%20Anil%20Kumar%20on%20WhatsApp." target="_blank" rel="noopener noreferrer" class="flex-1 sm:flex-none text-center px-3.5 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-xs font-bold text-white transition-colors">
-                                    <i class="fa-solid fa-headset mr-1"></i> Takeover Chat
-                                </a>
-                                <a href="https://wa.me/919702053758?text=Hi%2C%20I%20want%20to%20Assign%20Doctor%20for%20patient%20Anil%20Kumar." target="_blank" rel="noopener noreferrer" class="flex-1 sm:flex-none text-center px-3.5 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-bold text-gray-300 transition-colors">
-                                    <i class="fa-solid fa-user-plus mr-1"></i> Assign Doctor
-                                </a>
-                            </div>
-                        </div>
+      <h2
+        style="
+          font-size:clamp(1.8rem,3.5vw,2.75rem);
+          font-weight:900;
+          color:#041738;
+          margin-top:1rem;
+          line-height:1.2;">
+        Turn WhatsApp Conversations Into
+        <span class="gradient-text">Customers & Orders</span>
+      </h2>
 
-                        <!-- Conversation Thread -->
-                        <div class="space-y-4 text-xs mt-4">
-                            <div class="bg-slate-800/80 p-3.5 rounded-2xl max-w-full sm:max-w-md text-gray-300 border border-slate-700/50">
-                                <span class="text-brand-green font-bold block mb-1"><i class="fa-solid fa-robot mr-1"></i> eAssist AI Bot:</span>
-                                I have forwarded your request for the Lipid Profile report to the lab department.
-                            </div>
-                            <div class="bg-brand-blue/30 border border-brand-blue/40 p-3.5 rounded-2xl max-w-full sm:max-w-md ml-auto text-blue-100">
-                                <span class="text-blue-300 font-bold block mb-1"><i class="fa-solid fa-user mr-1"></i> Human Desk Agent (From CRM):</span>
-                                Hello Anil, your lab reports are ready! I am sending the official PDF file right here.
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Response Input Box -->
-                    <form action="https://wa.me/919702053758" method="get" target="_blank" class="mt-6 pt-4 border-t border-slate-800 flex flex-col sm:flex-row gap-2">
-                        <input type="hidden" name="text" value="Hi, I am sending a direct response to Anil Kumar from the CRM portal.">
-                        <input type="text" placeholder="Type direct WhatsApp response or select standard medical template..." class="flex-1 bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 text-xs text-white focus:outline-none focus:border-brand-green transition-colors">
-                        <button type="submit" class="gradient-btn px-6 py-3 rounded-xl text-xs font-bold text-white shadow-lg flex items-center justify-center gap-1.5 transition-transform hover:scale-[1.02]">
-                            <span>Send WhatsApp</span>
-                            <i class="fa-solid fa-paper-plane"></i>
-                        </button>
-                    </form>
-                </div>
-
-            </div>
-        </div>
+      <p
+        style="
+          color:#64748b;
+          margin-top:.875rem;
+          line-height:1.75;
+          font-size:.95rem;">
+        Give your business a smart WhatsApp AI assistant that answers
+        customer questions, showcases products, captures orders and
+        supports customers 24/7 — without requiring a dedicated support team.
+      </p>
     </div>
-</section>
 
- <!-- SECTION 5: Healthcare MSME Solutions -->
-<section id="msme" class="py-16 sm:py-24 bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="bg-gradient-to-r from-brand-lightBg via-emerald-50/50 to-blue-50/50 rounded-3xl p-6 sm:p-10 lg:p-14 border border-blue-100/80 shadow-lg relative overflow-hidden" data-aos="fade-up">
-            
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
-                <div class="lg:col-span-8">
-                    <span class="px-3 py-1 bg-brand-green text-white font-bold text-xs uppercase tracking-wider rounded-md inline-block">Tailored For MSMEs</span>
-                    <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-brand-darkNavy mt-4 mb-4 leading-tight">
-                        Affordable AI Automation Built for Growing Healthcare MSMEs
-                    </h2>
-                    <p class="text-gray-600 leading-relaxed text-sm sm:text-base mb-6">
-                        Small clinics and regional diagnostic labs don't need complex IT teams. eAssist AI connects with your official WhatsApp Business API effortlessly in under 15 minutes.
-                    </p>
-                    
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 text-xs sm:text-sm font-semibold text-gray-700">
-                        <div class="flex items-center space-x-2">
-                            <i class="fa-solid fa-circle-check text-brand-green text-base shrink-0"></i>
-                            <span>No technical coding required</span>
-                        </div>
-                        <div class="flex items-center space-x-2">
-                            <i class="fa-solid fa-circle-check text-brand-green text-base shrink-0"></i>
-                            <span>Multi-lingual WhatsApp AI</span>
-                        </div>
-                        <div class="flex items-center space-x-2">
-                            <i class="fa-solid fa-circle-check text-brand-green text-base shrink-0"></i>
-                            <span>Government MSME Compliant</span>
-                        </div>
-                        <div class="flex items-center space-x-2">
-                            <i class="fa-solid fa-circle-check text-brand-green text-base shrink-0"></i>
-                            <span>Unlimited automated chat handling</span>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="lg:col-span-4 text-center mt-4 lg:mt-0">
-                    <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-xl border border-gray-100">
-                        <span class="text-gray-400 text-xs font-bold uppercase tracking-wider">MSME Growth Special</span>
-                        <div class="text-2xl sm:text-3xl font-extrabold text-brand-navy mt-2">Special Plan</div>
-                        <p class="text-xs text-gray-500 mt-2 mb-6 leading-relaxed">Get custom onboarding support & setup discount today.</p>
-                        <a href="https://wa.me/919702053758?text=Hi%2C%20I%20am%20interested%20in%20the%20eAssist%20AI%20MSME%20Growth%20Special%20Plan%20for%20my%20healthcare%20business." target="_blank" rel="noopener noreferrer" class="block w-full py-3.5 px-4 rounded-xl text-xs font-bold text-white gradient-btn text-center shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5">
-                            <i class="fa-brands fa-whatsapp text-sm mr-1.5"></i> Claim MSME Offer <i class="fa-solid fa-arrow-right ml-1 text-xs"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
+    <!-- ===================================================== -->
+    <!-- FEATURE GRID -->
+    <!-- ===================================================== -->
+    <div
+      style="
+        display:grid;
+        grid-template-columns:repeat(auto-fit,minmax(17rem,1fr));
+        gap:1.5rem;
+        margin-bottom:2.5rem;">
 
+      <!-- =================================================== -->
+      <!-- FEATURE 1 -->
+      <!-- =================================================== -->
+      <div
+        class="feat-card"
+        data-aos="fade-up"
+        data-aos-delay="50"
+        style="
+          background:#ffffff;
+          border:1px solid #e0e0ff;
+          box-shadow:0 10px 30px -5px rgba(0,0,0,0.04);
+          padding:1.5rem;
+          border-radius:1rem;
+          transition:all .3s ease;">
+
+        <div
+          style="
+            width:3rem;
+            height:3rem;
+            border-radius:.875rem;
+            background:linear-gradient(135deg,#e0e7ff,#c7d2fe);
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            margin-bottom:1.25rem;
+            font-size:1.25rem;
+            color:#4338ca;">
+          <i class="fas fa-store"></i>
         </div>
-    </div>
-</section>
 
- <!-- SECTION 6: CTA Section -->
-<section id="demo" class="py-16 sm:py-24 gradient-bg text-white relative overflow-hidden">
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10" data-aos="zoom-in">
-        <h2 class="text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight">
-            Ready to Upgrade Your Clinic with WhatsApp AI?
-        </h2>
-        <p class="mt-4 text-base sm:text-lg text-blue-100 max-w-2xl mx-auto leading-relaxed">
-            Join forward-thinking doctors, caretaker agencies, and hospitals using eAssist AI.
+        <h3
+          style="
+            font-size:1.0625rem;
+            font-weight:800;
+            color:#041738;
+            margin-bottom:.625rem;">
+          Product Enquiries & Orders
+        </h3>
+
+        <p
+          style="
+            font-size:.8125rem;
+            color:#64748b;
+            line-height:1.7;">
+          Let customers explore your products, ask questions, check details
+          and place orders directly through WhatsApp.
         </p>
-        <div class="mt-8 sm:mt-10 flex flex-col sm:flex-row justify-center gap-4">
-            <!-- Book Live Demo CTA -->
-            <a href="https://wa.me/919702053758?text=Hi%2C%20I%20would%20like%20to%20book%20a%20live%20demo%20for%20eAssist%20AI." target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 rounded-xl font-bold bg-white text-brand-navy hover:bg-gray-100 shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
-                <i class="fa-brands fa-whatsapp text-brand-green text-xl mr-2"></i> Book Live Demo Now
-            </a>
-            <!-- Contact Sales Team CTA -->
-            <a href="https://wa.me/919702053758?text=Hi%2C%20I%20want%20to%20speak%20with%20the%20sales%20team%20regarding%20eAssistAI%20pricing%20and%20integration." target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 rounded-xl font-bold border border-white/30 text-white hover:bg-white/10 transition-all duration-300">
-                Contact Sales Team
-            </a>
+      </div>
+
+
+      <!-- =================================================== -->
+      <!-- FEATURE 2 -->
+      <!-- =================================================== -->
+      <div
+        class="feat-card"
+        data-aos="fade-up"
+        data-aos-delay="100"
+        style="
+          background:#ffffff;
+          border:1px solid #e0e0ff;
+          box-shadow:0 10px 30px -5px rgba(0,0,0,0.04);
+          padding:1.5rem;
+          border-radius:1rem;
+          transition:all .3s ease;">
+
+        <div
+          style="
+            width:3rem;
+            height:3rem;
+            border-radius:.875rem;
+            background:linear-gradient(135deg,#ccfbf1,#99f6e4);
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            margin-bottom:1.25rem;
+            font-size:1.25rem;
+            color:#0d9488;">
+          <i class="fas fa-language"></i>
         </div>
+
+        <h3
+          style="
+            font-size:1.0625rem;
+            font-weight:800;
+            color:#041738;
+            margin-bottom:.625rem;">
+          AI Customer Support
+        </h3>
+
+        <p
+          style="
+            font-size:.8125rem;
+            color:#64748b;
+            line-height:1.7;">
+          Automatically answer FAQs, product questions and common customer
+          queries in English, Hindi, Hinglish and other supported languages.
+        </p>
+      </div>
+
+
+      <!-- =================================================== -->
+      <!-- FEATURE 3 -->
+      <!-- =================================================== -->
+      <div
+        class="feat-card"
+        data-aos="fade-up"
+        data-aos-delay="150"
+        style="
+          background:#ffffff;
+          border:1px solid #e0e0ff;
+          box-shadow:0 10px 30px -5px rgba(0,0,0,0.04);
+          padding:1.5rem;
+          border-radius:1rem;
+          transition:all .3s ease;">
+
+        <div
+          style="
+            width:3rem;
+            height:3rem;
+            border-radius:.875rem;
+            background:linear-gradient(135deg,#dcfce7,#bbf7d0);
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            margin-bottom:1.25rem;
+            font-size:1.25rem;
+            color:#16a34a;">
+          <i class="fas fa-indian-rupee-sign"></i>
+        </div>
+
+        <h3
+          style="
+            font-size:1.0625rem;
+            font-weight:800;
+            color:#041738;
+            margin-bottom:.625rem;">
+          Payments & Order Confirmation
+        </h3>
+
+        <p
+          style="
+            font-size:.8125rem;
+            color:#64748b;
+            line-height:1.7;">
+          Share UPI or payment links through WhatsApp and automate order
+          confirmation workflows for a smoother buying experience.
+        </p>
+      </div>
+
     </div>
+
+
+    <!-- ===================================================== -->
+    <!-- PREMIUM MSME BANNER -->
+    <!-- ===================================================== -->
+    <div
+      style="
+        background:linear-gradient(135deg,#041738 0%,#0a2558 100%);
+        border-radius:1.5rem;
+        padding:2.5rem;
+        color:#ffffff;
+        position:relative;
+        overflow:hidden;
+        box-shadow:0 20px 40px -15px rgba(4,23,56,0.3);"
+      data-aos="zoom-in"
+      data-aos-delay="200">
+
+      <!-- Inner Background Accent -->
+      <div
+        style="
+          position:absolute;
+          right:-2rem;
+          top:-2rem;
+          width:15rem;
+          height:15rem;
+          background:radial-gradient(circle,rgba(110,231,183,0.15),transparent 70%);
+          border-radius:50%;
+          pointer-events:none;">
+      </div>
+
+      <div
+        style="
+          display:flex;
+          flex-wrap:wrap;
+          align-items:center;
+          justify-content:space-between;
+          gap:2rem;
+          position:relative;
+          z-index:1;">
+
+        <!-- LEFT CONTENT -->
+        <div style="max-width:34rem;">
+
+          <div
+            style="
+              display:inline-flex;
+              align-items:center;
+              gap:.5rem;
+              background:rgba(255,255,255,0.1);
+              padding:.35rem .75rem;
+              border-radius:50px;
+              font-size:.75rem;
+              font-weight:700;
+              color:#6ee7b7;
+              margin-bottom:1rem;
+              border:1px solid rgba(255,255,255,0.15);">
+
+            <i class="fas fa-robot"></i>
+            AI-Powered WhatsApp Automation
+          </div>
+
+          <h3
+            style="
+              font-size:clamp(1.3rem,2.5vw,1.8rem);
+              font-weight:800;
+              line-height:1.3;
+              color:#ffffff;">
+            Your 24/7 WhatsApp Assistant for Business Growth
+          </h3>
+
+          <p
+            style="
+              font-size:.875rem;
+              color:rgba(255,255,255,0.72);
+              margin-top:.75rem;
+              line-height:1.7;">
+            Automate customer enquiries, product information, order
+            collection and support — so you can focus on growing your business
+            instead of answering the same questions repeatedly.
+          </p>
+        </div>
+
+
+        <!-- RIGHT FEATURES + CTA -->
+        <div
+          style="
+            display:flex;
+            flex-direction:column;
+            gap:.875rem;
+            width:100%;
+            max-width:19rem;">
+
+          <!-- Benefit 1 -->
+          <div
+            style="
+              display:flex;
+              align-items:center;
+              gap:.75rem;
+              background:rgba(255,255,255,0.06);
+              padding:.75rem 1rem;
+              border-radius:.75rem;
+              border:1px solid rgba(255,255,255,0.1);">
+
+            <i
+              class="fas fa-check-circle"
+              style="color:#6ee7b7;font-size:1.125rem;">
+            </i>
+
+            <span
+              style="
+                font-size:.8125rem;
+                font-weight:600;
+                color:#ffffff;">
+              24/7 Automated Customer Support
+            </span>
+          </div>
+
+
+          <!-- Benefit 2 -->
+          <div
+            style="
+              display:flex;
+              align-items:center;
+              gap:.75rem;
+              background:rgba(255,255,255,0.06);
+              padding:.75rem 1rem;
+              border-radius:.75rem;
+              border:1px solid rgba(255,255,255,0.1);">
+
+            <i
+              class="fas fa-check-circle"
+              style="color:#6ee7b7;font-size:1.125rem;">
+            </i>
+
+            <span
+              style="
+                font-size:.8125rem;
+                font-weight:600;
+                color:#ffffff;">
+              MSME-Friendly Automation Solutions
+            </span>
+          </div>
+
+
+          <!-- Benefit 3 -->
+          <div
+            style="
+              display:flex;
+              align-items:center;
+              gap:.75rem;
+              background:rgba(255,255,255,0.06);
+              padding:.75rem 1rem;
+              border-radius:.75rem;
+              border:1px solid rgba(255,255,255,0.1);">
+
+            <i
+              class="fas fa-check-circle"
+              style="color:#6ee7b7;font-size:1.125rem;">
+            </i>
+
+            <span
+              style="
+                font-size:.8125rem;
+                font-weight:600;
+                color:#ffffff;">
+              Easy WhatsApp-Based Customer Journey
+            </span>
+          </div>
+
+
+          <!-- CTA -->
+          <a
+            href="https://wa.me/919702053758?text=Hi%2C%20I%20want%20to%20see%20the%20MSME%20WhatsApp%20AI%20Bot%20demo"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-primary"
+            style="
+              text-align:center;
+              justify-content:center;
+              width:100%;
+              padding:.875rem 1.25rem;
+              margin-top:.25rem;">
+
+            <i class="fab fa-whatsapp"></i>
+            Test MSME Bot Demo
+          </a>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
 </section>
 
+<!-- CRM INTEGRATION & MANAGEMENT SECTION -->
+<section id="crm" class="section-pad" style="background:#08214d; position:relative; overflow:hidden;">
+  <!-- Ambient background glow -->
+  <div style="position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); width:40rem; height:40rem; border-radius:50%; background:radial-gradient(circle, rgba(13,148,136,0.15), transparent 70%); pointer-events:none"></div>
 
-<!-- Footer -->
-<footer class="bg-brand-darkNavy text-gray-300 pt-16 pb-12 border-t border-slate-800 relative overflow-hidden font-sans">
-    <!-- Background Glow FX -->
-    <div class="absolute bottom-0 left-1/4 w-96 h-96 bg-brand-blue/10 rounded-full blur-3xl pointer-events-none"></div>
-    <div class="absolute top-0 right-1/4 w-96 h-96 bg-brand-green/10 rounded-full blur-3xl pointer-events-none"></div>
-
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <!-- Top Footer Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-slate-800" data-aos="fade-up">
-            
-            <!-- Brand Info (Spans 2 columns on desktop) -->
-            <div class="lg:col-span-2 space-y-4">
-                
-                <!-- Solid White Background Container for Logo -->
-                <a href="#" class="inline-flex items-center p-3 rounded-xl bg-white shadow-md group transition-all duration-300 hover:shadow-lg">
-                    <img src="/images/Assistlogo.png" alt="eAssist AI Logo" class="h-10 sm:h-12 w-auto max-h-12 object-contain transform group-hover:scale-105 transition-transform duration-200">
-                </a>
-                
-                <p class="text-xs text-slate-400 leading-relaxed max-w-sm">
-                    Smart. Simple. AI-Powered. Empowering doctors, hospitals, MSMEs, and caregivers with official WhatsApp API automation, smart tagging, and unified CRM controls.
-                </p>
-
-                <!-- Contact Details -->
-                <div class="pt-2 space-y-2 text-xs">
-                  
-                    <div class="flex items-center space-x-3 text-slate-300">
-                        <i class="fa-solid fa-envelope text-brand-teal w-4"></i>
-                        <a href="mailto:care@referindia.co.in" class="hover:text-white transition-colors">care@referindia.co.in</a>
-                    </div>
-                    <div class="flex items-center space-x-3 text-slate-300">
-                        <i class="fa-brands fa-whatsapp text-brand-green w-4 text-sm"></i>
-                        <a href="https://wa.me/919702053758" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">+91 9702053758</a>
-                    </div>
-                    
-                </div>
-            </div>
-
-            <!-- Column 1: Healthcare Solutions -->
-            <div>
-                <h4 class="text-sm font-bold text-white tracking-wider uppercase mb-4 border-l-2 border-brand-green pl-2.5">Solutions</h4>
-                <ul class="space-y-2.5 text-xs text-slate-400">
-                    <li><a href="#doctors" class="hover:text-white hover:translate-x-1 transition-all inline-block">For Individual Doctors</a></li>
-                    <li><a href="#hospitals" class="hover:text-white hover:translate-x-1 transition-all inline-block">Hospitals & OPD Booking</a></li>
-                    <li><a href="#caretakers" class="hover:text-white hover:translate-x-1 transition-all inline-block">Care Takers & Home Health</a></li>
-                    <li><a href="#crm" class="hover:text-white hover:translate-x-1 transition-all inline-block">Multi-Agent CRM Portal</a></li>
-                    <li><a href="#msme" class="hover:text-white hover:translate-x-1 transition-all inline-block">Healthcare MSME Plan</a></li>
-                </ul>
-            </div>
-
-            <!-- Column 2: Platform Features -->
-            <div>
-                <h4 class="text-sm font-bold text-white tracking-wider uppercase mb-4 border-l-2 border-brand-blue pl-2.5">Features</h4>
-                <ul class="space-y-2.5 text-xs text-slate-400">
-                    <li><a href="#" class="hover:text-white hover:translate-x-1 transition-all inline-block">WhatsApp Bot Engine</a></li>
-                    <li><a href="#" class="hover:text-white hover:translate-x-1 transition-all inline-block">Patient Auto-Tagging</a></li>
-                    <li><a href="#" class="hover:text-white hover:translate-x-1 transition-all inline-block">Live Chat Takeover</a></li>
-                    <li><a href="#" class="hover:text-white hover:translate-x-1 transition-all inline-block">Prescription Sharing</a></li>
-                    <li><a href="#" class="hover:text-white hover:translate-x-1 transition-all inline-block">WhatsApp Payment Links</a></li>
-                </ul>
-            </div>
-
-            <!-- Column 3: Trust & Compliance -->
-            <div>
-                <h4 class="text-sm font-bold text-white tracking-wider uppercase mb-4 border-l-2 border-brand-teal pl-2.5">Compliance</h4>
-                <div class="space-y-3 text-xs text-slate-400">
-                    <div class="flex items-center space-x-2 bg-slate-900/80 p-2 rounded-lg border border-slate-800">
-                        <i class="fa-solid fa-shield-halved text-brand-green text-sm"></i>
-                        <span class="text-slate-300 font-medium">HIPAA Compliant</span>
-                    </div>
-                    <div class="flex items-center space-x-2 bg-slate-900/80 p-2 rounded-lg border border-slate-800">
-                        <i class="fa-solid fa-lock text-brand-blue text-sm"></i>
-                        <span class="text-slate-300 font-medium">Meta Verified Partner</span>
-                    </div>
-                    <div class="flex items-center space-x-2 bg-slate-900/80 p-2 rounded-lg border border-slate-800">
-                        <i class="fa-solid fa-building-flag text-brand-teal text-sm"></i>
-                        <span class="text-slate-300 font-medium">MSME Registered</span>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-        <!-- Bottom Bar -->
-        <div class="pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-400">
-            <p>&copy; 2026 eAssist AI. Smart. Simple. AI-Powered. All rights reserved.</p>
-            
-            <div class="flex items-center space-x-6">
-                <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
-                <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
-                <a href="#" class="hover:text-white transition-colors">Security</a>
-            </div>
-
-            <!-- Social Links -->
-            <div class="flex space-x-3">
-                <a href="#" class="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center text-slate-300 hover:bg-brand-blue hover:text-white transition-all">
-                    <i class="fa-brands fa-linkedin-in text-xs"></i>
-                </a>
-                <a href="https://wa.me/919702053758" target="_blank" rel="noopener noreferrer" class="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center text-slate-300 hover:bg-brand-green hover:text-white transition-all">
-                    <i class="fa-brands fa-whatsapp text-xs"></i>
-                </a>
-                <a href="#" class="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center text-slate-300 hover:bg-brand-teal hover:text-white transition-all">
-                    <i class="fa-brands fa-twitter text-xs"></i>
-                </a>
-            </div>
-        </div>
+  <div class="max-w-7xl" style="padding:0 1.5rem; position:relative; z-index:1">
+    
+    <!-- Section Header -->
+    <div style="text-align:center; max-width:42rem; margin:0 auto 3.5rem" data-aos="fade-up">
+      <span class="section-label" style="background:rgba(255,255,255,0.08); color:#6ee7b7; border:1px solid rgba(110,231,183,0.2)">
+        <i class="fas fa-users-gear"></i> WhatsApp-Native CRM
+      </span>
+      <h2 style="font-size:clamp(1.75rem,3.5vw,2.75rem); font-weight:900; color:#fff; margin-top:1rem; line-height:1.2">
+        Turn Every Chat into a <span class="gradient-text">Customer Relationship</span>
+      </h2>
+      <p style="color:rgba(255,255,255,0.7); margin-top:.875rem; line-height:1.7">
+        Manage leads, track pipeline stages, and sync customer data effortlessly without switching tabs or losing context.
+      </p>
     </div>
+
+    <!-- Feature Grid -->
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(17rem, 1fr)); gap:1.5rem; margin-bottom:3rem">
+      
+      <div class="glass-dark" style="border-radius:1.25rem; padding:2rem" data-aos="fade-up" data-aos-delay="50">
+        <div style="width:3rem; height:3rem; border-radius:.875rem; background:linear-gradient(135deg,#0d9488,#14b8a6); display:flex; align-items:center; justify-content:center; margin-bottom:1.25rem; font-size:1.25rem; color:#fff">
+          <i class="fas fa-filter"></i>
+        </div>
+        <h3 style="font-size:1.0625rem; font-weight:800; color:#fff; margin-bottom:.625rem">Visual Sales Pipeline</h3>
+        <p style="font-size:.8125rem; color:rgba(255,255,255,0.6); line-height:1.7">
+          Automatically move WhatsApp leads through stages—from initial query to payment confirmed—with dynamic status tags.
+        </p>
+      </div>
+
+      <div class="glass-dark" style="border-radius:1.25rem; padding:2rem" data-aos="fade-up" data-aos-delay="100">
+        <div style="width:3rem; height:3rem; border-radius:.875rem; background:linear-gradient(135deg,#6d28d9,#7c3aed); display:flex; align-items:center; justify-content:center; margin-bottom:1.25rem; font-size:1.25rem; color:#fff">
+          <i class="fas fa-address-card"></i>
+        </div>
+        <h3 style="font-size:1.0625rem; font-weight:800; color:#fff; margin-bottom:.625rem">Rich Contact Profiles</h3>
+        <p style="font-size:.8125rem; color:rgba(255,255,255,0.6); line-height:1.7">
+          Store purchase histories, preferred items, interaction notes, and custom attributes tied to each phone number.
+        </p>
+      </div>
+
+      <div class="glass-dark" style="border-radius:1.25rem; padding:2rem" data-aos="fade-up" data-aos-delay="150">
+        <div style="width:3rem; height:3rem; border-radius:.875rem; background:linear-gradient(135deg,#16a34a,#22c55e); display:flex; align-items:center; justify-content:center; margin-bottom:1.25rem; font-size:1.25rem; color:#fff">
+          <i class="fas fa-arrows-rotate"></i>
+        </div>
+        <h3 style="font-size:1.0625rem; font-weight:800; color:#fff; margin-bottom:.625rem">2-Way Sync</h3>
+        <p style="font-size:.8125rem; color:rgba(255,255,255,0.6); line-height:1.7">
+          Connect seamlessly with HubSpot, Salesforce, Zoho, or Shopify to keep customer details synchronized in real-time.
+        </p>
+      </div>
+
+    </div>
+
+    <!-- Interactive Mockup Preview -->
+    <div class="glass-dark" style="border-radius:1.25rem; padding:2rem; background:rgba(255, 255, 255, 0.03); border:1px solid rgba(255, 255, 255, 0.08)" data-aos="fade-up" data-aos-delay="200">
+      <div style="display:flex; flex-wrap:wrap; gap:1.5rem; align-items:center; justify-content:space-between">
+        
+        <div>
+          <span style="font-size:.75rem; font-weight:700; color:#6ee7b7; text-transform:uppercase; letter-spacing:.05em">CRM Snapshot</span>
+          <h4 style="font-size:1.25rem; font-weight:800; color:#fff; margin-top:.25rem">Centralized Customer Dashboard</h4>
+          <p style="font-size:.8125rem; color:rgba(255,255,255,0.6); max-width:28rem; margin-top:.5rem">Assign incoming leads to agents, view purchase triggers, and filter conversations by custom tags instantly.</p>
+        </div>
+
+        <div style="display:flex; gap:1rem; flex-wrap:wrap">
+          <div style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); padding:.75rem 1.25rem; border-radius:.75rem">
+            <div style="font-size:.75rem; color:rgba(255,255,255,0.5)">Lead Status</div>
+            <div style="font-size:.875rem; font-weight:700; color:#22c55e; margin-top:.25rem"><i class="fas fa-circle" style="font-size:.5rem"></i> Payment Completed</div>
+          </div>
+          <div style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); padding:.75rem 1.25rem; border-radius:.75rem">
+            <div style="font-size:.75rem; color:rgba(255,255,255,0.5)">Assigned Agent</div>
+            <div style="font-size:.875rem; font-weight:700; color:#fff; margin-top:.25rem"><i class="fas fa-user-check" style="color:#0ea5e9"></i> AI Support Agent</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="solutions" class="section-pad" style="background:#fff">
+  <div class="max-w-7xl" style="padding:0 1.5rem">
+    <div style="text-align:center;max-width:38rem;margin:0 auto 3.5rem" data-aos="fade-up">
+      <span class="section-label label-teal"><i class="fas fa-circle-play"></i> How It Works</span>
+      <h2 style="font-size:clamp(1.75rem,3.5vw,2.75rem);font-weight:900;color:#041738;margin-top:1rem;line-height:1.2">Up &amp; Running in <span class="gradient-text">3 Simple Steps</span></h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));gap:2rem;position:relative">
+      <div style="text-align:center;padding:2.5rem 2rem" data-aos="fade-up" data-aos-delay="50">
+        <div style="width:4rem;height:4rem;border-radius:50%;background:linear-gradient(135deg,#6d28d9,#7c3aed);display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;font-size:1.5rem;font-weight:900;color:#fff;box-shadow:0 8px 24px rgba(109,40,217,0.4)">1</div>
+        <div style="width:3rem;height:3rem;border-radius:.875rem;background:#ede9fe;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-size:1.25rem"><i class="fab fa-whatsapp" style="color:#6d28d9"></i></div>
+        <h3 style="font-size:1.125rem;font-weight:800;color:#041738;margin-bottom:.625rem">Connect Your WhatsApp</h3>
+        <p style="font-size:.875rem;color:#64748b;line-height:1.7">Link your existing WhatsApp Business number with the official Meta API. Takes under 15 minutes. No coding required.</p>
+      </div>
+      <div style="text-align:center;padding:2.5rem 2rem" data-aos="fade-up" data-aos-delay="150">
+        <div style="width:4rem;height:4rem;border-radius:50%;background:linear-gradient(135deg,#0d9488,#14b8a6);display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;font-size:1.5rem;font-weight:900;color:#fff;box-shadow:0 8px 24px rgba(13,148,136,0.4)">2</div>
+        <div style="width:3rem;height:3rem;border-radius:.875rem;background:#ccfbf1;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-size:1.25rem"><i class="fas fa-robot" style="color:#0d9488"></i></div>
+        <h3 style="font-size:1.125rem;font-weight:800;color:#041738;margin-bottom:.625rem">Configure Your AI Bot</h3>
+        <p style="font-size:.875rem;color:#64748b;line-height:1.7">Use our no-code builder to set up your flows — bookings, orders, FAQs, lead forms. Pick a template for your industry.</p>
+      </div>
+      <div style="text-align:center;padding:2.5rem 2rem" data-aos="fade-up" data-aos-delay="250">
+        <div style="width:4rem;height:4rem;border-radius:50%;background:linear-gradient(135deg,#16a34a,#22c55e);display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;font-size:1.5rem;font-weight:900;color:#fff;box-shadow:0 8px 24px rgba(22,163,74,0.4)">3</div>
+        <div style="width:3rem;height:3rem;border-radius:.875rem;background:#dcfce7;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-size:1.25rem"><i class="fas fa-chart-line" style="color:#16a34a"></i></div>
+        <h3 style="font-size:1.125rem;font-weight:800;color:#041738;margin-bottom:.625rem">Watch Your Business Scale</h3>
+        <p style="font-size:.875rem;color:#64748b;line-height:1.7">Your AI handles thousands of conversations daily. You just monitor the dashboard and close deals — effortlessly.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS STRIP -->
+<div style="background:linear-gradient(135deg,#041738 0%,#072b61 60%,#0d4a2e 100%);padding:3rem 1.5rem">
+  <div class="max-w-7xl" style="padding:0 1.5rem">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(10rem,1fr));gap:2rem;text-align:center">
+      <div data-aos="zoom-in" data-aos-delay="0">
+        <div class="stat-num" style="background:linear-gradient(135deg,#6ee7b7,#fff);-webkit-background-clip:text;background-clip:text">500+</div>
+        <div style="color:rgba(255,255,255,0.7);font-size:.875rem;font-weight:600;margin-top:.375rem">Businesses Automated</div>
+      </div>
+      <div data-aos="zoom-in" data-aos-delay="80">
+        <div class="stat-num" style="background:linear-gradient(135deg,#fff,#6ee7b7);-webkit-background-clip:text;background-clip:text">2M+</div>
+        <div style="color:rgba(255,255,255,0.7);font-size:.875rem;font-weight:600;margin-top:.375rem">Conversations Handled</div>
+      </div>
+      <div data-aos="zoom-in" data-aos-delay="160">
+        <div class="stat-num" style="background:linear-gradient(135deg,#fff,#fde68a);-webkit-background-clip:text;background-clip:text">15m</div>
+        <div style="color:rgba(255,255,255,0.7);font-size:.875rem;font-weight:600;margin-top:.375rem">Average Setup Time</div>
+      </div>
+      <div data-aos="zoom-in" data-aos-delay="240">
+        <div class="stat-num" style="background:linear-gradient(135deg,#fff,#fca5a5);-webkit-background-clip:text;background-clip:text">4.9★</div>
+        <div style="color:rgba(255,255,255,0.7);font-size:.875rem;font-weight:600;margin-top:.375rem">Average Rating</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TESTIMONIALS -->
+<section class="section-pad" style="background:#f8fafc">
+  <div class="max-w-7xl" style="padding:0 1.5rem">
+    <div style="text-align:center;max-width:38rem;margin:0 auto 3.5rem" data-aos="fade-up">
+      <span class="section-label label-violet"><i class="fas fa-quote-left"></i> Testimonials</span>
+      <h2 style="font-size:clamp(1.75rem,3.5vw,2.75rem);font-weight:900;color:#041738;margin-top:1rem;line-height:1.2">Loved by <span class="gradient-text-blue">Businesses Everywhere</span></h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(17rem,1fr));gap:1.5rem">
+      <div class="testi-card" data-aos="fade-up" data-aos-delay="50">
+        <div style="display:flex;gap:.25rem;margin-bottom:1rem;color:#f59e0b;font-size:.875rem">★★★★★</div>
+        <p style="font-size:.9375rem;color:#1e293b;line-height:1.7;margin-bottom:1.5rem;font-style:italic">"eAssist completely transformed our restaurant. We get 80+ WhatsApp orders daily and zero staff needed for order taking. The ROI was visible in week one!"</p>
+        <div style="display:flex;align-items:center;gap:.875rem">
+          <div style="width:2.75rem;height:2.75rem;border-radius:50%;background:linear-gradient(135deg,#6d28d9,#0d9488);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:.875rem;flex-shrink:0">RP</div>
+          <div>
+            <div style="font-weight:700;color:#0f172a;font-size:.9375rem">Rajesh Patel</div>
+            <div style="font-size:.75rem;color:#64748b">Owner, Spice Garden Restaurant · Mumbai</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card" data-aos="fade-up" data-aos-delay="150">
+        <div style="display:flex;gap:.25rem;margin-bottom:1rem;color:#f59e0b;font-size:.875rem">★★★★★</div>
+        <p style="font-size:.9375rem;color:#1e293b;line-height:1.7;margin-bottom:1.5rem;font-style:italic">"Our real estate team now closes leads 3x faster. The bot qualifies buyers, shares property brochures, and books site visits automatically. Game changer."</p>
+        <div style="display:flex;align-items:center;gap:.875rem">
+          <div style="width:2.75rem;height:2.75rem;border-radius:50%;background:linear-gradient(135deg,#0d9488,#16a34a);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:.875rem;flex-shrink:0">SK</div>
+          <div>
+            <div style="font-weight:700;color:#0f172a;font-size:.9375rem">Sneha Kulkarni</div>
+            <div style="font-size:.75rem;color:#64748b">Director, Skyline Properties · Pune</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card" data-aos="fade-up" data-aos-delay="250">
+        <div style="display:flex;gap:.25rem;margin-bottom:1rem;color:#f59e0b;font-size:.875rem">★★★★★</div>
+        <p style="font-size:.9375rem;color:#1e293b;line-height:1.7;margin-bottom:1.5rem;font-style:italic">"Patient appointment scheduling used to take our front desk 4 hours daily. Now it's fully automated. Our clinic handles 2x more patients with the same team."</p>
+        <div style="display:flex;align-items:center;gap:.875rem">
+          <div style="width:2.75rem;height:2.75rem;border-radius:50%;background:linear-gradient(135deg,#1e40af,#6d28d9);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:.875rem;flex-shrink:0">DM</div>
+          <div>
+            <div style="font-weight:700;color:#0f172a;font-size:.9375rem">Dr. Meera Nair</div>
+            <div style="font-size:.75rem;color:#64748b">Founder, Nair Multispeciality Clinic · Kochi</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA SECTION -->
+<section class="section-pad hero-mesh" style="position:relative;overflow:hidden">
+  <div class="grid-overlay"></div>
+  <div style="max-width:48rem;margin:0 auto;text-align:center;position:relative;z-index:1;padding:0 1.5rem" data-aos="zoom-in">
+    <span class="section-label" style="background:rgba(255,255,255,0.1);color:#fff;border:1px solid rgba(255,255,255,0.2);margin-bottom:1.5rem"><i class="fas fa-rocket"></i> Get Started Today</span>
+    <h2 style="font-size:clamp(2rem,4.5vw,3.25rem);font-weight:900;color:#fff;line-height:1.15;margin-top:1rem;margin-bottom:1rem">Ready to Automate Your <span class="gradient-text">Business?</span></h2>
+    <p style="color:rgba(255,255,255,0.75);font-size:1.0625rem;line-height:1.7;margin-bottom:2.5rem">Join 500+ businesses already saving 4+ hours daily with eAssist WhatsApp AI. Free 14-day trial, no credit card needed.</p>
+    <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:1rem">
+      <a href="contact.html" class="btn-primary" style="font-size:1rem;padding:1rem 2.25rem"><i class="fas fa-rocket"></i> Start Free Trial</a>
+      <a href="https://wa.me/919702053758?text=Hi%2C+I+want+to+see+a+demo" target="_blank" class="btn-ghost" style="font-size:1rem;padding:1rem 2.25rem"><i class="fab fa-whatsapp"></i> See Live Demo</a>
+    </div>
+    <p style="color:rgba(255,255,255,0.5);font-size:.8125rem;margin-top:1.5rem"><i class="fas fa-lock" style="margin-right:.25rem"></i> 14-day free trial &nbsp;·&nbsp; No credit card &nbsp;·&nbsp; Cancel anytime</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="background:#020d1f;color:#94a3b8;padding:4rem 0 2rem;border-top:1px solid rgba(255,255,255,0.06)">
+  <div class="max-w-7xl" style="padding:0 1.5rem">
+    <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:2.5rem;padding-bottom:3rem;border-bottom:1px solid rgba(255,255,255,0.06)" id="footer-grid" data-aos="fade-up">
+      <div>
+        <a href="index.html" style="display:inline-block;margin-bottom:1rem;padding:.5rem .75rem;background:#fff;border-radius:.5rem">
+          <img src="images/Assistlogo.png" alt="eAssist AI" style="height:2.25rem;width:auto;object-fit:contain">
+        </a>
+        <p style="font-size:.8125rem;line-height:1.8;max-width:18rem;color:#64748b">WhatsApp AI automation for every business. Connect, automate, and scale without code.</p>
+        <div style="margin-top:1.25rem;display:flex;flex-direction:column;gap:.5rem;font-size:.8125rem">
+          <a href="mailto:care@referindia.co.in" style="color:#64748b;text-decoration:none;display:flex;align-items:center;gap:.5rem;transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#64748b'"><i class="fas fa-envelope" style="color:#0d9488;width:1rem"></i> care@referindia.co.in</a>
+          <a href="https://wa.me/919702053758" target="_blank" style="color:#64748b;text-decoration:none;display:flex;align-items:center;gap:.5rem;transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#64748b'"><i class="fab fa-whatsapp" style="color:#25d366;width:1rem"></i> +91 9702053758</a>
+        </div>
+      </div>
+      <div>
+        <h4 style="color:#fff;font-weight:700;font-size:.875rem;margin-bottom:1.25rem;padding-left:.625rem;border-left:2px solid #6d28d9">Solutions</h4>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:.625rem;font-size:.8125rem">
+          <li><a href="#industries" style="color:#64748b;text-decoration:none;transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#64748b'">Retail &amp; E-Commerce</a></li>
+          <li><a href="#industries" style="color:#64748b;text-decoration:none;transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#64748b'">Healthcare &amp; Clinics</a></li>
+          <li><a href="#industries" style="color:#64748b;text-decoration:none;transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#64748b'">Restaurants &amp; F&amp;B</a></li>
+          <li><a href="#industries" style="color:#64748b;text-decoration:none;transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#64748b'">Real Estate</a></li>
+          <li><a href="#industries" style="color:#64748b;text-decoration:none;transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#64748b'">Logistics &amp; Delivery</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 style="color:#fff;font-weight:700;font-size:.875rem;margin-bottom:1.25rem;padding-left:.625rem;border-left:2px solid #0d9488">Platform</h4>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:.625rem;font-size:.8125rem">
+          <li><a href="#features" style="color:#64748b;text-decoration:none;transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#64748b'">Features</a></li>
+          <li><a href="pricing.html" style="color:#64748b;text-decoration:none;transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#64748b'">Pricing</a></li>
+          <li><a href="contact.html" style="color:#64748b;text-decoration:none;transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#64748b'">Book Demo</a></li>
+          <li><a href="#solutions" style="color:#64748b;text-decoration:none;transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#64748b'">How It Works</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 style="color:#fff;font-weight:700;font-size:.875rem;margin-bottom:1.25rem;padding-left:.625rem;border-left:2px solid #16a34a">Trust</h4>
+        <div style="display:flex;flex-direction:column;gap:.625rem">
+          <div style="display:flex;align-items:center;gap:.5rem;padding:.5rem .75rem;background:rgba(255,255,255,0.04);border-radius:.5rem;border:1px solid rgba(255,255,255,0.06);font-size:.75rem;color:#94a3b8"><i class="fas fa-shield-halved" style="color:#0d9488"></i> ISO 27001 Certified</div>
+          <div style="display:flex;align-items:center;gap:.5rem;padding:.5rem .75rem;background:rgba(255,255,255,0.04);border-radius:.5rem;border:1px solid rgba(255,255,255,0.06);font-size:.75rem;color:#94a3b8"><i class="fab fa-whatsapp" style="color:#25d366"></i> Meta Verified Partner</div>
+          <div style="display:flex;align-items:center;gap:.5rem;padding:.5rem .75rem;background:rgba(255,255,255,0.04);border-radius:.5rem;border:1px solid rgba(255,255,255,0.06);font-size:.75rem;color:#94a3b8"><i class="fas fa-building-flag" style="color:#6d28d9"></i> MSME Registered</div>
+        </div>
+      </div>
+    </div>
+    <div style="padding-top:2rem;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:1rem;font-size:.8125rem">
+      <p>© 2026 eAssist AI. All rights reserved.</p>
+      <div style="display:flex;gap:1.5rem">
+        <a href="#" style="color:#64748b;text-decoration:none" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#64748b'">Privacy Policy</a>
+        <a href="#" style="color:#64748b;text-decoration:none" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#64748b'">Terms of Service</a>
+      </div>
+      <div style="display:flex;gap:.625rem">
+        <a href="#" style="width:2rem;height:2rem;background:rgba(255,255,255,0.06);border-radius:.5rem;display:flex;align-items:center;justify-content:center;color:#64748b;text-decoration:none;transition:all .2s" onmouseover="this.style.background='#6d28d9';this.style.color='#fff'" onmouseout="this.style.background='rgba(255,255,255,0.06)';this.style.color='#64748b'"><i class="fab fa-linkedin-in" style="font-size:.75rem"></i></a>
+        <a href="https://wa.me/919702053758" target="_blank" style="width:2rem;height:2rem;background:rgba(255,255,255,0.06);border-radius:.5rem;display:flex;align-items:center;justify-content:center;color:#64748b;text-decoration:none;transition:all .2s" onmouseover="this.style.background='#25d366';this.style.color='#fff'" onmouseout="this.style.background='rgba(255,255,255,0.06)';this.style.color='#64748b'"><i class="fab fa-whatsapp" style="font-size:.75rem"></i></a>
+        <a href="#" style="width:2rem;height:2rem;background:rgba(255,255,255,0.06);border-radius:.5rem;display:flex;align-items:center;justify-content:center;color:#64748b;text-decoration:none;transition:all .2s" onmouseover="this.style.background='#0d9488';this.style.color='#fff'" onmouseout="this.style.background='rgba(255,255,255,0.06)';this.style.color='#64748b'"><i class="fab fa-twitter" style="font-size:.75rem"></i></a>
+      </div>
+    </div>
+  </div>
 </footer>
 
-<!-- WhatsApp AI Assistant Floating Button -->
+<!-- Floating WhatsApp Button -->
 <a href="https://wa.me/919702053758?text=Hi%2C%20I%20have%20a%20query."
    target="_blank"
    rel="noopener noreferrer"
-   class="fixed bottom-5 right-5 z-50 bg-green-500 hover:bg-green-600
-          text-white w-14 h-14 rounded-full flex items-center justify-center
-          shadow-lg hover:scale-110 transition-all duration-300"
-   aria-label="Chat with WhatsApp AI Assistant">
-    <i class="fab fa-whatsapp text-3xl"></i>
+   aria-label="Chat with us on WhatsApp"
+   style="
+      position:fixed;
+      bottom:20px;
+      right:20px;
+      width:58px;
+      height:58px;
+      background:#25D366;
+      color:#fff;
+      border-radius:50%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:30px;
+      text-decoration:none;
+      box-shadow:0 6px 18px rgba(0,0,0,0.25);
+      z-index:9999;
+      transition:all 0.3s ease;
+   "
+   onmouseover="this.style.transform='scale(1.1)'"
+   onmouseout="this.style.transform='scale(1)'">
+
+   <i class="fab fa-whatsapp"></i>
 </a>
 
-    <!-- AOS (Animate On Scroll) JS Library -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-        // Initialize AOS library
-        AOS.init({
-            once: true, // Animation occurs only once while scrolling down
-            duration: 800, // Duration of animations in ms
-            easing: 'ease-out-cubic',
-        });
-    </script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+AOS.init({ once: true, duration: 800, easing: 'ease-out-cubic' });
+
+// Nav scroll
+const nav = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 50);
+});
+
+// Mobile menu
+const mobBtn = document.getElementById('mob-btn');
+const mobMenu = document.getElementById('mob-menu');
+const mobIcon = document.getElementById('mob-icon');
+mobBtn.addEventListener('click', () => {
+  const open = mobMenu.style.display === 'block';
+  mobMenu.style.display = open ? 'none' : 'block';
+  mobIcon.className = open ? 'fas fa-bars' : 'fas fa-xmark';
+});
+document.querySelectorAll('.mob-link').forEach(l => l.addEventListener('click', () => {
+  mobMenu.style.display = 'none'; mobIcon.className = 'fas fa-bars';
+}));
+window.addEventListener('scroll', () => { if(window.scrollY > 50){ mobMenu.style.display='none'; mobIcon.className='fas fa-bars'; } });
+
+// Responsive: hero grid, floating badges, desktop nav
+function applyResponsive() {
+  const w = window.innerWidth;
+  const hg = document.getElementById('hero-grid');
+  const dn = document.querySelector('.desktop-nav');
+  if (hg) hg.style.gridTemplateColumns = w >= 1024 ? '1fr 1fr' : '1fr';
+  if (dn) dn.style.display = w >= 1024 ? 'flex' : 'none';
+  document.getElementById('mob-btn').style.display = w >= 1024 ? 'none' : 'block';
+  ['fb1','fb2','fb3'].forEach(id => {
+    const el = document.getElementById(id);
+    if(el) el.style.display = w >= 1280 ? 'flex' : 'none';
+  });
+  const fg = document.getElementById('footer-grid');
+  if(fg) fg.style.gridTemplateColumns = w >= 768 ? '2fr 1fr 1fr 1fr' : '1fr';
+}
+applyResponsive();
+window.addEventListener('resize', applyResponsive);
+</script>
 </body>
 </html>

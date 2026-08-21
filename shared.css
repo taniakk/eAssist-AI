@@ -1,0 +1,271 @@
+/* ===== eAssist AI — Shared Design System ===== */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap');
+
+:root {
+  --navy: #072b61;
+  --dark-navy: #041738;
+  --blue: #1e40af;
+  --violet: #6d28d9;
+  --violet-light: #7c3aed;
+  --green: #16a34a;
+  --teal: #0d9488;
+  --light-bg: #f4f9ff;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; overflow-x: hidden; }
+body { font-family: 'Plus Jakarta Sans', sans-serif; color: #1e293b; background: #fff; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+
+/* ── Animated Mesh Gradient ── */
+@keyframes meshShift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.hero-mesh {
+  background: linear-gradient(-45deg, #041738, #072b61, #6d28d9, #0d9488, #041738);
+  background-size: 400% 400%;
+  animation: meshShift 14s ease infinite;
+}
+
+/* ── Grid Overlay ── */
+.grid-overlay {
+  position: absolute; inset: 0; pointer-events: none;
+  background-image: radial-gradient(circle, rgba(255,255,255,0.07) 1px, transparent 1px);
+  background-size: 32px 32px;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
+}
+
+/* ── Glassmorphism ── */
+.glass-dark {
+  background: rgba(255,255,255,0.06);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255,255,255,0.12);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+}
+.glass-light {
+  background: rgba(255,255,255,0.88);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(7,43,97,0.08);
+  box-shadow: 0 4px 24px rgba(7,43,97,0.06);
+}
+
+/* ── Gradient Text ── */
+.gradient-text {
+  background: linear-gradient(135deg, #16a34a 0%, #0d9488 60%, #6d28d9 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.gradient-text-blue {
+  background: linear-gradient(135deg, #072b61 0%, #6d28d9 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Primary Shimmer Button (Green→Teal) ── */
+.btn-primary {
+  display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+  padding: .875rem 2rem; border-radius: .75rem; font-weight: 700; font-size: .9375rem;
+  color: #fff; position: relative; overflow: hidden; cursor: pointer; border: none;
+  background: linear-gradient(135deg, #16a34a 0%, #0d9488 100%);
+  background-size: 200% 200%;
+  transition: all .35s ease;
+  box-shadow: 0 4px 20px rgba(22,163,74,0.4);
+  text-decoration: none;
+}
+.btn-primary:hover {
+  box-shadow: 0 8px 32px rgba(22,163,74,0.55);
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, #15803d 0%, #0f766e 100%);
+}
+.btn-primary::after {
+  content: ''; position: absolute; top: -50%; left: -75%;
+  width: 50%; height: 200%;
+  background: rgba(255,255,255,0.25); transform: skewX(-20deg); transition: left .6s ease;
+}
+.btn-primary:hover::after { left: 130%; }
+
+/* ── Ghost Button (for hero dark bg) ── */
+.btn-ghost {
+  display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+  padding: .875rem 2rem; border-radius: .75rem; font-weight: 700; font-size: .9375rem;
+  color: #fff; border: 1.5px solid rgba(255,255,255,0.35); background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(8px); transition: all .3s ease; cursor: pointer; text-decoration: none;
+}
+.btn-ghost:hover { background: rgba(255,255,255,0.2); border-color: rgba(255,255,255,0.65); transform: translateY(-2px); }
+
+/* ── Navy CTA button (for light bg) ── */
+.btn-navy {
+  display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+  padding: .875rem 2rem; border-radius: .75rem; font-weight: 700; font-size: .9375rem;
+  color: #fff; background: linear-gradient(135deg, #072b61, #1e40af);
+  box-shadow: 0 4px 20px rgba(7,43,97,0.3); transition: all .3s ease; text-decoration: none;
+  position: relative; overflow: hidden; border: none; cursor: pointer;
+}
+.btn-navy:hover { box-shadow: 0 8px 32px rgba(7,43,97,0.45); transform: translateY(-2px); }
+.btn-navy::after {
+  content: ''; position: absolute; top: -50%; left: -75%;
+  width: 50%; height: 200%;
+  background: rgba(255,255,255,0.2); transform: skewX(-20deg); transition: left .6s;
+}
+.btn-navy:hover::after { left: 130%; }
+
+/* ── Violet Accent Button ── */
+.btn-violet {
+  display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+  padding: .875rem 2rem; border-radius: .75rem; font-weight: 700; font-size: .9375rem;
+  color: #fff; background: linear-gradient(135deg, #6d28d9, #7c3aed);
+  box-shadow: 0 4px 20px rgba(109,40,217,0.4); transition: all .3s ease; text-decoration: none;
+  position: relative; overflow: hidden; border: none; cursor: pointer;
+}
+.btn-violet:hover { box-shadow: 0 8px 32px rgba(109,40,217,0.6); transform: translateY(-2px); }
+.btn-violet::after {
+  content: ''; position: absolute; top: -50%; left: -75%;
+  width: 50%; height: 200%;
+  background: rgba(255,255,255,0.2); transform: skewX(-20deg); transition: left .6s;
+}
+.btn-violet:hover::after { left: 130%; }
+
+/* ── Floating Badge Animations ── */
+@keyframes floatUp { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+.badge-float { animation: floatUp 4s ease-in-out infinite; }
+.badge-float-delay { animation: floatUp 4s ease-in-out 2s infinite; }
+.badge-float-delay2 { animation: floatUp 4s ease-in-out 1s infinite; }
+
+/* ── Section Labels ── */
+.section-label {
+  display: inline-flex; align-items: center; gap: .375rem;
+  padding: .3rem .875rem; border-radius: 99px; font-size: .7rem; font-weight: 700;
+  letter-spacing: .08em; text-transform: uppercase;
+}
+.label-violet { background: rgba(109,40,217,0.1); color: #7c3aed; border: 1px solid rgba(109,40,217,0.2); }
+.label-green  { background: rgba(22,163,74,0.1);  color: #16a34a; border: 1px solid rgba(22,163,74,0.2); }
+.label-teal   { background: rgba(13,148,136,0.1); color: #0d9488; border: 1px solid rgba(13,148,136,0.2); }
+.label-navy   { background: rgba(7,43,97,0.08);   color: #072b61; border: 1px solid rgba(7,43,97,0.15); }
+
+/* ══════════════════════════════════
+   NAVIGATION — Always White / Premium
+══════════════════════════════════ */
+.nav-bar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: #ffffff;
+  border-bottom: 1px solid rgba(7,43,97,0.08);
+  box-shadow: 0 2px 20px rgba(7,43,97,0.07);
+  transition: box-shadow .3s ease;
+}
+.nav-bar.scrolled {
+  box-shadow: 0 4px 32px rgba(7,43,97,0.12);
+}
+
+/* Nav links — dark navy on white */
+.nav-link {
+  position: relative; font-weight: 700; font-size: .875rem;
+  color: #334155; text-decoration: none; padding: .375rem 0; transition: color .2s;
+}
+.nav-link::after {
+  content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 2px;
+  background: linear-gradient(90deg, #16a34a, #0d9488); transition: width .3s;
+}
+.nav-link:hover { color: #072b61; }
+.nav-link:hover::after { width: 100%; }
+.nav-link.active { color: #072b61; font-weight: 800; }
+.nav-link.active::after { width: 100%; }
+
+/* ── Mobile Menu ── */
+#mob-menu {
+  background: #ffffff !important;
+  border-top: 1px solid rgba(7,43,97,0.08) !important;
+  box-shadow: 0 8px 32px rgba(7,43,97,0.1);
+}
+.mob-link {
+  color: #334155 !important;
+  text-decoration: none;
+  font-weight: 600;
+  padding: .75rem 1rem;
+  border-radius: .625rem;
+  transition: background .2s, color .2s;
+  display: block;
+}
+.mob-link:hover { background: #f0fdf4 !important; color: #16a34a !important; }
+
+/* Hamburger icon — dark on white nav */
+#mob-btn { color: #072b61 !important; }
+
+/* ── Feature Cards ── */
+.feat-card {
+  background: #fff; border: 1px solid #e2e8f0; border-radius: 1.25rem; padding: 2rem;
+  transition: all .35s ease; position: relative; overflow: hidden;
+}
+.feat-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, #16a34a, #0d9488, #6d28d9); opacity: 0; transition: opacity .35s;
+}
+.feat-card:hover { box-shadow: 0 16px 48px rgba(7,43,97,0.1); border-color: rgba(22,163,74,0.25); transform: translateY(-4px); }
+.feat-card:hover::before { opacity: 1; }
+
+/* ── Testimonial Cards ── */
+.testi-card {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 1.25rem; padding: 2rem;
+  transition: all .3s ease;
+  box-shadow: 0 2px 12px rgba(7,43,97,0.05);
+}
+.testi-card:hover { box-shadow: 0 12px 40px rgba(7,43,97,0.1); transform: translateY(-3px); border-color: rgba(22,163,74,0.2); }
+
+/* ── Pricing Cards ── */
+.price-card {
+  border-radius: 1.5rem; padding: 2.5rem; border: 1px solid #e2e8f0;
+  transition: all .35s ease; position: relative; overflow: hidden; background: #fff;
+}
+.price-card.featured {
+  background: linear-gradient(160deg, #041738 0%, #072b61 50%, #1e40af 100%);
+  border-color: transparent; color: #fff;
+  box-shadow: 0 24px 60px rgba(7,43,97,0.45);
+  transform: scale(1.04);
+}
+.price-card:hover:not(.featured) { box-shadow: 0 16px 48px rgba(7,43,97,0.1); border-color: rgba(22,163,74,0.25); }
+.price-card.featured:hover { box-shadow: 0 28px 70px rgba(7,43,97,0.55); }
+
+/* ── FAQ ── */
+.faq-item { border-bottom: 1px solid #e2e8f0; }
+.faq-btn { width:100%; text-align:left; padding: 1.25rem 0; font-weight:700; font-size:.9375rem; background:none; border:none; cursor:pointer; display:flex; justify-content:space-between; align-items:center; color:#1e293b; }
+.faq-body { display:none; padding-bottom:1.25rem; color:#64748b; font-size:.875rem; line-height:1.7; }
+.faq-body.open { display:block; }
+.faq-icon { transition: transform .3s; font-size:1.1rem; color:#16a34a; }
+.faq-btn.open .faq-icon { transform: rotate(45deg); }
+
+/* ── Form Fields ── */
+.form-field {
+  width:100%; padding:.875rem 1.25rem; border-radius:.75rem;
+  border:1.5px solid #e2e8f0; font-family:inherit; font-size:.9375rem;
+  color:#1e293b; background:#fff; transition: border-color .2s, box-shadow .2s; outline:none;
+}
+.form-field:focus { border-color:#16a34a; box-shadow: 0 0 0 3px rgba(22,163,74,0.12); }
+
+/* ── Scrolling Logo Strip ── */
+@keyframes scrollLeft { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+.logo-strip-inner { display:flex; gap:2rem; animation:scrollLeft 28s linear infinite; white-space:nowrap; width:max-content; }
+.logo-strip-inner:hover { animation-play-state:paused; }
+
+/* ── Stat Number ── */
+.stat-num {
+  font-size:2.5rem; font-weight:900;
+  background:linear-gradient(135deg,#072b61,#16a34a);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; line-height:1;
+}
+
+/* ── Utilities ── */
+.max-w-7xl { max-width:80rem; margin-left:auto; margin-right:auto; }
+.section-pad { padding: 5rem 1.5rem; }
+@media(max-width:768px){ .section-pad { padding: 3.5rem 1rem; } }
+
+/* ── Premium divider ── */
+.premium-divider {
+  height:1px;
+  background:linear-gradient(90deg, transparent, rgba(22,163,74,0.3), rgba(13,148,136,0.3), transparent);
+}
